@@ -28,20 +28,44 @@ public class Result<T> implements Serializable {
         this.body = body;
     }
 
-    public static Result ok(){
+    public static  Result ok(){
         return new Result(Result.SUCCESS,Result.DEFAULT_SUCCESS_MSG,null);
     }
-    public static Result ok(Object body){
+    public static <T> Result<T> ok(T body){
         return new Result(Result.SUCCESS,Result.DEFAULT_SUCCESS_MSG,body);
     }
 
-    public static Result error(){
+    public static  Result error(){
         return new Result(Result.FAIL,DEFAULT_FAIL_MSG,null);
     }
-    public static Result error(String msg){
+    public static  Result error(String msg){
         return new Result(Result.FAIL,msg,null);
     }
-    public static Result error(String code, String msg){
+    public static  Result error(String code, String msg){
         return new Result(code,msg,null);
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public T getBody() {
+        return body;
+    }
+
+    public void setBody(T body) {
+        this.body = body;
     }
 }
