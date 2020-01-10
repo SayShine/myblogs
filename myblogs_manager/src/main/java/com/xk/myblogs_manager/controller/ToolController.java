@@ -18,7 +18,7 @@ public class ToolController {
     @GetMapping
     @RequestMapping("/toTranslate")
     public Result<String> toTransalte(){
-        return Result.ok("test ok");
+        return Result.ok("我是带弟弟柯西");
     }
 
 }
