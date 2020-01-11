@@ -10,20 +10,20 @@ public class Md5Util {
     /*
      *四个链接变量
      */
-    private final int A = 0x67452301;
-    private final int B = 0xefcdab89;
-    private final int C = 0x98badcfe;
-    private final int D = 0x10325476;
+    private static final int A = 0x67452301;
+    private static final int B = 0xefcdab89;
+    private static final int C = 0x98badcfe;
+    private static final int D = 0x10325476;
     /*
      *ABCD的临时变量
      */
-    private int Atemp, Btemp, Ctemp, Dtemp;
+    private static  int Atemp, Btemp, Ctemp, Dtemp;
 
     /*
      *常量ti
      *公式:floor(abs(sin(i+1))×(2pow32)
      */
-    private final int K[] = {
+    private static final int K[] = {
             0xd76aa478, 0xe8c7b756, 0x242070db, 0xc1bdceee,
             0xf57c0faf, 0x4787c62a, 0xa8304613, 0xfd469501, 0x698098d8,
             0x8b44f7af, 0xffff5bb1, 0x895cd7be, 0x6b901122, 0xfd987193,
@@ -40,7 +40,7 @@ public class Md5Util {
     /*
      *向左位移数,计算方法未知
      */
-    private final int s[] = {7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22, 7,
+    private static final int s[] = {7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22, 7,
             12, 17, 22, 5, 9, 14, 20, 5, 9, 14, 20, 5, 9, 14, 20, 5, 9, 14, 20,
             4, 11, 16, 23, 4, 11, 16, 23, 4, 11, 16, 23, 4, 11, 16, 23, 6, 10,
             15, 21, 6, 10, 15, 21, 6, 10, 15, 21, 6, 10, 15, 21};
@@ -49,7 +49,7 @@ public class Md5Util {
     /*
      *初始化函数
      */
-    private void init() {
+    private static void init() {
         Atemp = A;
         Btemp = B;
         Ctemp = C;
@@ -59,14 +59,14 @@ public class Md5Util {
     /*
      *移动一定位数
      */
-    private int shift(int a, int s) {
+    private static int shift(int a, int s) {
         return (a << s) | (a >>> (32 - s));//右移的时候，高位一定要补零，而不是补充符号位
     }
 
     /*
      *主循环
      */
-    private void MainLoop(int M[]) {
+    private static void mianLoop(int M[]) {
         int F, g;
         int a = Atemp;
         int b = Btemp;
@@ -105,7 +105,7 @@ public class Md5Util {
      *填充方式为先加一个1,其它位补零
      *最后加上64位的原来长度
      */
-    private int[] add(String str) {
+    private static int[] add(String str) {
         int num = ((str.length() + 8) / 64) + 1;//以512位，64个字节为一组
         int strByte[] = new int[num * 16];//64/4=16，所以有16个整数
         for (int i = 0; i < num * 16; i++) {//全部初始化0
@@ -126,24 +126,24 @@ public class Md5Util {
     /*
      *调用函数
      */
-    public String getMD5(String source) {
+    public static String getMD5(String code) {
         init();
-        int strByte[] = add(source);
+        int strByte[] = add(code);
         for (int i = 0; i < strByte.length / 16; i++) {
             int num[] = new int[16];
             for (int j = 0; j < 16; j++) {
                 num[j] = strByte[i * 16 + j];
             }
-            MainLoop(num);
+            mianLoop(num);
         }
-        return changeHex(Atemp) + changeHex(Btemp) + changeHex(Ctemp) + changeHex(Dtemp);
+        return convert(Atemp) + convert(Btemp) + convert(Ctemp) + convert(Dtemp);
 
     }
 
     /*
      *整数变成16进制字符串
      */
-    private String changeHex(int a) {
+    private static String convert(int a) {
         String str = "";
         for (int i = 0; i < 4; i++) {
             str += String.format("%2s", Integer.toHexString(((a >> i * 8) % (1 << 8)) & 0xff)).replace(' ', '0');
