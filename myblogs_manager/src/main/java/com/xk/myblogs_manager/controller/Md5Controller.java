@@ -1,7 +1,7 @@
 package com.xk.myblogs_manager.controller;
 
 import com.xk.myblogs.client.vo.Result;
-import com.xk.myblogs_util.Md5Util;
+import com.xk.myblogs.common.utils.Md5Util;
 import org.springframework.web.bind.annotation.*;
 
 /**

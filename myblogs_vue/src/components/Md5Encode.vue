@@ -5,7 +5,7 @@
       <el-button type="primary" @click="toEncode">加密</el-button>
     </div>
     <div style="text-align: left">
-      <div style="width:50%;display: inline-block">
+      <div style="width:100%;display: inline-block">
         <el-input
           disabled
           type="textarea"

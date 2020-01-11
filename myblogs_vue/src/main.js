@@ -15,7 +15,6 @@ VueRouter.prototype.push = function push(location) {
 import api from './api'
 Vue.prototype.$api = api; // 将api挂载到vue的原型上复制代码
 
-
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

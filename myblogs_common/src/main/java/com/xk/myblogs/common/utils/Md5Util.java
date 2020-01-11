@@ -1,4 +1,4 @@
-package com.xk.myblogs_util;
+package com.xk.myblogs.common.utils;
 
 /**
  * @Author kex
