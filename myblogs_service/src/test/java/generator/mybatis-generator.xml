@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!-- MYSQL -->
+    <classPathEntry location="D:\mvnRepository\mysql\mysql-connector-java\8.0.15/mysql-connector-java-8.0.15.jar"/>
+    <!--<classPathEntry location="/Users/hanliangliang/.m2/repository/mysql/mysql-connector-java/5.1.46/mysql-connector-java-5.1.46.jar"/>-->
+    <context id="myblogs_generator" targetRuntime="MyBatis3">
+
+        <plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin"/>
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+<!--        &lt;!&ndash; 增加分页处理 &ndash;&gt;-->
+<!--        <plugin type="com.xk.myblogs.common.plugins.MysqlPaginationPlugin"/>-->
+
+        <commentGenerator type="com.xk.myblogs.common.plugins.MyCommentGenerator">
+            <property name="suppressDate" value="true"/>
+            <property name="addRemarkComments" value="true"/>
+        </commentGenerator>
+        <!-- MYSQL -->
+        <jdbcConnection
+                driverClass="com.mysql.cj.jdbc.Driver"
+                connectionURL="jdbc:mysql://rm-uf6007okohysp230a4o.mysql.rds.aliyuncs.com:3306/my_blog?useUnicode=true&amp;characterEncoding=utf-8&amp;autoReconnect=true&amp;serverTimezone=Asia/Shanghai&amp;tinyInt1isBit=false"
+                userId="tianshaocong"
+                password="Aa123456">
+        </jdbcConnection>
+
+        <javaTypeResolver type="com.xk.myblogs.common.plugins.MyJavaTypeResolver"/>
+
+        <!-- bean 实体类 生成包 -->
+        <javaModelGenerator targetPackage="com.xk.myblogs.client.entity"
+                            targetProject="/personal_workspace/myblogs\myblogs_client\src\main\java">
+            <property name="enableSubPackages" value="false"/>
+            <property name="trimStrings" value="false"/>
+        </javaModelGenerator>
+
+        <!-- mybatis Sql配置文件 -->
+        <sqlMapGenerator targetPackage="com.xk.myblogs.service.mapper.xml"
+                         targetProject="/personal_workspace/myblogs/myblogs_service\src\main\java">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+
+        <!-- mapper Dao接口类 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.xk.myblogs.service.mapper"
+                             targetProject="/personal_workspace/myblogs\myblogs_service\src\main\java">
+            <property name="enableSubPackages" value="false"/>
+        </javaClientGenerator>
+
+        <!-- 需要生成的表的名称 -->
+        <table tableName="tpg_authority" domainObjectName="Authority">
+            <generatedKey column="ID" sqlStatement="MySql" identity="true"/>
+        </table>
+    </context>
+
+</generatorConfiguration>
+
