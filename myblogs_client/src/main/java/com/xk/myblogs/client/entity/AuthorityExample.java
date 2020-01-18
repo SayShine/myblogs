@@ -66,6 +66,7 @@ public class AuthorityExample {
 
     /**
      * TABLE tpg_authority
+     *
      * @mbg.generated
      */
     protected abstract static class GeneratedCriteria {
@@ -682,6 +683,7 @@ public class AuthorityExample {
 
     /**
      * TABLE tpg_authority
+     *
      * @mbg.generated MyBatis Generator 自动生成Bean，自定义属性会覆盖
      */
     public static class Criteria extends GeneratedCriteria {
@@ -692,6 +694,7 @@ public class AuthorityExample {
 
     /**
      * TABLE tpg_authority
+     *
      * @mbg.generated
      */
     public static class Criterion {

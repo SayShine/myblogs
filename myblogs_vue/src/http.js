@@ -4,16 +4,16 @@
  */
 
 import axios from 'axios';
-import router from 'vue-router';
-import store from 'vuex';
-// import qs from 'qs'
+import store from '@/store';
+import router from './router';
+import qs from 'qs'
 /**
  * 跳转登录页
  * 携带当前页面路由，(用于在登录页面完成登录后返回当前页面)
  */
 const toLogin = () => {
   router.replace({
-    path: '/login',
+    path: '/login/toLogin',
     query: {
       redirect: router.currentRoute.fullPath
     }
@@ -32,18 +32,21 @@ const errorHandle = (status, other) => {
       alert('请先登陆！')
       toLogin();
       break;
-    // 403 token过期 清除token并跳转登录页
-    case 403:
+    // 402 token过期 清除token并跳转登录页
+    case 402:
       alert('登录过期，请重新登录');
-      localStorage.removeItem('token');
-      store.commit('setToken',null);
+      store.commit('clearToken');
       setTimeout(() => {
         toLogin();
       }, 1000);
       break;
-    // 404请求不存在
+    // 403无权限访问
+    case 403:
+      alert('无权限访问');
+      break;
+    // 403请求不存在
     case 404:
-      alert('请求的资源不存在');
+      alert('请求不存在');
       break;
     default:
       console.log(other);
@@ -52,8 +55,8 @@ const errorHandle = (status, other) => {
 
 // 创建axios实例
 var instance = axios.create({
-  //timeout: 1000 * 12,
-  // headers:{'Content-Type':'application/x-www-form-urlencoded'}
+  timeout: 1000 * 12,
+  headers:{'Content-Type':'application/x-www-form-urlencoded'}
 });
 
 /**
@@ -63,12 +66,12 @@ var instance = axios.create({
 instance.interceptors.request.use(
   config => {
     // post请求进行序列化
-    // if(config.method=='post'){
-    //   config.data = qs.stringify(config.data);
-    // }
+    if(config.method=='post'){
+      config.data = qs.stringify(config.data);
+    }
     // 用于判断用户登录情况
-    // const token = store.state.token || localStorage.getItem('token');
-    // token && (config.headers.Authorization = token);
+    const token = store.state.token;
+    token && (config.headers.Authorization = token);
     return config;
   },
   error => Promise.error(error))
@@ -77,11 +80,9 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   // 请求成功
   res => {
-    if(res.status === 200){
-      // localStorage.setItem('token',res.data.body);
-      // store.commit('setToken',res.data.body);
+    if (res.status === 200) {
       return Promise.resolve(res);
-    }else{
+    } else {
       return Promise.reject(res);
     }
   },
@@ -90,14 +91,13 @@ instance.interceptors.response.use(
     const {
       response
     } = error;
-    console.log(error)
     if (response) {
       errorHandle(response.status, response.data.message);
-      return Promise.reject(response);
+      return Promise.reject(response).catch(error => error);
     } else {
       // 处理断网的情况
       if (!window.navigator.onLine) {
-        // store.commit('changeNetwork', false);
+        store.commit('changeNetwork', false);
       } else {
         return Promise.reject(error);
       }

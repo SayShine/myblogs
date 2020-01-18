@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- *
  * TABLE  tpg_authority
  * MyBatis Generator Create
  */
@@ -12,7 +11,7 @@ public class Authority implements Serializable {
     /**
      * ID
      * 权限id
-     * 
+     * <p>
      * WARNING - @mbg.generated MyBatis Generator Create
      */
     private Long id;
@@ -20,7 +19,7 @@ public class Authority implements Serializable {
     /**
      * NAME
      * 权限名
-     * 
+     * <p>
      * WARNING - @mbg.generated MyBatis Generator Create
      */
     private String name;
@@ -28,7 +27,7 @@ public class Authority implements Serializable {
     /**
      * PID
      * 父权限id
-     * 
+     * <p>
      * WARNING - @mbg.generated MyBatis Generator Create
      */
     private Long pid;
@@ -36,7 +35,7 @@ public class Authority implements Serializable {
     /**
      * DESCRIPTION
      * 权限描述
-     * 
+     * <p>
      * WARNING - @mbg.generated MyBatis Generator Create
      */
     private String description;
@@ -44,7 +43,7 @@ public class Authority implements Serializable {
     /**
      * CREATOR
      * 创建人
-     * 
+     * <p>
      * WARNING - @mbg.generated MyBatis Generator Create
      */
     private Long creator;
@@ -52,7 +51,7 @@ public class Authority implements Serializable {
     /**
      * CREATE_TIME
      * 创建时间
-     * 
+     * <p>
      * WARNING - @mbg.generated MyBatis Generator Create
      */
     private Date createTime;
@@ -60,7 +59,7 @@ public class Authority implements Serializable {
     /**
      * UPDATER
      * 更新人
-     * 
+     * <p>
      * WARNING - @mbg.generated MyBatis Generator Create
      */
     private Long updater;
@@ -68,7 +67,7 @@ public class Authority implements Serializable {
     /**
      * UPDATE_TIME
      * 更新时间
-     * 
+     * <p>
      * WARNING - @mbg.generated MyBatis Generator Create
      */
     private Date updateTime;
@@ -76,7 +75,7 @@ public class Authority implements Serializable {
     /**
      * STATUS
      * 状态【0：已删除；1：可使用；2：禁用】
-     * 
+     * <p>
      * WARNING - @mbg.generated MyBatis Generator Create
      */
     private Integer status;

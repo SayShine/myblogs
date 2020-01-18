@@ -8,6 +8,6 @@ import Tool from './apiList/tool';// 工具接口
 
 // 导出接口
 export default {
-    ToolApi:Tool,
-    // ……
+  ToolApi: Tool,
+  // ……
 }

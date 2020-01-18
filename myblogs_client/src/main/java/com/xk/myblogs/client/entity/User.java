@@ -4,14 +4,13 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- *
  * TABLE  tpg_user
  * MyBatis Generator Create
  */
 public class User implements Serializable {
     /**
      * ID
-     * 
+     * <p>
      * WARNING - @mbg.generated MyBatis Generator Create
      */
     private Long id;
@@ -19,7 +18,7 @@ public class User implements Serializable {
     /**
      * NAME
      * 姓名
-     * 
+     * <p>
      * WARNING - @mbg.generated MyBatis Generator Create
      */
     private String name;
@@ -27,7 +26,7 @@ public class User implements Serializable {
     /**
      * ACCOUNT
      * 账号
-     * 
+     * <p>
      * WARNING - @mbg.generated MyBatis Generator Create
      */
     private String account;
@@ -35,7 +34,7 @@ public class User implements Serializable {
     /**
      * PASSWORD
      * 密码
-     * 
+     * <p>
      * WARNING - @mbg.generated MyBatis Generator Create
      */
     private String password;
@@ -43,7 +42,7 @@ public class User implements Serializable {
     /**
      * CREATE_TIME
      * 创建时间
-     * 
+     * <p>
      * WARNING - @mbg.generated MyBatis Generator Create
      */
     private Date createTime;
@@ -51,7 +50,7 @@ public class User implements Serializable {
     /**
      * CREATOR
      * 创建人
-     * 
+     * <p>
      * WARNING - @mbg.generated MyBatis Generator Create
      */
     private Long creator;
@@ -59,7 +58,7 @@ public class User implements Serializable {
     /**
      * UPDATE_TIME
      * 更新时间
-     * 
+     * <p>
      * WARNING - @mbg.generated MyBatis Generator Create
      */
     private Date updateTime;
@@ -67,7 +66,7 @@ public class User implements Serializable {
     /**
      * UPDATOR
      * 更新人
-     * 
+     * <p>
      * WARNING - @mbg.generated MyBatis Generator Create
      */
     private Long updator;
@@ -75,7 +74,7 @@ public class User implements Serializable {
     /**
      * STATUS
      * 状态【0：已删除；1：可使用；2：禁用】
-     * 
+     * <p>
      * WARNING - @mbg.generated MyBatis Generator Create
      */
     private Integer status;
@@ -83,7 +82,7 @@ public class User implements Serializable {
     /**
      * COMMENTS
      * 备注
-     * 
+     * <p>
      * WARNING - @mbg.generated MyBatis Generator Create
      */
     private String comments;
@@ -91,7 +90,7 @@ public class User implements Serializable {
     /**
      * GENDER
      * 性别【1：女；2，男】
-     * 
+     * <p>
      * WARNING - @mbg.generated MyBatis Generator Create
      */
     private String gender;
@@ -99,7 +98,7 @@ public class User implements Serializable {
     /**
      * EMAIL
      * 邮箱
-     * 
+     * <p>
      * WARNING - @mbg.generated MyBatis Generator Create
      */
     private String email;
@@ -107,7 +106,7 @@ public class User implements Serializable {
     /**
      * REALNAME
      * 真实姓名
-     * 
+     * <p>
      * WARNING - @mbg.generated MyBatis Generator Create
      */
     private String realname;

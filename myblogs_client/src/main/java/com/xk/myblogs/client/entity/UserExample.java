@@ -66,6 +66,7 @@ public class UserExample {
 
     /**
      * TABLE tpg_user
+     *
      * @mbg.generated
      */
     protected abstract static class GeneratedCriteria {
@@ -997,6 +998,7 @@ public class UserExample {
 
     /**
      * TABLE tpg_user
+     *
      * @mbg.generated MyBatis Generator 自动生成Bean，自定义属性会覆盖
      */
     public static class Criteria extends GeneratedCriteria {
@@ -1007,6 +1009,7 @@ public class UserExample {
 
     /**
      * TABLE tpg_user
+     *
      * @mbg.generated
      */
     public static class Criterion {

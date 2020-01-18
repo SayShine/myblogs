@@ -18,6 +18,7 @@
     <properties>
         <java.version>1.8</java.version>
     </properties>
+
     <packaging>jar</packaging>
     <build>
         <plugins>
@@ -30,6 +31,8 @@
                         <resource>
                             <directory>src/main/webapp</directory>
                         </resource>
+                        <source>1.8</source>
+                        <target>1.8</target>
                     </webResources>
                 </configuration>
             </plugin>

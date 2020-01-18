@@ -47,7 +47,7 @@
         </javaClientGenerator>
 
         <!-- 需要生成的表的名称 -->
-        <table tableName="tpg_authority" domainObjectName="Authority">
+        <table tableName="tpg_authority" domainObjectName="Permission">
             <generatedKey column="ID" sqlStatement="MySql" identity="true"/>
         </table>
     </context>

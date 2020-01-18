@@ -17,7 +17,7 @@ public class Md5Util {
     /*
      *ABCD的临时变量
      */
-    private static  int Atemp, Btemp, Ctemp, Dtemp;
+    private static int Atemp, Btemp, Ctemp, Dtemp;
 
     /*
      *常量ti

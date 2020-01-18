@@ -1,7 +1,7 @@
 <template>
   <el-container style="height: 700px; border: 1px solid #eee">
     <el-header style="text-align: right; font-size: 12px">
-      <el-menu  class="el-menu-demo" mode="horizontal" style="background-color: #B3C0D1" @select="HeaderMenuSelect">
+      <el-menu class="el-menu-demo" mode="horizontal" style="background-color: #B3C0D1" @select="HeaderMenuSelect">
         <el-menu-item index="home">首页</el-menu-item>
       </el-menu>
     </el-header>
@@ -20,9 +20,9 @@
           </el-submenu>
         </el-menu>
       </el-aside>
-        <el-main>
-          <router-view></router-view>
-        </el-main>
+      <el-main>
+        <router-view></router-view>
+      </el-main>
     </el-container>
     <el-footer style="text-align: center">
       Element UI ©2020 Created by XK
@@ -44,38 +44,52 @@
 </style>
 
 <script>
-  import {Container,Aside,Menu,Submenu,Table,Header,Main,MenuItem,TableColumn,MenuItemGroup,Dropdown,DropdownItem,DropdownMenu,Footer} from 'element-ui'
+  import {
+    Container,
+    Aside,
+    Menu,
+    Submenu,
+    Table,
+    Header,
+    Main,
+    MenuItem,
+    TableColumn,
+    MenuItemGroup,
+    Dropdown,
+    DropdownItem,
+    DropdownMenu,
+    Footer
+  } from 'element-ui'
+
   export default {
-    name:'Main',
-    components:{
-      [Container.name]:Container,
-      [Aside.name]:Aside,
-      [Menu.name]:Menu,
-      [Submenu.name]:Submenu,
-      [Table.name]:Table,
-      [Header.name]:Header,
-      [Main.name]:Main,
-      [MenuItem.name]:MenuItem,
-      [TableColumn.name]:TableColumn,
-      [MenuItemGroup.name]:MenuItemGroup,
-      [Dropdown.name]:Dropdown,
-      [DropdownItem.name]:DropdownItem,
-      [DropdownMenu.name]:DropdownMenu,
-      [Footer.name]:Footer,
+    name: 'Main',
+    components: {
+      [Container.name]: Container,
+      [Aside.name]: Aside,
+      [Menu.name]: Menu,
+      [Submenu.name]: Submenu,
+      [Table.name]: Table,
+      [Header.name]: Header,
+      [Main.name]: Main,
+      [MenuItem.name]: MenuItem,
+      [TableColumn.name]: TableColumn,
+      [MenuItemGroup.name]: MenuItemGroup,
+      [Dropdown.name]: Dropdown,
+      [DropdownItem.name]: DropdownItem,
+      [DropdownMenu.name]: DropdownMenu,
+      [Footer.name]: Footer,
     },
     data() {
-      return {
-
-      }
+      return {}
     },
-    methods:{
-      siderMenuSelect(index,indexPath){
+    methods: {
+      siderMenuSelect(index, indexPath) {
         let urlPath = `/${indexPath.join("/")}`
-        this.$router.push({path:urlPath})
+        this.$router.push({path: urlPath})
       },
-      HeaderMenuSelect(index,indexPath){
-        if(indexPath == 'home'){
-          this.$router.push({path:'/'})
+      HeaderMenuSelect(index, indexPath) {
+        if (indexPath == 'home') {
+          this.$router.push({path: '/'})
         }
       }
     }

@@ -4,6 +4,7 @@ import ZuanTranslator from '@/components/ZuanTranslator'
 import MainNotice from '@/components/MainNotice'
 import Md5Encode from "../components/Md5Encode"
 import Taobao from "../components/Taobao"
+import ToLogin from '@/components/login/toLogin'
 Vue.use(Router)
 
 export default new Router({
@@ -27,6 +28,11 @@ export default new Router({
       path: '/tool/Taobao',
       name: 'taobao',
       component: Taobao
+    },
+    {
+      path: '/login/toLogin',
+      name: 'toLogin',
+      component: ToLogin
     }
   ]
 })
