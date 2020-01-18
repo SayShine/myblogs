@@ -3,6 +3,9 @@
     <el-header style="text-align: right; font-size: 12px">
       <el-menu class="el-menu-demo" mode="horizontal" style="background-color: #B3C0D1" @select="HeaderMenuSelect">
         <el-menu-item index="home">首页</el-menu-item>
+        <el-menu-item index="home" style="float: right">
+          <el-button type="primary" @click="loginOut()" v-if="this.$store.getters.login">退出登录</el-button>
+        </el-menu-item>
       </el-menu>
     </el-header>
 
@@ -58,7 +61,8 @@
     Dropdown,
     DropdownItem,
     DropdownMenu,
-    Footer
+    Footer,
+    Button,
   } from 'element-ui'
 
   export default {
@@ -78,6 +82,7 @@
       [DropdownItem.name]: DropdownItem,
       [DropdownMenu.name]: DropdownMenu,
       [Footer.name]: Footer,
+      [Button.name]:Button
     },
     data() {
       return {}
@@ -91,6 +96,12 @@
         if (indexPath == 'home') {
           this.$router.push({path: '/'})
         }
+      },
+      loginOut(){
+        //清除token
+        this.$store.commit('clearToken')
+        //跳转登陆页面
+        this.$router.push({path:'/login/toLogin'})
       }
     }
   };

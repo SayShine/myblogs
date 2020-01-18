@@ -7,7 +7,7 @@
           <el-input v-model="form.username"></el-input>
         </el-form-item>
         <el-form-item label="密码">
-          <el-input v-model="form.password"></el-input>
+          <el-input v-model="form.password" type="password"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="toLogin('loginForm')">登录</el-button>
@@ -47,12 +47,15 @@
           toLogin(formName){
             this.$refs[formName].validate((valid)=>{
               AdminApi.toLogin(this.form).then(res=>{
-                if(res.data.body){
+                if(res.data.code == '0'){
                   store.commit('changeToken',res.data.body)
                   let that = this
                   setTimeout(function () {
                     that.$router.push({path:'/tool/zuanTranslator'})
                   },1000)
+                }else{
+                  alert(res.data.msg)
+                  this.form.password=''
                 }
               })
             })
