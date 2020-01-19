@@ -89,6 +89,8 @@
                         <resource>
                             <directory>src/main/webapp</directory>
                         </resource>
+                        <source>1.8</source>
+                        <target>1.8</target>
                     </webResources>
                 </configuration>
             </plugin>
