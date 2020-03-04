@@ -28,7 +28,7 @@
       </el-main>
     </el-container>
     <el-footer style="text-align: center">
-      Element UI ©2020 Created by XK
+      Element UI ©2020 Created by XK  <el-link type="info" href="http://www.beian.miit.gov.cn">鄂ICP备19027451号-1</el-link>
     </el-footer>
   </el-container>
 </template>
@@ -62,6 +62,7 @@
     DropdownItem,
     DropdownMenu,
     Footer,
+    Link,
     Button,
   } from 'element-ui'
 
@@ -82,6 +83,7 @@
       [DropdownItem.name]: DropdownItem,
       [DropdownMenu.name]: DropdownMenu,
       [Footer.name]: Footer,
+      [Link.name]: Link,
       [Button.name]:Button
     },
     data() {
