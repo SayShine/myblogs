@@ -62,6 +62,7 @@
     DropdownItem,
     DropdownMenu,
     Footer,
+    Link,
     Button,
   } from 'element-ui'
 
@@ -82,6 +83,7 @@
       [DropdownItem.name]: DropdownItem,
       [DropdownMenu.name]: DropdownMenu,
       [Footer.name]: Footer,
+      [Link.name]: Link,
       [Button.name]:Button
     },
     data() {
