@@ -90,6 +90,7 @@
     </dependencies>
 
     <build>
+        <finalName>myblogs</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
