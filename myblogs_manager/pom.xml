@@ -95,16 +95,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.0.0</version>
-                <configuration>
-                    <warName>myblogs</warName>
-                    <webResources>
-                        <resource>
-                            <directory>src/main/webapp</directory>
-                        </resource>
-                        <source>1.8</source>
-                        <target>1.8</target>
-                    </webResources>
-                </configuration>
             </plugin>
         </plugins>
     </build>
