@@ -1,6 +1,6 @@
 <template>
   <div style="font-size: 30px">
-    联系我们，微信号：wxid_k7bqhee6n2nv22
+    Jenkins部署成功了
   </div>
 </template>
 
