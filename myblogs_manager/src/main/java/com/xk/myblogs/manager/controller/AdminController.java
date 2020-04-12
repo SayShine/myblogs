@@ -39,4 +39,10 @@ public class AdminController {
             return Result.error(loginResultDto.getMsg());
         }
     }
+
+    @GetMapping
+    @RequestMapping("/helloWorld")
+    public Result<String> sayHello() {
+        return Result.ok("hello world");
+    }
 }
