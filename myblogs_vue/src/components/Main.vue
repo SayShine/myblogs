@@ -4,6 +4,7 @@
       <el-menu class="el-menu-demo" mode="horizontal" style="background-color: #B3C0D1" @select="HeaderMenuSelect">
         <el-menu-item index="home">首页</el-menu-item>
         <el-menu-item index="home" style="float: right">
+          <el-button  @click="loginIn()" >登录</el-button>
           <el-button type="primary" @click="loginOut()" v-if="this.$store.getters.login">退出登录</el-button>
         </el-menu-item>
       </el-menu>
@@ -19,6 +20,7 @@
               <el-menu-item index="ZuanTranslator">祖安语言翻译器</el-menu-item>
               <el-menu-item index="Md5Encode">MD5在线加密</el-menu-item>
               <el-menu-item index="Taobao">网址</el-menu-item>
+              <el-menu-item index="Admin">后台管理页面</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
         </el-menu>
@@ -103,6 +105,10 @@
         //清除token
         this.$store.commit('clearToken')
         //跳转登陆页面
+        this.$router.push({path:'/login/toLogin'})
+      },
+      loginIn(){
+        //跳转登录页面
         this.$router.push({path:'/login/toLogin'})
       }
     }
