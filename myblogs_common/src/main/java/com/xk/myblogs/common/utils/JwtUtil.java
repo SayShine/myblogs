@@ -26,7 +26,7 @@ public class JwtUtil {
 
     @Value("${jwt.secret}")
     private String secret;
-    @Value(value = "${jwt.expiration}")
+    @Value("${jwt.expiration}")
     private Long expiration;
 
     /**
@@ -36,7 +36,7 @@ public class JwtUtil {
         return Jwts.builder()
                 .setClaims(claims)
                 .setExpiration(generateExpirationDate())
-                .signWith(SignatureAlgorithm.HS512, "zhegebunengtaiduan")
+                .signWith(SignatureAlgorithm.HS512, secret)
                 .compact();
     }
 
@@ -47,7 +47,7 @@ public class JwtUtil {
         Claims claims = null;
         try {
             claims = Jwts.parser()
-                    .setSigningKey("zhegebunengtaiduan")
+                    .setSigningKey(secret)
                     .parseClaimsJws(token)
                     .getBody();
         } catch (Exception e) {
@@ -60,7 +60,7 @@ public class JwtUtil {
      * 生成token的过期时间
      */
     private Date generateExpirationDate() {
-        return new Date(System.currentTimeMillis() + 60 * 1000);
+        return new Date(System.currentTimeMillis() + expiration * 1000);
     }
 
     /**

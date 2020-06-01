@@ -27,12 +27,20 @@ public class MyCommentGenerator implements CommentGenerator {
     private boolean suppressAllComments = false;
     private boolean addRemarkComments = false;
     private SimpleDateFormat dateFormat;
+    private static final String EXAMPLE_SUFFIX="Example";
+    private static final String MODEL_SUFFIX="entity";
+    private static final String API_MODEL_PROPERTY_FULL_CLASS_NAME="io.swagger.annotations.ApiModelProperty";
 
     public MyCommentGenerator() {
     }
 
     @Override
     public void addJavaFileComment(CompilationUnit compilationUnit) {
+        //处于model包内并且不是example的实体类
+        if(compilationUnit.getType().getFullyQualifiedName().contains(MODEL_SUFFIX)
+            &&!compilationUnit.getType().getFullyQualifiedName().contains(EXAMPLE_SUFFIX)){
+            compilationUnit.addImportedType(new FullyQualifiedJavaType(API_MODEL_PROPERTY_FULL_CLASS_NAME));
+        }
     }
 
     @Override
@@ -166,30 +174,42 @@ public class MyCommentGenerator implements CommentGenerator {
 
     @Override
     public void addFieldComment(Field field, IntrospectedTable introspectedTable, IntrospectedColumn introspectedColumn) {
+//        if (!this.suppressAllComments) {
+//            field.addJavaDocLine("/**");
+//            field.addJavaDocLine(" * " + introspectedColumn.getActualColumnName());
+//            String remarks = introspectedColumn.getRemarks();
+//            if (this.addRemarkComments && StringUtility.stringHasValue(remarks)) {
+//                String[] remarkLines = remarks.split(System.getProperty("line.separator"));
+//                String[] var6 = remarkLines;
+//                int var7 = remarkLines.length;
+//
+//                for (int var8 = 0; var8 < var7; ++var8) {
+//                    String remarkLine = var6[var8];
+//                    field.addJavaDocLine(" * " + remarkLine);
+//                }
+//            }
+//
+//            field.addJavaDocLine(" * ");
+//            StringBuilder sb = new StringBuilder();
+//            sb.append(" * ");
+//            sb.append("WARNING - ");
+//            sb.append("@mbg.generated");
+//            sb.append(" MyBatis Generator Create");
+//            field.addJavaDocLine(sb.toString());
+//            field.addJavaDocLine(" */");
+//
+//        }
         if (!this.suppressAllComments) {
-            field.addJavaDocLine("/**");
-            field.addJavaDocLine(" * " + introspectedColumn.getActualColumnName());
             String remarks = introspectedColumn.getRemarks();
-            if (this.addRemarkComments && StringUtility.stringHasValue(remarks)) {
-                String[] remarkLines = remarks.split(System.getProperty("line.separator"));
-                String[] var6 = remarkLines;
-                int var7 = remarkLines.length;
-
-                for (int var8 = 0; var8 < var7; ++var8) {
-                    String remarkLine = var6[var8];
-                    field.addJavaDocLine(" * " + remarkLine);
+            if (addRemarkComments && StringUtility.stringHasValue(remarks)) {
+                if(remarks.contains("\"")){
+                    remarks = remarks.replace("\"","'");
                 }
+                //给model的字段添加swagger注解
+                field.addJavaDocLine("@ApiModelProperty(value = \""+remarks+"\")");
             }
-
-            field.addJavaDocLine(" * ");
-            StringBuilder sb = new StringBuilder();
-            sb.append(" * ");
-            sb.append("WARNING - ");
-            sb.append("@mbg.generated");
-            sb.append(" MyBatis Generator Create");
-            field.addJavaDocLine(sb.toString());
-            field.addJavaDocLine(" */");
         }
+
     }
 
     @Override

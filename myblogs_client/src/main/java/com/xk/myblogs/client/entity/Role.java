@@ -6,28 +6,25 @@ import java.util.Date;
 
 /**
  * 
- *   后台用户权限表
+ *   后台用户角色表
  *
- * TABLE  tpg_authority
+ * TABLE  tpg_role
  * MyBatis Generator Create
  */
-public class Permission implements Serializable {
-    @ApiModelProperty(value = "权限id")
+public class Role implements Serializable {
+    @ApiModelProperty(value = "角色id")
     private Long id;
 
-    @ApiModelProperty(value = "权限名称")
+    @ApiModelProperty(value = "父级角色id")
+    private Long pid;
+
+    @ApiModelProperty(value = "角色名")
     private String name;
 
-    @ApiModelProperty(value = "权限等级")
-    private Long level;
-
-    @ApiModelProperty(value = "权限类型")
-    private String type;
-
-    @ApiModelProperty(value = "权限描述")
+    @ApiModelProperty(value = "角色描述")
     private String description;
 
-    @ApiModelProperty(value = "关联用户数量")
+    @ApiModelProperty(value = "关联用户账号数量")
     private Integer userCount;
 
     @ApiModelProperty(value = "创建人")
@@ -42,7 +39,7 @@ public class Permission implements Serializable {
     @ApiModelProperty(value = "更新时间")
     private Date updateTime;
 
-    @ApiModelProperty(value = "权限启用状态：0->已删除；1->启用；2->禁用")
+    @ApiModelProperty(value = "角色启用状态：0->已删除；1->启用；2->禁用")
     private Integer status;
 
     private static final long serialVersionUID = 1L;
@@ -55,28 +52,20 @@ public class Permission implements Serializable {
         this.id = id;
     }
 
+    public Long getPid() {
+        return pid;
+    }
+
+    public void setPid(Long pid) {
+        this.pid = pid;
+    }
+
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Long getLevel() {
-        return level;
-    }
-
-    public void setLevel(Long level) {
-        this.level = level;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public String getDescription() {
@@ -142,9 +131,8 @@ public class Permission implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
+        sb.append(", pid=").append(pid);
         sb.append(", name=").append(name);
-        sb.append(", level=").append(level);
-        sb.append(", type=").append(type);
         sb.append(", description=").append(description);
         sb.append(", userCount=").append(userCount);
         sb.append(", creator=").append(creator);

@@ -1,9 +1,10 @@
 package com.xk.myblogs.manager.config;
 
-import com.xk.myblogs.manager.sercurity.JwtAuthenticationTokenFilter;
-import com.xk.myblogs.manager.sercurity.RestfulAccessDeniedHandler;
-import com.xk.myblogs.manager.sercurity.RestAuthenticationEntryPoint;
-import com.xk.myblogs.manager.sercurity.UserDetailsServiceImpl;
+import com.xk.myblogs.client.entity.Permission;
+import com.xk.myblogs.client.entity.UserAdmin;
+import com.xk.myblogs.manager.sercurity.*;
+import com.xk.myblogs.service.UserAdminService;
+import com.xk.myblogs.service.dto.UserAdminDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -15,18 +16,18 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.annotation.web.configurers.CorsConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * HTTP配置(jwt会话管理，跨域，登录认证，以及权限认证)
@@ -42,6 +43,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private RestfulAccessDeniedHandler restfulAccessDeniedHandler;
     @Autowired
     private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
+    @Autowired
+    private UserAdminService adminService;
 
     @Value("${CROS_MAPPING}")
     private String mapping;
@@ -90,7 +93,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/v2/api-docs/**"
                 )
                 .permitAll()
-                .antMatchers("/admin/toLogin", "/admin/toRegister","/tool/toEncode","/admin/helloWorld")// 对登录注册要允许匿名访问
+                .antMatchers("/admin/**")// 对登录注册要允许匿名访问
                 .permitAll()
                 .antMatchers(HttpMethod.OPTIONS)//跨域请求会先进行一次options请求
                 .permitAll()
@@ -115,9 +118,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(passwordEncoder());
     }
 
+    @Override
     @Bean
+    //loadUserByUsername里面只有一个接口 loadUserByUsername 用于加载用户信息 函数式编程
     public UserDetailsService userDetailsService() {
-        return new UserDetailsServiceImpl();
+        return username -> {
+            UserAdmin userAdmin = adminService.getUserAdminByUsername(username);
+            if(userAdmin!=null){
+                List<Permission> permissionList = adminService.getPermissionsByUserid(userAdmin.getId());
+                return new UserAdminDetail(userAdmin,permissionList);
+            }
+            throw new UsernameNotFoundException("用户名或密码错误");
+        };
     }
 
     @Bean

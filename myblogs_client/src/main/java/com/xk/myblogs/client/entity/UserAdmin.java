@@ -1,119 +1,59 @@
 package com.xk.myblogs.client.entity;
 
+import io.swagger.annotations.ApiModelProperty;
+
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
+ * 
+ *   后台用户账号表
  *
  * TABLE  tpg_user
  * MyBatis Generator Create
  */
 public class UserAdmin implements Serializable {
-    /**
-     * ID
-     * 
-     * WARNING - @mbg.generated MyBatis Generator Create
-     */
+    @ApiModelProperty(value = "用户id")
     private Long id;
 
-    /**
-     * NAME
-     * 姓名
-     * 
-     * WARNING - @mbg.generated MyBatis Generator Create
-     */
-    private String name;
+    @ApiModelProperty(value = "用户名")
+    @NotEmpty(message = "用户名不能为空")
+    private String username;
 
-    /**
-     * ACCOUNT
-     * 账号
-     * 
-     * WARNING - @mbg.generated MyBatis Generator Create
-     */
-    private String account;
+    @ApiModelProperty(value = "真实姓名")
+    private String realname;
 
-    /**
-     * PASSWORD
-     * 密码
-     * 
-     * WARNING - @mbg.generated MyBatis Generator Create
-     */
+    @ApiModelProperty(value = "用户密码")
+    @NotEmpty(message = "密码不能为空")
     private String password;
 
-    /**
-     * CREATE_TIME
-     * 创建时间
-     * 
-     * WARNING - @mbg.generated MyBatis Generator Create
-     */
-    private Date createTime;
-
-    /**
-     * CREATOR
-     * 创建人
-     * 
-     * WARNING - @mbg.generated MyBatis Generator Create
-     */
-    private Long creator;
-
-    /**
-     * UPDATE_TIME
-     * 更新时间
-     * 
-     * WARNING - @mbg.generated MyBatis Generator Create
-     */
-    private Date updateTime;
-
-    /**
-     * UPDATOR
-     * 更新人
-     * 
-     * WARNING - @mbg.generated MyBatis Generator Create
-     */
-    private Long updator;
-
-    /**
-     * STATUS
-     * 状态【0：已删除；1：可使用；2：禁用】
-     * 
-     * WARNING - @mbg.generated MyBatis Generator Create
-     */
-    private Integer status;
-
-    /**
-     * COMMENTS
-     * 备注
-     * 
-     * WARNING - @mbg.generated MyBatis Generator Create
-     */
-    private String comments;
-
-    /**
-     * GENDER
-     * 性别【1：女；2，男】
-     * 
-     * WARNING - @mbg.generated MyBatis Generator Create
-     */
-    private String gender;
-
-    /**
-     * EMAIL
-     * 邮箱
-     * 
-     * WARNING - @mbg.generated MyBatis Generator Create
-     */
+    @ApiModelProperty(value = "用户邮箱")
     private String email;
 
-    /**
-     * REALNAME
-     * 真实姓名
-     * 
-     * WARNING - @mbg.generated MyBatis Generator Create
-     */
-    private String realname;
+    @ApiModelProperty(value = "创建人")
+    private Long creator;
+
+    @ApiModelProperty(value = "创建时间")
+    private Date createTime;
+
+    @ApiModelProperty(value = "更新人")
+    private Long updator;
+
+    @ApiModelProperty(value = "更新时间")
+    private Date updateTime;
+
+    @ApiModelProperty(value = "最后登录时间")
+    private Date loginTime;
+
+    @ApiModelProperty(value = "帐号启用状态：0->已删除；1->启用；2->禁用")
+    private Integer status;
+
+    @ApiModelProperty(value = "备注")
+    private String description;
+
+    @ApiModelProperty(value = "性别：0->女；1->男")
+    private Integer gender;
 
     private static final long serialVersionUID = 1L;
 
@@ -125,20 +65,20 @@ public class UserAdmin implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getAccount() {
-        return account;
+    public String getRealname() {
+        return realname;
     }
 
-    public void setAccount(String account) {
-        this.account = account;
+    public void setRealname(String realname) {
+        this.realname = realname;
     }
 
     public String getPassword() {
@@ -149,12 +89,12 @@ public class UserAdmin implements Serializable {
         this.password = password;
     }
 
-    public Date getCreateTime() {
-        return createTime;
+    public String getEmail() {
+        return email;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Long getCreator() {
@@ -165,12 +105,12 @@ public class UserAdmin implements Serializable {
         this.creator = creator;
     }
 
-    public Date getUpdateTime() {
-        return updateTime;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public Long getUpdator() {
@@ -181,6 +121,22 @@ public class UserAdmin implements Serializable {
         this.updator = updator;
     }
 
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public Date getLoginTime() {
+        return loginTime;
+    }
+
+    public void setLoginTime(Date loginTime) {
+        this.loginTime = loginTime;
+    }
+
     public Integer getStatus() {
         return status;
     }
@@ -189,35 +145,43 @@ public class UserAdmin implements Serializable {
         this.status = status;
     }
 
-    public String getComments() {
-        return comments;
+    public String getDescription() {
+        return description;
     }
 
-    public void setComments(String comments) {
-        this.comments = comments;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getGender() {
+    public Integer getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Integer gender) {
         this.gender = gender;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getRealname() {
-        return realname;
-    }
-
-    public void setRealname(String realname) {
-        this.realname = realname;
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", username=").append(username);
+        sb.append(", realname=").append(realname);
+        sb.append(", password=").append(password);
+        sb.append(", email=").append(email);
+        sb.append(", creator=").append(creator);
+        sb.append(", createTime=").append(createTime);
+        sb.append(", updator=").append(updator);
+        sb.append(", updateTime=").append(updateTime);
+        sb.append(", loginTime=").append(loginTime);
+        sb.append(", status=").append(status);
+        sb.append(", description=").append(description);
+        sb.append(", gender=").append(gender);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
 }

@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xk.myblogs.service.mapper.AuthorityMapper">
-  <resultMap id="BaseResultMap" type="com.xk.myblogs.client.entity.Authority">
+<mapper namespace="com.xk.myblogs.service.mapper.UserRoleMapper">
+  <resultMap id="BaseResultMap" type="com.xk.myblogs.client.entity.UserRole">
     <!--
       WARNING - @mbg.generated MyBatis Generator Create
     -->
-    <result column="ID" jdbcType="BIGINT" property="id" />
-    <result column="NAME" jdbcType="VARCHAR" property="name" />
-    <result column="PID" jdbcType="BIGINT" property="pid" />
-    <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
-    <result column="CREATOR" jdbcType="BIGINT" property="creator" />
-    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="UPDATER" jdbcType="BIGINT" property="updater" />
-    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
-    <result column="STATUS" jdbcType="INTEGER" property="status" />
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="role_id" jdbcType="BIGINT" property="roleId" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <!--
@@ -83,9 +77,9 @@
     <!--
       WARNING - @mbg.generated MyBatis Generator Create
     -->
-    ID, NAME, PID, DESCRIPTION, CREATOR, CREATE_TIME, UPDATER, UPDATE_TIME, STATUS
+    id, user_id, role_id
   </sql>
-  <select id="selectByExample" parameterType="com.xk.myblogs.client.entity.AuthorityExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.xk.myblogs.client.entity.UserRoleExample" resultMap="BaseResultMap">
     <!--
       WARNING - @mbg.generated MyBatis Generator Create
     -->
@@ -94,7 +88,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from tpg_authority
+    from tpg_user_role_relation
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -102,95 +96,71 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.xk.myblogs.client.entity.AuthorityExample">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     <!--
       WARNING - @mbg.generated MyBatis Generator Create
     -->
-    delete from tpg_authority
+    select 
+    <include refid="Base_Column_List" />
+    from tpg_user_role_relation
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    delete from tpg_user_role_relation
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xk.myblogs.client.entity.UserRoleExample">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    delete from tpg_user_role_relation
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.xk.myblogs.client.entity.Authority">
+  <insert id="insert" parameterType="com.xk.myblogs.client.entity.UserRole">
     <!--
       WARNING - @mbg.generated MyBatis Generator Create
     -->
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into tpg_authority (NAME, PID, DESCRIPTION, 
-      CREATOR, CREATE_TIME, UPDATER, 
-      UPDATE_TIME, STATUS)
-    values (#{name,jdbcType=VARCHAR}, #{pid,jdbcType=BIGINT}, #{description,jdbcType=VARCHAR}, 
-      #{creator,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{updater,jdbcType=BIGINT}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER})
+    insert into tpg_user_role_relation (user_id, role_id)
+    values (#{userId,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.xk.myblogs.client.entity.Authority">
+  <insert id="insertSelective" parameterType="com.xk.myblogs.client.entity.UserRole">
     <!--
       WARNING - @mbg.generated MyBatis Generator Create
     -->
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into tpg_authority
+    insert into tpg_user_role_relation
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="name != null">
-        NAME,
+      <if test="userId != null">
+        user_id,
       </if>
-      <if test="pid != null">
-        PID,
-      </if>
-      <if test="description != null">
-        DESCRIPTION,
-      </if>
-      <if test="creator != null">
-        CREATOR,
-      </if>
-      <if test="createTime != null">
-        CREATE_TIME,
-      </if>
-      <if test="updater != null">
-        UPDATER,
-      </if>
-      <if test="updateTime != null">
-        UPDATE_TIME,
-      </if>
-      <if test="status != null">
-        STATUS,
+      <if test="roleId != null">
+        role_id,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
       </if>
-      <if test="pid != null">
-        #{pid,jdbcType=BIGINT},
-      </if>
-      <if test="description != null">
-        #{description,jdbcType=VARCHAR},
-      </if>
-      <if test="creator != null">
-        #{creator,jdbcType=BIGINT},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updater != null">
-        #{updater,jdbcType=BIGINT},
-      </if>
-      <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=INTEGER},
+      <if test="roleId != null">
+        #{roleId,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.xk.myblogs.client.entity.AuthorityExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.xk.myblogs.client.entity.UserRoleExample" resultType="java.lang.Long">
     <!--
       WARNING - @mbg.generated MyBatis Generator Create
     -->
-    select count(*) from tpg_authority
+    select count(*) from tpg_user_role_relation
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -199,34 +169,16 @@
     <!--
       WARNING - @mbg.generated MyBatis Generator Create
     -->
-    update tpg_authority
+    update tpg_user_role_relation
     <set>
       <if test="record.id != null">
-        ID = #{record.id,jdbcType=BIGINT},
+        id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.name != null">
-        NAME = #{record.name,jdbcType=VARCHAR},
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=BIGINT},
       </if>
-      <if test="record.pid != null">
-        PID = #{record.pid,jdbcType=BIGINT},
-      </if>
-      <if test="record.description != null">
-        DESCRIPTION = #{record.description,jdbcType=VARCHAR},
-      </if>
-      <if test="record.creator != null">
-        CREATOR = #{record.creator,jdbcType=BIGINT},
-      </if>
-      <if test="record.createTime != null">
-        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.updater != null">
-        UPDATER = #{record.updater,jdbcType=BIGINT},
-      </if>
-      <if test="record.updateTime != null">
-        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.status != null">
-        STATUS = #{record.status,jdbcType=INTEGER},
+      <if test="record.roleId != null">
+        role_id = #{record.roleId,jdbcType=BIGINT},
       </if>
     </set>
     <if test="_parameter != null">
@@ -237,18 +189,36 @@
     <!--
       WARNING - @mbg.generated MyBatis Generator Create
     -->
-    update tpg_authority
-    set ID = #{record.id,jdbcType=BIGINT},
-      NAME = #{record.name,jdbcType=VARCHAR},
-      PID = #{record.pid,jdbcType=BIGINT},
-      DESCRIPTION = #{record.description,jdbcType=VARCHAR},
-      CREATOR = #{record.creator,jdbcType=BIGINT},
-      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
-      UPDATER = #{record.updater,jdbcType=BIGINT},
-      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
-      STATUS = #{record.status,jdbcType=INTEGER}
+    update tpg_user_role_relation
+    set id = #{record.id,jdbcType=BIGINT},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      role_id = #{record.roleId,jdbcType=BIGINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xk.myblogs.client.entity.UserRole">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    update tpg_user_role_relation
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="roleId != null">
+        role_id = #{roleId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xk.myblogs.client.entity.UserRole">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    update tpg_user_role_relation
+    set user_id = #{userId,jdbcType=BIGINT},
+      role_id = #{roleId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

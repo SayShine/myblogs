@@ -42,11 +42,11 @@
             <scope>test</scope>
         </dependency>
         <!--SpringSecurity依赖配置-->
-                <dependency>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-security</artifactId>
-                    <version>2.2.2.RELEASE</version>
-                </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+            <version>2.2.2.RELEASE</version>
+        </dependency>
         <!-- fastjson -->
         <dependency>
             <groupId>com.alibaba</groupId>

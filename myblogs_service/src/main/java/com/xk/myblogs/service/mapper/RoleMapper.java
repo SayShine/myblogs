@@ -1,18 +1,18 @@
 package com.xk.myblogs.service.mapper;
 
-import com.xk.myblogs.client.entity.Permission;
-import com.xk.myblogs.client.entity.PermissionExample;
+import com.xk.myblogs.client.entity.Role;
+import com.xk.myblogs.client.entity.RoleExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface PermissionMapper {
+public interface RoleMapper {
     /**
      * 按条件计数
 	 * @param example 条件
      * 
      * WARNING - @mbg.generated MyBatis Generator Create
      */
-    long countByExample(PermissionExample example);
+    long countByExample(RoleExample example);
 
     /**
      * 按条件删除
@@ -20,7 +20,7 @@ public interface PermissionMapper {
      * 
      * WARNING - @mbg.generated MyBatis Generator Create
      */
-    int deleteByExample(PermissionExample example);
+    int deleteByExample(RoleExample example);
 
     /**
      * 按主键删除
@@ -35,7 +35,7 @@ public interface PermissionMapper {
      * 
      * WARNING - @mbg.generated MyBatis Generator Create
      */
-    int insert(Permission record);
+    int insert(Role record);
 
     /**
      * 插入数据 值不为 null 的字段
@@ -43,7 +43,7 @@ public interface PermissionMapper {
      * 
      * WARNING - @mbg.generated MyBatis Generator Create
      */
-    int insertSelective(Permission record);
+    int insertSelective(Role record);
 
     /**
      * 按条件查询
@@ -51,14 +51,14 @@ public interface PermissionMapper {
      * 
      * WARNING - @mbg.generated MyBatis Generator Create
      */
-    List<Permission> selectByExample(PermissionExample example);
+    List<Role> selectByExample(RoleExample example);
 
     /**
      * 按主键查询
      * 
      * WARNING - @mbg.generated MyBatis Generator Create
      */
-    Permission selectByPrimaryKey(Long id);
+    Role selectByPrimaryKey(Long id);
 
     /**
      * 按条件更新值不为 null 的字段
@@ -67,7 +67,7 @@ public interface PermissionMapper {
      * 
      * WARNING - @mbg.generated MyBatis Generator Create
      */
-    int updateByExampleSelective(@Param("record") Permission record, @Param("example") PermissionExample example);
+    int updateByExampleSelective(@Param("record") Role record, @Param("example") RoleExample example);
 
     /**
      * 按条件更新所有字段
@@ -76,7 +76,7 @@ public interface PermissionMapper {
      * 
      * WARNING - @mbg.generated MyBatis Generator Create
      */
-    int updateByExample(@Param("record") Permission record, @Param("example") PermissionExample example);
+    int updateByExample(@Param("record") Role record, @Param("example") RoleExample example);
 
     /**
      * 按主键更新值不为 null 的字段
@@ -84,7 +84,7 @@ public interface PermissionMapper {
      * 
      * WARNING - @mbg.generated MyBatis Generator Create
      */
-    int updateByPrimaryKeySelective(Permission record);
+    int updateByPrimaryKeySelective(Role record);
 
     /**
      * 按主键更新所有字段
@@ -92,5 +92,5 @@ public interface PermissionMapper {
      * 
      * WARNING - @mbg.generated MyBatis Generator Create
      */
-    int updateByPrimaryKey(Permission record);
+    int updateByPrimaryKey(Role record);
 }

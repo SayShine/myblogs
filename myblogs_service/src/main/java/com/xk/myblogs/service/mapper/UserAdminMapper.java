@@ -4,7 +4,6 @@ import com.xk.myblogs.client.entity.UserAdmin;
 import com.xk.myblogs.client.entity.UserAdminExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Component;
 
 public interface UserAdminMapper {
     /**
@@ -22,6 +21,13 @@ public interface UserAdminMapper {
      * WARNING - @mbg.generated MyBatis Generator Create
      */
     int deleteByExample(UserAdminExample example);
+
+    /**
+     * 按主键删除
+     * 
+     * WARNING - @mbg.generated MyBatis Generator Create
+     */
+    int deleteByPrimaryKey(Long id);
 
     /**
      * 插入数据 所有字段
@@ -48,6 +54,13 @@ public interface UserAdminMapper {
     List<UserAdmin> selectByExample(UserAdminExample example);
 
     /**
+     * 按主键查询
+     * 
+     * WARNING - @mbg.generated MyBatis Generator Create
+     */
+    UserAdmin selectByPrimaryKey(Long id);
+
+    /**
      * 按条件更新值不为 null 的字段
      * @param record 操作 实体 bean 对象
 	 * @param example 条件
@@ -64,4 +77,20 @@ public interface UserAdminMapper {
      * WARNING - @mbg.generated MyBatis Generator Create
      */
     int updateByExample(@Param("record") UserAdmin record, @Param("example") UserAdminExample example);
+
+    /**
+     * 按主键更新值不为 null 的字段
+     * @param record 操作 实体 bean 对象
+     * 
+     * WARNING - @mbg.generated MyBatis Generator Create
+     */
+    int updateByPrimaryKeySelective(UserAdmin record);
+
+    /**
+     * 按主键更新所有字段
+     * @param record 操作 实体 bean 对象
+     * 
+     * WARNING - @mbg.generated MyBatis Generator Create
+     */
+    int updateByPrimaryKey(UserAdmin record);
 }

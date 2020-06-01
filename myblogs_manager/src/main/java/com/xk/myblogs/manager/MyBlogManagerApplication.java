@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 import tk.mybatis.spring.annotation.MapperScan;
 
 @SpringBootApplication
-@MapperScan("com.xk.myblogs.service.mapper")
+@MapperScan({"com.xk.myblogs.service.mapper","com.xk.myblogs.service.dao"})
 @ComponentScan(basePackages = {"com.xk.myblogs",})
 public class MyBlogManagerApplication extends SpringBootServletInitializer {
 

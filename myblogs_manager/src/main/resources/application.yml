@@ -1,0 +1,55 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /myblogs
+##########################  跨域配置参数  ##########################
+CROS_MAPPING: /**
+CROS_ALLOWED_HEADERS: /*
+CROS_ALLOWED_ORIGINS: /*
+CROS_ALLOWED_METHOD: OPTIONS,GET,POST,DELETE,PUT
+
+##########################  配置jwt参数  ##########################
+jwt:
+  tokenHeader: Authorization #JWT存储的请求头
+  tokenHead:
+  secret: oursecret #JWT加解密使用的密钥
+  expiration: 3600 #JWT的超期限时间(60*60)
+
+spring:
+  ##########################  配置数据源  ##########################
+  datasource:
+    url: jdbc:mysql://rm-2zex7x2f6f8ljwfw0ao.mysql.rds.aliyuncs.com:3306/my_blog?zeroDateTimeBehavior=convertToNull
+    username: tiansc
+    password: lvmz521@tsc
+    driverClassName: com.mysql.cj.jdbc.Driver
+
+      ##########################  redis  正式环境redis 修改配置文件##########################
+      ##redis:
+      ##  host: 127.0.0.1 # Redis服务器地址 即服务器本身
+      ##  database: 0 # Redis数据库索引（默认为0）
+      ## port: 9734 # Redis服务器连接端口
+      ## password: meitn@tsc # Redis服务器连接密码（默认为空）
+      ## jedis:
+      ##  pool:
+      ##   max-active: 8 # 连接池最大连接数（使用负值表示没有限制）
+    ##  max-wait: -1ms # 连接池最大阻塞等待时间（使用负值表示没有限制）
+    ## max-idle: 8 # 连接池中的最大空闲连接
+    ##  min-idle: 0 # 连接池中的最小空闲连接
+    ## timeout: 3000ms # 连接超时时间（毫秒）
+
+##########################  自定义redis key ##########################
+redis:
+  key:
+    prefix:
+      authCode: "portal:authCode:" #验证码前缀
+      authToken: "refresh_token:"  #token缓存时间
+    expire:
+      authCode: 120 #验证码超期时间
+      authToken: 10800 #token刷新时间 三倍过期时长
+
+  ##########################  配置mybatis ##########################
+mybatis:
+  mapper-locations: classpath*:com/xk/myblogs/service/mapper/xml/*.xml
+
+
+

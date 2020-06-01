@@ -1,8 +1,6 @@
-package com.xk.myblogs.manager.sercurity;
+package com.xk.myblogs.service.dto;
 
-import com.xk.myblogs.client.entity.Authority;
 import com.xk.myblogs.client.entity.Permission;
-import com.xk.myblogs.client.entity.User;
 import com.xk.myblogs.client.entity.UserAdmin;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -13,15 +11,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * 用户以及对应权限的包装类
- * @author Xiong Kai
- * @date 2020年01月16日 10时58分55秒
+ * @author: tian
+ * @date: 2020/6/1 17:08
  */
-public class AdminUserDetail implements UserDetails {
+public class UserAdminDetail implements UserDetails {
     private UserAdmin userAdmin;//用户
     private List<Permission> permissionList;//权限列表
 
-    public AdminUserDetail(UserAdmin userAdmin,List<Permission> permissionList){
+    public UserAdminDetail(UserAdmin userAdmin, List<Permission> permissionList){
         this.userAdmin = userAdmin;
         this.permissionList = permissionList;
     }
@@ -31,9 +28,9 @@ public class AdminUserDetail implements UserDetails {
         //返回当前用户的权限
         return permissionList==null?null:
                 permissionList.stream()
-                .filter(permission -> permission.getValue()!=null)
-                .map(permission ->new SimpleGrantedAuthority(permission.getValue()))
-                .collect(Collectors.toList());
+                        .filter(permission -> permission.getType()!=null)
+                        .map(permission ->new SimpleGrantedAuthority(permission.getType().toString()))
+                        .collect(Collectors.toList());
     }
 
     @Override
@@ -43,7 +40,7 @@ public class AdminUserDetail implements UserDetails {
 
     @Override
     public String getUsername() {
-        return userAdmin.getAccount();
+        return userAdmin.getUsername();
     }
 
     @Override
