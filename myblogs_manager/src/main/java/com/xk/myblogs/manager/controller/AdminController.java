@@ -73,6 +73,6 @@ public class AdminController {
     @RequestMapping(value = "/helloWorld", method = RequestMethod.GET)
     @ApiOperation("纯属测试")
     public Result<String> sayHello() {
-        return Result.ok("hello world!!");
+        return Result.ok("hello world..");
     }
 }
