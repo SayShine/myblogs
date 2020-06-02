@@ -45,7 +45,7 @@ public class Swagger2Config {
         return new ApiInfoBuilder()
                 .title("SwaggerUI")
                 .description("my_blogs控制层接口测试")
-                .version("1.0")
+                .version("2.0")
                 .build();
     }
 
