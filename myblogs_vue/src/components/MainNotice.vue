@@ -1,6 +1,6 @@
 <template>
   <div style="font-size: 30px">
-    Jenkins部署成功了！！
+    Jenkins部署成功了！！测试
   </div>
 </template>
 
