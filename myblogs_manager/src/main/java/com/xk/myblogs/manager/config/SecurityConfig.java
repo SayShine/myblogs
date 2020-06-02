@@ -72,13 +72,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 
-                //登录认证
-                .and()
-                .addFilterBefore(jwtAuthenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class)
-                .exceptionHandling()
-                .accessDeniedHandler(restfulAccessDeniedHandler)//自定义未登录返回结果
-                .authenticationEntryPoint(restAuthenticationEntryPoint)//自定义未授权返回结果
-
                 //权限认证
                 .and()
                 .authorizeRequests()
@@ -90,10 +83,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/*.css",
                         "/**/*.js",
                         "/swagger-resources/**",
+                        "/swagger**/**",
+                        "/configuration/**",
                         "/v2/api-docs/**"
                 )
                 .permitAll()
-                .antMatchers("/admin/**")// 对登录注册要允许匿名访问
+                .antMatchers("/admin/**","/tool/**")// 对登录注册要允许匿名访问
                 .permitAll()
                 .antMatchers(HttpMethod.OPTIONS)//跨域请求会先进行一次options请求
                 .permitAll()
@@ -110,6 +105,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .headers()
                 .cacheControl();//禁用缓存
+
+        // 添加JWT filter
+        httpSecurity.addFilterBefore(jwtAuthenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+        //添加自定义未授权和未登录结果返回
+        httpSecurity.exceptionHandling()
+                .accessDeniedHandler(restfulAccessDeniedHandler)
+                .authenticationEntryPoint(restAuthenticationEntryPoint);
     }
 
     @Override
@@ -147,12 +149,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
+
     @Bean
+    /**
+     * 这里是配置跨域请求的bean
+     */
     public CorsConfigurationSource corsConfigurationSource(){
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList(allowedOrigins));
+//        configuration.setAllowedOrigins(Arrays.asList(allowedOrigins));
         configuration.setAllowedMethods(Arrays.asList(allowedMethods));
-        configuration.setAllowedHeaders(Arrays.asList(allowedHeaders));
+//        configuration.setAllowedHeaders(Arrays.asList(allowedHeaders));
+
+        //配置请求源和请求头
+        configuration.addAllowedOrigin("http://localhost:9527");
+        configuration.addAllowedOrigin("http://47.103.137.193:80");
+        configuration.addAllowedHeader("*");
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration(mapping, configuration);
         return source;

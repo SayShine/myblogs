@@ -51,5 +51,3 @@ redis:
 mybatis:
   mapper-locations: classpath*:com/xk/myblogs/service/mapper/xml/*.xml
 
-
-

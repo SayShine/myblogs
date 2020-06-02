@@ -20,7 +20,7 @@
       loginStatus:function() {
         let toLogin = "/login/toLogin";
         let toRegister = "/login/toRegister";
-        let localPath = this.$route.path
+        let localPath = this.$route.path;
         // if(localPath!=toLogin&&localPath!=toRegister){//访问非登陆页面
         //     if(store.state.token == ''){//如果不存在token
         //       this.$router.push({path:'/login/toLogin'})

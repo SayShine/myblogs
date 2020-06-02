@@ -29,3 +29,4 @@ build/
 
 ### VS Code ###
 .vscode/
+myblogs_vue/src/api/baseUrl.js

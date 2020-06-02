@@ -104,8 +104,8 @@
       loginOut(){
         //清除token
         this.$store.commit('clearToken')
-        //跳转登陆页面
-        this.$router.push({path:'/login/toLogin'})
+        //跳转登陆页面   cxk:2020/06/02跳个锤子
+        // this.$router.push({path:'/login/toLogin'})
       },
       loginIn(){
         //跳转登录页面

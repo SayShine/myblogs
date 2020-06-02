@@ -32,7 +32,7 @@ public class AdminController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AdminController.class);
 
-    @GetMapping("/toLogin")
+    @PostMapping("/toLogin")
     @ApiOperation("会员登录")
     public Result<String> toTransalte(@RequestParam(value = "username") String username,
                                       @RequestParam(value = "password") String password) {

@@ -48,8 +48,8 @@
             this.$refs[formName].validate((valid)=>{
               AdminApi.toLogin(this.form).then(res=>{
                 if(res.data.code == '0'){
-                  store.commit('changeToken',res.data.body)
-                  let that = this
+                  store.commit('changeToken',res.data.body);
+                  let that = this;
                   setTimeout(function () {
                     that.$router.push({path:'/tool/zuanTranslator'})
                   },1000)
