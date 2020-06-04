@@ -15,6 +15,7 @@
         <framework.version>1.0.0</framework.version>
         <junit.version>4.12</junit.version>
         <spring-test.version>4.0.6.RELEASE</spring-test.version>
+<!--        <start-class>com.xk.myblogs.manager.MyBlogManagerApplication</start-class>-->
     </properties>
 
     <dependencies>
@@ -47,6 +48,7 @@
             <version>2.2.2.RELEASE</version>
             <scope>provided</scope>
         </dependency>
+
         <!--spring  end-->
 
         <!--redis依赖配置-->
@@ -100,6 +102,32 @@
             </plugin>
         </plugins>
     </build>
+
+    <!--打jar包的插件
+    步骤 1：删除排除的springboottomcat的依赖和引入的tomcat的依赖
+    步骤 2：替换build插件
+    步骤 3：将打包方式从war替换成jar  即可打jar包
+    -->
+<!--    <build>-->
+<!--        <finalName>myblogs</finalName>-->
+<!--        <plugins>-->
+<!--            <plugin>-->
+<!--                <groupId>org.springframework.boot</groupId>-->
+<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>repackage</id>-->
+<!--                        <goals>-->
+<!--                            <goal>repackage</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--                <configuration>-->
+<!--                    <mainClass>${start-class}</mainClass>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
+<!--        </plugins>-->
+<!--    </build>-->
 
     <packaging>war</packaging>
 
