@@ -36,8 +36,8 @@ public class Swagger2Config {
                 .paths(PathSelectors.any())
                 .build()
                 //添加登录认证
-//                .securitySchemes(securityScheme())
-//                .securityContexts(securityContexts())
+                .securitySchemes(securityScheme())
+                .securityContexts(securityContexts())
                 ;
     }
 
@@ -60,7 +60,7 @@ public class Swagger2Config {
     private List<SecurityContext> securityContexts() {
         //设置需要登录认证的路径
         List<SecurityContext> result = new ArrayList<>();
-        result.add(getContextByPath("/*/.*"));
+        result.add(getContextByPath("/tool/.*"));
         return result;
     }
 

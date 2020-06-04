@@ -50,4 +50,3 @@ redis:
   ##########################  配置mybatis ##########################
 mybatis:
   mapper-locations: classpath*:com/xk/myblogs/service/mapper/xml/*.xml
-
