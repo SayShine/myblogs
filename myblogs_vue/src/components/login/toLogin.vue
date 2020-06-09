@@ -145,9 +145,13 @@
             //表单校验
             if(valid){
               AdminApi.toLogin(this.form).then(res=>{
-                if(res.data.code == '0'){
+                //返回登录成功消息
+                if(res.data.msg == 'SUCCESS'){
+                  //存储token
                   store.commit('changeToken',res.data.body);
                   let that = this;
+                  //同时存储用户名
+                  window.localStorage.setItem('username',this.form.username);
                   setTimeout(function () {
                     that.$router.push({path:'/tool/zuanTranslator'})
                   },1000)

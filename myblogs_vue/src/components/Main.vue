@@ -1,12 +1,13 @@
 <template>
   <el-container style="height: 700px; border: 1px solid #eee">
-    <el-header style="text-align: right; font-size: 12px">
+    <el-header style="text-align: right; font-size: 16px">
       <el-menu class="el-menu-demo" mode="horizontal"  @select="HeaderMenuSelect"
                background-color="#545c64" text-color="#fff" active-text-color="#ffd04b"
                 style="border-bottom: 0px">
         <el-menu-item index="home">首页</el-menu-item>
 
-        <!--登陆成功选项-->
+        <!--登陆成功选项 并显示用户名-->
+        欢迎您：{{user==''?'':user}}
         <el-submenu v-if="this.$store.getters.login" index="1"  style="float: right;">
           <template slot="title">个人中心</template>
           <!--            <el-button type="primary" @click="loginOut()" ></el-button>-->
@@ -103,7 +104,9 @@
       [Button.name]:Button
     },
     data() {
-      return {}
+      return {
+        user : window.localStorage.getItem('username')
+      }
     },
     methods: {
       siderMenuSelect(index, indexPath) {
@@ -118,6 +121,8 @@
       loginOut(){
         //清除token
         this.$store.commit('clearToken')
+        //同时清除localstroage中存储的用户名信息
+        window.localStorage.removeItem('username');
         //跳转登陆页面   cxk:2020/06/02跳个锤子跳登录页面
         // this.$router.push({path:'/login/toLogin'})
       },
