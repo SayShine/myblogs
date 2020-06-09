@@ -21,7 +21,7 @@
         <!-- MYSQL -->
         <jdbcConnection
                 driverClass="com.mysql.cj.jdbc.Driver"
-                connectionURL="jdbc:mysql://rm-2zex7x2f6f8ljwfw0ao.mysql.rds.aliyuncs.com:3306/my_blog?useUnicode=true&amp;characterEncoding=utf-8&amp;autoReconnect=true&amp;serverTimezone=Asia/Shanghai&amp;tinyInt1isBit=false?zeroDateTimeBehavior=convertToNull"
+                connectionURL="jdbc:mysql://rm-2zex7x2f6f8ljwfw0ao.mysql.rds.aliyuncs.com:3306/my_blog?useUnicode=true&amp;characterEncoding=utf-8&amp;autoReconnect=true&amp;serverTimezone=Asia/Shanghai&amp;tinyInt1isBit=false&amp;zeroDateTimeBehavior=convertToNull"
                 userId="tiansc"
                 password="lvmz521@tsc">
         </jdbcConnection>

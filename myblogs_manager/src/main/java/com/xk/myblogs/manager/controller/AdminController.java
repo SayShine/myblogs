@@ -39,10 +39,12 @@ public class AdminController {
         if(StringUtils.isEmpty(username)||StringUtils.isEmpty(password)){
             return Result.error(LoginStatusEnum.LOGIN_PARAM_ERROR.getMsg());
         }
+        LOGGER.info("username:"+username+", password:"+password);
         LoginResultDto loginResultDto = userAdminService.toLogin(username,password);
         if (loginResultDto==null){
             return Result.error(LoginStatusEnum.LOGIN_PARAM_ERROR.getMsg());
         }else if(LoginStatusEnum.LOGIN_SUCCESS.getType().equals(loginResultDto.getStatus())){
+            LOGGER.info("登录token：{}",loginResultDto.getToken());
             return Result.ok(loginResultDto.getToken());
         }else{
             return Result.error(loginResultDto.getMsg());
@@ -50,7 +52,7 @@ public class AdminController {
     }
 
     @ApiOperation("会员注册")
-    @PostMapping("/toRegist")
+    @PostMapping("/toRegister")
     public Result<UserAdmin> toRegist(@RequestBody@Valid UserAdmin userAdminParam,BindingResult result){
         if(result.hasErrors()){
             List<FieldError> fieldErrors = result.getFieldErrors();
@@ -73,6 +75,6 @@ public class AdminController {
     @RequestMapping(value = "/helloWorld", method = RequestMethod.GET)
     @ApiOperation("纯属测试")
     public Result<String> sayHello() {
-        return Result.ok("hello world..");
+        return Result.ok("hello world");
     }
 }

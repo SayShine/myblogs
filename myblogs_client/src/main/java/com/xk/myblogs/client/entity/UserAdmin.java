@@ -1,8 +1,6 @@
 package com.xk.myblogs.client.entity;
 
 import io.swagger.annotations.ApiModelProperty;
-
-import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -18,15 +16,15 @@ public class UserAdmin implements Serializable {
     private Long id;
 
     @ApiModelProperty(value = "用户名")
-    @NotEmpty(message = "用户名不能为空")
     private String username;
 
     @ApiModelProperty(value = "真实姓名")
     private String realname;
 
     @ApiModelProperty(value = "用户密码")
-    @NotEmpty(message = "密码不能为空")
     private String password;
+
+    private Integer telephone;
 
     @ApiModelProperty(value = "用户邮箱")
     private String email;
@@ -87,6 +85,14 @@ public class UserAdmin implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Integer getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(Integer telephone) {
+        this.telephone = telephone;
     }
 
     public String getEmail() {
@@ -171,6 +177,7 @@ public class UserAdmin implements Serializable {
         sb.append(", username=").append(username);
         sb.append(", realname=").append(realname);
         sb.append(", password=").append(password);
+        sb.append(", telephone=").append(telephone);
         sb.append(", email=").append(email);
         sb.append(", creator=").append(creator);
         sb.append(", createTime=").append(createTime);

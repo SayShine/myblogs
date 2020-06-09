@@ -1,6 +1,7 @@
 /**
  * axios封装
  * 请求拦截、响应拦截、错误统一处理
+ * 注意: @代表src的路径
  */
 
 import axios from 'axios';
@@ -29,7 +30,7 @@ const errorHandle = (status, other) => {
   switch (status) {
     // 401: 未登录状态，跳转登录页
     case 401:
-      alert('请先登陆！')
+      alert('请先登陆！');
       toLogin();
       break;
     // 402 token过期 清除token并跳转登录页
@@ -51,13 +52,17 @@ const errorHandle = (status, other) => {
     default:
       console.log(other);
   }
-}
+};
 
 // 创建axios实例
 var instance = axios.create({
+  //配置baseUrl 分为开发和生产环境 见config配置
+  baseURL: process.env.BASE_URL,
   timeout: 1000 * 12,
-  headers:{'Content-Type':'application/x-www-form-urlencoded'}
+  headers:{'Content-Type':'application/x-www-form-urlencoded'},
 });
+
+
 
 /**
  * 请求拦截器
@@ -71,7 +76,7 @@ instance.interceptors.request.use(
     }
     // 用于判断用户登录情况
     const token = store.state.token;
-    token && (config.headers.Authorization = token);
+    token && (config.headers.Authorization = "Bearer " + token);
     return config;
   },
   error => Promise.error(error));

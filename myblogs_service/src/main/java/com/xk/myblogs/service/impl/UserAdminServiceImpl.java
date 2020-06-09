@@ -82,7 +82,7 @@ public class UserAdminServiceImpl implements UserAdminService {
                 loginResultDto.setStatus(LoginStatusEnum.LOGIN_SUCCESS.getType());
                 loginResultDto.setMsg(LoginStatusEnum.LOGIN_SUCCESS.getMsg());
                 loginResultDto.setToken(jwtUtil.generateToken(username));
-                LOGGER.info("登录token：{}",loginResultDto.getToken());
+
             }else{
                 //用户名或密码错误
                 loginResultDto.setStatus(LoginStatusEnum.LOGIN_PASSWORD_ERROR.getType());

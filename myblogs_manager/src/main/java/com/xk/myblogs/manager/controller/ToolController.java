@@ -4,8 +4,10 @@ package com.xk.myblogs.manager.controller;
 
 import com.xk.myblogs.manager.vo.Result;
 import com.xk.myblogs.common.utils.Md5Util;
+import com.xk.myblogs.service.ToolService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("tool")
 @Api(tags = "ToolController", description = "祖安工具")
 public class ToolController {
+    @Autowired
+    private ToolService toolService;
 
     @GetMapping("/toTranslate")
     @ApiOperation("祖安语言翻译器")
@@ -29,4 +33,28 @@ public class ToolController {
         String result = Md5Util.getMD5(code);
         return Result.ok(result);
     }
+
+    @GetMapping("/getAuthCode")
+    @ApiOperation("获取验证码")
+    public Result<String> getAuthCoded(@RequestParam String telephone){
+        if("".equals(telephone)){
+            return Result.error("请输入手机号码");
+        }
+        String authCode = toolService.generateAuthCode(telephone);
+        return Result.ok(authCode);
+    }
+
+    @GetMapping("/verifyAuthCode")
+    @ApiOperation("比对验证码是否正确")
+    public Result<String> verifyAuthCode(@RequestParam String telephone,
+                                 @RequestParam String authCode){
+        if("".equals(authCode)){
+            return Result.error("请输入验证码");
+        }
+        boolean result = toolService.verifyAuthCode(telephone,authCode);
+        return result?Result.ok("验证码校验成功"):Result.error("验证码校验失败");
+
+    }
+
+
 }

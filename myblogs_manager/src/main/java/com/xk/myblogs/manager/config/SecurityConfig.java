@@ -162,11 +162,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         //配置请求源和请求头
         configuration.addAllowedOrigin("http://localhost:9527");
+        configuration.addAllowedOrigin("http://localhost");
 
         //配置正式环境
         configuration.addAllowedOrigin("http://47.103.137.193");
         configuration.addAllowedOrigin("http://www.wangmin520.com");
-        configuration.addAllowedHeader("*");
+        configuration.addAllowedOrigin("http://wangmin520.com");
+
+        configuration.addAllowedOrigin("http://39.107.247.2");
+        configuration.addAllowedOrigin("http://www.lvmz521.com");
+        configuration.addAllowedOrigin("http://lvmz521.com");
+
+        //配置请求头
+        configuration.addAllowedHeader("Authorization");
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration(mapping, configuration);

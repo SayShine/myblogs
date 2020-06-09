@@ -1,0 +1,44 @@
+{
+  "id": "1870644",
+  "name": "myblogs",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1219209",
+      "name": "盾牌",
+      "font_class": "codefail",
+      "unicode": "e642",
+      "unicode_decimal": 58946
+    },
+    {
+      "icon_id": "1597923",
+      "name": "闭眼",
+      "font_class": "hidepass",
+      "unicode": "e6ba",
+      "unicode_decimal": 59066
+    },
+    {
+      "icon_id": "6282785",
+      "name": "验证码",
+      "font_class": "codesuccess",
+      "unicode": "e6bf",
+      "unicode_decimal": 59071
+    },
+    {
+      "icon_id": "11372780",
+      "name": "眼睛",
+      "font_class": "showpass",
+      "unicode": "e8c7",
+      "unicode_decimal": 59591
+    },
+    {
+      "icon_id": "11776580",
+      "name": "登录",
+      "font_class": "user",
+      "unicode": "e611",
+      "unicode_decimal": 58897
+    }
+  ]
+}

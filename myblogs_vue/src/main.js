@@ -13,14 +13,14 @@ VueRouter.prototype.push = function push(location) {
 }
 // 导入api接口
 import api from './api'
-
 Vue.prototype.$api = api; // 将api挂载到vue的原型上复制代码
-
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 import store from "./store/index";
-Vue.use(store)
-Vue.prototype.$store = store
+//路由
+Vue.use(store);
+Vue.prototype.$store = store;
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

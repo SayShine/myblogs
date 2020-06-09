@@ -30,7 +30,13 @@
       </el-main>
     </el-container>
     <el-footer style="text-align: center">
-      <el-link type="info" href="http://www.beian.miit.gov.cn">备案号：鄂ICP备19027451号</el-link>
+
+      <el-link type="info" href="http://www.beian.miit.gov.cn">
+<!--        xk的-->
+<!--        备案号：鄂ICP备19027451号-->
+<!--        tsc的-->
+        备案号：鄂ICP备20008807号
+      </el-link>
     </el-footer>
   </el-container>
 </template>

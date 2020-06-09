@@ -1,5 +1,5 @@
 // 如果本地缓存里有token，就将token赋值
-let defaultToken = ''
+let defaultToken = '';
 try {
   if (localStorage.token) {
     defaultToken = localStorage.token

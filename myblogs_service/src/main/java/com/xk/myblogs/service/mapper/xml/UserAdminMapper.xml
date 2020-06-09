@@ -9,6 +9,7 @@
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="realname" jdbcType="VARCHAR" property="realname" />
     <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="telephone" jdbcType="INTEGER" property="telephone" />
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="creator" jdbcType="BIGINT" property="creator" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -87,8 +88,8 @@
     <!--
       WARNING - @mbg.generated MyBatis Generator Create
     -->
-    id, username, realname, password, email, creator, create_time, updator, update_time, 
-    login_time, status, description, gender
+    id, username, realname, password, telephone, email, creator, create_time, updator, 
+    update_time, login_time, status, description, gender
   </sql>
   <select id="selectByExample" parameterType="com.xk.myblogs.client.entity.UserAdminExample" resultMap="BaseResultMap">
     <!--
@@ -140,15 +141,15 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into tpg_user (username, realname, password, 
-      email, creator, create_time, 
-      updator, update_time, login_time, 
-      status, description, gender
-      )
+      telephone, email, creator, 
+      create_time, updator, update_time, 
+      login_time, status, description, 
+      gender)
     values (#{username,jdbcType=VARCHAR}, #{realname,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{email,jdbcType=VARCHAR}, #{creator,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updator,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, #{loginTime,jdbcType=TIMESTAMP}, 
-      #{status,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, #{gender,jdbcType=INTEGER}
-      )
+      #{telephone,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR}, #{creator,jdbcType=BIGINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updator,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{loginTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, 
+      #{gender,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.xk.myblogs.client.entity.UserAdmin">
     <!--
@@ -167,6 +168,9 @@
       </if>
       <if test="password != null">
         password,
+      </if>
+      <if test="telephone != null">
+        telephone,
       </if>
       <if test="email != null">
         email,
@@ -205,6 +209,9 @@
       </if>
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        #{telephone,jdbcType=INTEGER},
       </if>
       <if test="email != null">
         #{email,jdbcType=VARCHAR},
@@ -262,6 +269,9 @@
       <if test="record.password != null">
         password = #{record.password,jdbcType=VARCHAR},
       </if>
+      <if test="record.telephone != null">
+        telephone = #{record.telephone,jdbcType=INTEGER},
+      </if>
       <if test="record.email != null">
         email = #{record.email,jdbcType=VARCHAR},
       </if>
@@ -303,6 +313,7 @@
       username = #{record.username,jdbcType=VARCHAR},
       realname = #{record.realname,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
+      telephone = #{record.telephone,jdbcType=INTEGER},
       email = #{record.email,jdbcType=VARCHAR},
       creator = #{record.creator,jdbcType=BIGINT},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -330,6 +341,9 @@
       </if>
       <if test="password != null">
         password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        telephone = #{telephone,jdbcType=INTEGER},
       </if>
       <if test="email != null">
         email = #{email,jdbcType=VARCHAR},
@@ -369,6 +383,7 @@
     set username = #{username,jdbcType=VARCHAR},
       realname = #{realname,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=INTEGER},
       email = #{email,jdbcType=VARCHAR},
       creator = #{creator,jdbcType=BIGINT},
       create_time = #{createTime,jdbcType=TIMESTAMP},

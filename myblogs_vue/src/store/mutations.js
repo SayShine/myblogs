@@ -8,7 +8,7 @@ export default {
   },
   clearToken (state) {
     //退出登录时清除token的方法
-    localStorage.token = ''
-    state.token = ''
+    localStorage.token = '';
+    state.token = '';
   }
 }

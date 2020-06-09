@@ -3,9 +3,9 @@ import Router from 'vue-router'
 import ZuanTranslator from '@/components/tool/ZuanTranslator'
 import MainNotice from '@/components/MainNotice'
 import Md5Encode from "../components/tool/Md5Encode"
-import Taobao from "../components/Taobao"
+import Taobao from "../components/tool/Taobao"
 import ToLogin from '@/components/login/toLogin'
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
   mode: 'history',
