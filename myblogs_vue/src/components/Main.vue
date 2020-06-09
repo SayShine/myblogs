@@ -7,9 +7,8 @@
         <el-menu-item index="home">首页</el-menu-item>
 
         <!--登陆成功选项 并显示用户名-->
-        欢迎您：{{user==''?'':user}}
         <el-submenu v-if="this.$store.getters.login" index="1"  style="float: right;">
-          <template slot="title">个人中心</template>
+          <template slot="title">{{user==''?'':user}}</template>
           <!--            <el-button type="primary" @click="loginOut()" ></el-button>-->
           <el-menu-item @click="loginOut()" index="1-1-1">退出登录</el-menu-item>
         </el-submenu>
@@ -123,6 +122,7 @@
         this.$store.commit('clearToken')
         //同时清除localstroage中存储的用户名信息
         window.localStorage.removeItem('username');
+        this.user = '';
         //跳转登陆页面   cxk:2020/06/02跳个锤子跳登录页面
         // this.$router.push({path:'/login/toLogin'})
       },
