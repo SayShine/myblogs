@@ -2,20 +2,18 @@
   <el-container style="height: 700px; border: 1px solid #eee">
     <el-header style="text-align: right; font-size: 12px">
       <el-menu class="el-menu-demo" mode="horizontal"  @select="HeaderMenuSelect"
-               background-color="#545c64" text-color="#fff" active-text-color="#ffd04b" >
+               background-color="#545c64" text-color="#fff" active-text-color="#ffd04b"
+                style="border-bottom: 0px">
         <el-menu-item index="home">首页</el-menu-item>
 
         <!--登陆成功选项-->
-        <el-submenu index="1" v-if="this.$store.getters.login" style="float: right">
+        <el-submenu v-if="this.$store.getters.login" index="1"  style="float: right;">
           <template slot="title">个人中心</template>
           <!--            <el-button type="primary" @click="loginOut()" ></el-button>-->
           <el-menu-item @click="loginOut()" index="1-1-1">退出登录</el-menu-item>
         </el-submenu>
-
-<!--        &lt;!&ndash;未成功选项&ndash;&gt;-->
-<!--        <el-submenu index="1" v-else index="1">-->
-<!--          <el-button   @click="loginIn()" >登录</el-button>-->
-<!--        </el-submenu>-->
+        <!--未成功选项-->
+        <el-menu-item v-else index="2" style="float: right;"   @click="loginIn()" >登录</el-menu-item>
 
       </el-menu>
     </el-header>
@@ -43,9 +41,9 @@
 
       <el-link type="info" href="http://www.beian.miit.gov.cn">
 <!--        xk的-->
-        备案号：鄂ICP备19027451号
+<!--        备案号：鄂ICP备19027451号-->
 <!--        tsc的-->
-<!--        备案号：鄂ICP备20008807号-->
+        备案号：鄂ICP备20008807号
       </el-link>
     </el-footer>
   </el-container>
@@ -57,9 +55,6 @@
     background-color: #545c64;
     color: #333;
     line-height: 60px;
-  }
-  .el-menu-demo {
-    border-bottom: 0px;
   }
 
   .el-aside {
