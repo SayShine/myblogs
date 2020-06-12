@@ -75,7 +75,7 @@ public class AdminController {
         return Result.ok(userAdmin);
     }
 
-    @ApiOperation(value = "无限刷新token（后续需要从redis中判断是否存在才能刷新）")
+    @ApiOperation(value = "刷新token（从redis中判断是否存在才能刷新）")
     @GetMapping("/refreshToken")
     @ResponseBody
     public Result refreshToken(@RequestParam(value = "username") String username) {

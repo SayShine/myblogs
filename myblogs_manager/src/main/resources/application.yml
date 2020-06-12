@@ -10,6 +10,8 @@ server:
 ##########################  配置mybatis ##########################
 mybatis:
   mapper-locations: classpath*:com/xk/myblogs/service/mapper/xml/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 ##########################  跨域配置参数  ##########################
 CROS_MAPPING: /**
@@ -22,7 +24,7 @@ jwt:
   tokenHeader: Authorization #JWT存储的请求头
   tokenHead: Bearer
   secret: oursecret #JWT加解密使用的密钥
-  expiration: 100 #JWT的超期限时间(60*60)
+  expiration: 15 #JWT的超期限时间(60*60)
 
 ##########################  自定义redis key ##########################
 redis:
@@ -32,5 +34,5 @@ redis:
       authToken: "refresh_token:"  #token缓存时间
     expire:
       authCode: 120 #验证码超期时间
-      authToken: 10800 #token刷新时间 三倍过期时长
+      authToken: 30 #token刷新时间 三倍过期时长
 

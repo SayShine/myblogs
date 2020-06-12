@@ -141,6 +141,9 @@ public class UserAdminServiceImpl implements UserAdminService {
 
     @Override
     public String refreshToken(String username) {
+        if(StringUtils.isEmpty(redisService.get(REDIS_KEY_PREFIX_AUTH_TOKEN+username))){
+            return null;
+        }
         return jwtUtil.generateToken(username);
 
 //        return jwtUtil.refreshHeadToken(token);

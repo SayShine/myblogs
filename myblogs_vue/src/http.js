@@ -98,7 +98,7 @@ instance.interceptors.response.use(
             isRefreshing = true
             return refreshToken(localStorage.get('username')).then(res => {
               var refreshedtoken = res.data.body
-              if(refreshedtoken !== ''){
+              if(refreshedtoken !== ''&& refreshedtoken !== null){
                 console.log("刷新token:"+refreshedtoken)
                 localStorage.set('token',refreshedtoken);
                 config.headers['Authorization'] = 'Bearer ' + refreshedtoken;
