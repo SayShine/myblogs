@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 
 import java.util.Date;
@@ -28,6 +29,8 @@ public class JwtUtil {
     private String secret;
     @Value("${jwt.expiration}")
     private Long expiration;
+    @Value("${jwt.tokenHead}")
+    private String tokenHead;
 
     /**
      * 根据负责生成JWT的token
@@ -51,6 +54,7 @@ public class JwtUtil {
                     .parseClaimsJws(token)
                     .getBody();
         } catch (Exception e) {
+            System.out.println(e);
             LOGGER.info("JWT格式验证失败:{}",token);
         }
         return claims;
@@ -128,5 +132,55 @@ public class JwtUtil {
         Claims claims = getClaimsFromToken(token);
         claims.put(CLAIM_KEY_CREATED, new Date());
         return generateToken(claims);
+    }
+
+    /**
+     * token刷新
+     *
+     * @param oldToken 带tokenHead的token
+     */
+    public String refreshHeadToken(String oldToken) {
+        if(StringUtils.isEmpty(oldToken)){
+            return null;
+        }
+        String token = oldToken.substring(tokenHead.length());
+        if(StringUtils.isEmpty(token)){
+            return null;
+        }
+
+        //token校验不通过
+        Claims claims = getClaimsFromToken(token);
+        if(claims==null){
+            return null;
+        }
+        //如果token已经过期，不支持刷新
+        if(isTokenExpired(token)){
+            return null;
+        }
+        //如果token在10秒之内刚刷新过，返回原token
+        if(tokenRefreshJustBefore(token,10)){
+            return token;
+        }else{
+            claims.put(CLAIM_KEY_CREATED, new Date());
+            return generateToken(claims);
+        }
+    }
+
+    /**
+     * 判断token在指定时间内是否刚刚刷新过
+     * @param token 原token
+     * @param time 指定时间（秒）
+     */
+    private boolean tokenRefreshJustBefore(String token, int time) {
+        Claims claims = getClaimsFromToken(token);
+        //创建时间
+        Date created = claims.get(CLAIM_KEY_CREATED, Date.class);
+        //刷新时间
+        Date refreshDate = new Date();
+        //刷新时间在创建时间的指定时间内
+        if(refreshDate.after(created)&&refreshDate.before(new Date(created.getTime()+refreshDate.getTime()))){
+            return true;
+        }
+        return false;
     }
 }

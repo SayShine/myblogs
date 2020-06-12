@@ -52,6 +52,7 @@
   import AdminApi from '../../api/apiList/admin'
   import store from '@/store'
   import SIdentify from '@/components/common/authCode'
+  import localStorage from '@/assets/utils/js/localStorage';
     export default {
       name: "toLogin",
       components:{
@@ -147,11 +148,12 @@
               AdminApi.toLogin(this.form).then(res=>{
                 //返回登录成功消息
                 if(res.data.msg == 'SUCCESS'){
-                  //存储token
-                  store.commit('changeToken',res.data.body);
+                  store.commit('changeToken',res.data.body)
+                  //存储token和用户名
+                  localStorage.set('token',res.data.body)
+                  localStorage.set('username',this.form.username)
                   let that = this;
-                  //同时存储用户名
-                  window.localStorage.setItem('username',this.form.username);
+                  //同时存储
                   setTimeout(function () {
                     that.$router.push({path:'/tool/zuanTranslator'})
                   },1000)

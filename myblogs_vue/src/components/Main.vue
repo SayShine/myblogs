@@ -81,6 +81,7 @@
     Link,
     Button,
   } from 'element-ui'
+  import localStorage from "../assets/utils/js/localStorage";
 
   export default {
     name: 'Main',
@@ -120,8 +121,9 @@
       loginOut(){
         //清除token
         this.$store.commit('clearToken')
+        localStorage.remove('token');
         //同时清除localstroage中存储的用户名信息
-        window.localStorage.removeItem('username');
+        localStorage.remove('username');
         this.user = '';
         //跳转登陆页面   cxk:2020/06/02跳个锤子跳登录页面
         // this.$router.push({path:'/login/toLogin'})

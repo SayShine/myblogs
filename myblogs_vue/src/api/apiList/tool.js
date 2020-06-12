@@ -6,7 +6,7 @@ import axios from '../../http'; // 导入http中创建的axios实例
 
 const Tool = {
   toTranslateWords(params) {
-    return axios.get(`/tool/toTranslate`, params)
+    return axios.get(`/tool/toTranslate`, {params: params})
   },
   toEncoding(params) {
     return axios.get(`/tool/toEncode`, {params: params})

@@ -7,10 +7,10 @@ import com.xk.myblogs.manager.vo.Result;
 import com.xk.myblogs.service.UserAdminService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -29,6 +29,10 @@ import java.util.List;
 public class AdminController {
     @Autowired
     private UserAdminService userAdminService;
+    @Value("${jwt.tokenHeader}")
+    private String tokenHeader;
+    @Value("${jwt.tokenHead}")
+    private String tokenHead;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AdminController.class);
 
@@ -69,6 +73,21 @@ public class AdminController {
             return Result.error("注册失败");
         }
         return Result.ok(userAdmin);
+    }
+
+    @ApiOperation(value = "无限刷新token（后续需要从redis中判断是否存在才能刷新）")
+    @GetMapping("/refreshToken")
+    @ResponseBody
+    public Result refreshToken(@RequestParam(value = "username") String username) {
+        if(StringUtils.isEmpty(username)){
+            return Result.error("用户未登录");
+        }
+        String refreshedToken = userAdminService.refreshToken(username);
+        if (refreshedToken == null) {
+            return Result.error("token已经过期！");
+        }
+        LOGGER.info("刷新的token：{}",refreshedToken);
+        return Result.ok(refreshedToken);
     }
 
     @GetMapping

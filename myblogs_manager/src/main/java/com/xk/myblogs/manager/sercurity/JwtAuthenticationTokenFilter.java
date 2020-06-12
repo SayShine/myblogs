@@ -38,10 +38,10 @@ public class JwtAuthenticationTokenFilter  extends OncePerRequestFilter {
     @Value("${jwt.tokenHead}")
     private String tokenHead;
 
-    //redis中 token字段和时间限制
-    @Value("${redis.key.prefix.authCode}")
+    //redis中 验证码字段和时间限制
+    @Value("${redis.key.prefix.authToken}")
     private String REDIS_KEY_PREFIX_AUTH_TOKEN;
-    @Value("${redis.key.expire.authCode}")
+    @Value("${redis.key.expire.authToken}")
     private Long AUTH_TOKEN_EXPIRE_SECONDS;
 
     @Override
@@ -53,6 +53,7 @@ public class JwtAuthenticationTokenFilter  extends OncePerRequestFilter {
             String authToken = authHeader.substring(this.tokenHead.length());// The part after "Bearer "
             String username = jwtUtil.getUserNameFromToken(authToken);
 
+            //上下文中找不到token
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
                 if (jwtUtil.validateToken(authToken, userDetails)) {
@@ -62,6 +63,9 @@ public class JwtAuthenticationTokenFilter  extends OncePerRequestFilter {
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                 }
             }else{
+                //从redis中寻找token
+
+
                 request.setAttribute("expiredFlag",true);
             }
         }

@@ -39,4 +39,11 @@ public interface UserAdminService {
      * @return
      */
     UserAdmin register(UserAdmin userAdmin);
+
+    /**
+     * 刷新token
+     * @param username 用户名
+     * @return
+     */
+    String refreshToken(String username);
 }

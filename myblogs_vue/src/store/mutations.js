@@ -3,7 +3,7 @@ export default {
     //登录或者注册时，存储token的方法
     state.token = token
     try {
-      localStorage.token = token
+      // localStorage.token = token
     } catch (e) {}
   },
   clearToken (state) {

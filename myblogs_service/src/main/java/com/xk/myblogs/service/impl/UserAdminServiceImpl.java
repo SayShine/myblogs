@@ -7,6 +7,7 @@ import com.xk.myblogs.client.entity.UserAdminExample;
 import com.xk.myblogs.common.enums.DataStatusEnum;
 import com.xk.myblogs.common.enums.LoginStatusEnum;
 import com.xk.myblogs.common.utils.JwtUtil;
+import com.xk.myblogs.service.RedisService;
 import com.xk.myblogs.service.UserAdminService;
 import com.xk.myblogs.service.dao.UserAdminAuthDao;
 import com.xk.myblogs.service.mapper.UserAdminMapper;
@@ -14,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -34,6 +36,12 @@ import java.util.List;
 public class UserAdminServiceImpl implements UserAdminService {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserAdminServiceImpl.class);
 
+    //redis中 验证码字段和时间限制
+    @Value("${redis.key.prefix.authToken}")
+    private String REDIS_KEY_PREFIX_AUTH_TOKEN;
+    @Value("${redis.key.expire.authToken}")
+    private Long AUTH_TOKEN_EXPIRE_SECONDS;
+
     @Resource
     private UserAdminMapper userAdminMapper;
 
@@ -48,6 +56,9 @@ public class UserAdminServiceImpl implements UserAdminService {
 
     @Autowired
     private UserAdminAuthDao userAdminAuthDao;
+
+    @Autowired
+    private RedisService redisService;
 
     @Override
     public UserAdmin getUserAdminByUsername(String username) {
@@ -81,7 +92,16 @@ public class UserAdminServiceImpl implements UserAdminService {
                 //密码相等
                 loginResultDto.setStatus(LoginStatusEnum.LOGIN_SUCCESS.getType());
                 loginResultDto.setMsg(LoginStatusEnum.LOGIN_SUCCESS.getMsg());
-                loginResultDto.setToken(jwtUtil.generateToken(username));
+
+                //设置token并添加进redis中
+                String token = jwtUtil.generateToken(username);
+                loginResultDto.setToken(token);
+
+                //token和用户名绑定
+                redisService.set(REDIS_KEY_PREFIX_AUTH_TOKEN+username,token);
+                //设置过期时间
+                redisService.expire(REDIS_KEY_PREFIX_AUTH_TOKEN+username,AUTH_TOKEN_EXPIRE_SECONDS);
+
 
             }else{
                 //用户名或密码错误
@@ -117,5 +137,12 @@ public class UserAdminServiceImpl implements UserAdminService {
         userAdmin.setPassword(encodePassword);
         userAdminMapper.insert(userAdmin);
         return userAdmin;
+    }
+
+    @Override
+    public String refreshToken(String username) {
+        return jwtUtil.generateToken(username);
+
+//        return jwtUtil.refreshHeadToken(token);
     }
 }

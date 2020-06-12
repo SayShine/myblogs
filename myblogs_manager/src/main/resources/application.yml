@@ -22,7 +22,7 @@ jwt:
   tokenHeader: Authorization #JWT存储的请求头
   tokenHead: Bearer
   secret: oursecret #JWT加解密使用的密钥
-  expiration: 3600 #JWT的超期限时间(60*60)
+  expiration: 100 #JWT的超期限时间(60*60)
 
 ##########################  自定义redis key ##########################
 redis:
@@ -33,5 +33,4 @@ redis:
     expire:
       authCode: 120 #验证码超期时间
       authToken: 10800 #token刷新时间 三倍过期时长
-
 
