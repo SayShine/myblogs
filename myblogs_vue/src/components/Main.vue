@@ -46,6 +46,18 @@
 <!--        备案号：鄂ICP备20008807号-->
       </el-link>
     </el-footer>
+
+    <div>
+      <!--博客精灵 start*-->
+      <div id="spig" class="spig">
+        <div id="message">……</div>
+        <div id="mumu" class="mumu"
+             v-bind:style="{backgroundImage:'url(' + bg + ')',
+          backgroundRepeat:'no-repeat',
+          backgroundSize:'100% 65%'}">
+        </div>
+      </div>
+    </div>
   </el-container>
 </template>
 
@@ -60,6 +72,10 @@
   .el-aside {
     color: #333;
   }
+
+  .spig {display:block;width:175px;height:246px;position:absolute;bottom: 300px;left:180px;z-index:9999;}
+  #message{color :#191919;border: 1px solid #c4c4c4;background:#ddd;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;min-height:1em;padding:5px;top:-45px;position:absolute;text-align:center;width:auto !important;z-index:10000;-moz-box-shadow:0 0 15px #eeeeee;-webkit-box-shadow:0 0 15px #eeeeee;border-color:#eeeeee;box-shadow:0 0 15px #eeeeee;outline:none;}
+  .mumu{width:175px;height:246px;cursor: move;}
 </style>
 
 <script>
@@ -82,6 +98,7 @@
     Button,
   } from 'element-ui'
   import localStorage from "../assets/utils/js/localStorage";
+  import {cutedoll} from "../assets/common/cutedoll/feizong/js/cutedoll"
 
   export default {
     name: 'Main',
@@ -105,10 +122,19 @@
     },
     data() {
       return {
-        user : window.localStorage.getItem('username')
+        user : window.localStorage.getItem('username'),
+        isindex: true,
+        title: "",
+        visitor: "这位怪蜀黍",
+        bg: require('@/assets/common/cutedoll/feizong/images/22.png'),
+        msgs: "",
       }
     },
+    mounted() {
+      cutedoll("这位怪蜀黍",true);
+    },
     methods: {
+
       siderMenuSelect(index, indexPath) {
         let urlPath = `/${indexPath.join("/")}`
         this.$router.push({path: urlPath})

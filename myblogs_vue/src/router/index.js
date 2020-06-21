@@ -5,6 +5,7 @@ import MainNotice from '@/components/MainNotice'
 import Md5Encode from "../components/tool/Md5Encode"
 import Taobao from "../components/tool/Taobao"
 import ToLogin from '@/components/login/toLogin'
+import Admin from '@/components/Admin'
 Vue.use(Router);
 
 export default new Router({
@@ -34,6 +35,11 @@ export default new Router({
       path: '/login/toLogin',
       name: 'toLogin',
       component: ToLogin
+    },
+    {
+      path: '/tool/Admin',
+      name: 'Admin',
+      component: Admin
     }
   ]
 })

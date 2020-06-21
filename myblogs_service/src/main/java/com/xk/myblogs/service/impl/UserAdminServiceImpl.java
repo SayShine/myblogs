@@ -142,8 +142,12 @@ public class UserAdminServiceImpl implements UserAdminService {
     @Override
     public String refreshToken(String username) {
         if(StringUtils.isEmpty(redisService.get(REDIS_KEY_PREFIX_AUTH_TOKEN+username))){
+            LOGGER.info("-----------key is null----------");
+
             return null;
         }
+        LOGGER.info("-----------key is not null----------");
+        LOGGER.info("username:{}",redisService.get(REDIS_KEY_PREFIX_AUTH_TOKEN+username));
         return jwtUtil.generateToken(username);
 
 //        return jwtUtil.refreshHeadToken(token);

@@ -88,6 +88,7 @@ public class WebLogAspect {
         webLog.setStartTime(startTime);
         webLog.setUri(request.getRequestURI());
         webLog.setUrl(urlStr);
+        //这里比较重要 获取方法参数
         webLog.setParameter(getParameter(method, joinPoint.getArgs()));
         LOGGER.info("{}", JSONObject.toJSONString(webLog));
 

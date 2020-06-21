@@ -16,6 +16,9 @@ import api from './api'
 Vue.prototype.$api = api; // 将api挂载到vue的原型上复制代码
 Vue.config.productionTip = false;
 
+//导入jquery
+import $ from 'jquery'
+
 import store from "./store/index";
 //路由
 Vue.use(store);

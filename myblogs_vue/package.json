@@ -10,15 +10,14 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "element-ui": "^2.13.0",
+    "element-ui": "^2.13.2",
+    "jquery": "^3.5.1",
     "vue": "^2.5.2",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.3.4"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
-    "axios": "^0.19.1",
-    "vuex": "^3.1.2",
-    "qs": "^6.9.1",
+    "axios": "^0.19.2",
     "babel-core": "^6.22.1",
     "babel-helper-vue-jsx-merge-props": "^2.0.3",
     "babel-loader": "^7.1.1",
@@ -39,10 +38,11 @@
     "node-notifier": "^5.1.2",
     "optimize-css-assets-webpack-plugin": "^3.2.0",
     "ora": "^1.2.0",
-    "portfinder": "^1.0.13",
+    "portfinder": "^1.0.26",
     "postcss-import": "^11.0.0",
     "postcss-loader": "^2.0.8",
     "postcss-url": "^7.2.1",
+    "qs": "^6.9.4",
     "rimraf": "^2.6.0",
     "semver": "^5.3.0",
     "shelljs": "^0.7.6",
@@ -51,6 +51,7 @@
     "vue-loader": "^13.3.0",
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.5.2",
+    "vuex": "^3.4.0",
     "webpack": "^3.6.0",
     "webpack-bundle-analyzer": "^2.9.0",
     "webpack-dev-server": "^2.9.1",
