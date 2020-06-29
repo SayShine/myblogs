@@ -64,6 +64,9 @@
         <table tableName="tpg_role_authority_relation" domainObjectName="RolePermission">
             <generatedKey column="ID" sqlStatement="MySql" identity="true"/>
         </table>
+        <table tableName="tpg_user_blogs" domainObjectName="UserBlogs">
+            <generatedKey column="ID" sqlStatement="MySql" identity="true"/>
+        </table>
     </context>
 
 </generatorConfiguration>

@@ -62,7 +62,11 @@ instance.interceptors.request.use(
   config => {
     // post请求进行序列化
     if(config.method=='post'){
-      config.data = qs.stringify(config.data);
+      //json字符串不需要序列化
+      console.log(typeof config.data);
+      if(typeof config.data !== "string"){
+        config.data = qs.stringify(config.data);
+      }
     }
     // 用于判断用户登录情况refreshToken
     const token = localStorage.get('token')

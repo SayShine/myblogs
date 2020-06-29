@@ -155,7 +155,7 @@
                   let that = this;
                   //同时存储
                   setTimeout(function () {
-                    that.$router.push({path:'/tool/zuanTranslator'})
+                    that.$router.push({path:'/tool/Markdown/Detail'})
                   },1000)
                 }else{
                   alert(res.data.msg)

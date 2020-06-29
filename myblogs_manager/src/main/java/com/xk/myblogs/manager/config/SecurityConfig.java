@@ -175,6 +175,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         //配置请求头
         configuration.addAllowedHeader("Authorization");
+        configuration.addAllowedHeader("Content-Type");
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration(mapping, configuration);

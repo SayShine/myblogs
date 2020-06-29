@@ -2,13 +2,24 @@ package com.xk.myblogs.manager.controller;
 
 
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.xk.myblogs.client.entity.UserBlogs;
 import com.xk.myblogs.manager.vo.Result;
 import com.xk.myblogs.common.utils.Md5Util;
 import com.xk.myblogs.service.ToolService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.spring.web.json.Json;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author xiongkai
@@ -46,15 +57,35 @@ public class ToolController {
 
     @GetMapping("/verifyAuthCode")
     @ApiOperation("比对验证码是否正确")
-    public Result<String> verifyAuthCode(@RequestParam String telephone,
-                                 @RequestParam String authCode){
+    public Result<String> verifyAuthCode(@RequestParam(value = "telephone") String telephone,
+                                 @RequestParam(value = "authCode") String authCode){
         if("".equals(authCode)){
             return Result.error("请输入验证码");
         }
         boolean result = toolService.verifyAuthCode(telephone,authCode);
         return result?Result.ok("验证码校验成功"):Result.error("验证码校验失败");
-
     }
 
+    @GetMapping("/getMdListByUsername")
+    @ApiOperation("根据用户名获取博客列表")
+    public Result<List<UserBlogs>> getMdListByUsername(@RequestParam String username){
+        List<UserBlogs> userBlogsList = toolService.getMdListByUsername(username);
+        return Result.ok(userBlogsList);
+    }
+
+    @PostMapping("/savaMdList")
+    @ApiOperation("保存用户博客内容")
+    public Result savaMdList(@RequestBody String jsonObject) {
+        UserBlogs userBlogs = JSONObject.parseObject(jsonObject, UserBlogs.class);
+        int count = toolService.savaMdList(userBlogs);
+        return count>0?Result.ok(count):Result.error("修改失败");
+    }
+
+    @GetMapping("/deleteMdList")
+    @ApiOperation("批量删除博客内容")
+    public Result deleteMdList(@RequestParam(value = "idsString") String idsString){
+        int count = toolService.deleteMdList(idsString);
+        return count>0?Result.ok(count):Result.error("删除失败");
+    }
 
 }

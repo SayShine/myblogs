@@ -15,6 +15,7 @@
         <!--未成功选项-->
         <el-menu-item v-else index="2" style="float: right;"   @click="loginIn()" >登录</el-menu-item>
 
+        <el-menu-item  index="3" style="float: right;"   @click="MarkdownDetail()" >博客系统</el-menu-item>
       </el-menu>
     </el-header>
 
@@ -25,10 +26,10 @@
           <el-submenu index="tool">
             <template slot="title"><i class="el-icon-s-tools"></i>小工具</template>
             <el-menu-item-group>
+              <el-menu-item index="MdTable">我的博客</el-menu-item>
               <el-menu-item index="ZuanTranslator">祖安语言翻译器</el-menu-item>
               <el-menu-item index="Md5Encode">MD5在线加密</el-menu-item>
               <el-menu-item index="Taobao">网址</el-menu-item>
-              <el-menu-item index="Admin">后台管理页面</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
         </el-menu>
@@ -134,7 +135,6 @@
       cutedoll("这位怪蜀黍",true);
     },
     methods: {
-
       siderMenuSelect(index, indexPath) {
         let urlPath = `/${indexPath.join("/")}`
         this.$router.push({path: urlPath})
@@ -157,6 +157,9 @@
       loginIn(){
         //跳转登录页面
         this.$router.push({path:'/login/toLogin'})
+      },
+      MarkdownDetail(){
+        this.$router.push({path:'/tool/Markdown/Detail'})
       }
     }
   };

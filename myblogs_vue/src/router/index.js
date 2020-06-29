@@ -5,7 +5,8 @@ import MainNotice from '@/components/MainNotice'
 import Md5Encode from "../components/tool/Md5Encode"
 import Taobao from "../components/tool/Taobao"
 import ToLogin from '@/components/login/toLogin'
-import Admin from '@/components/Admin'
+import Markdown from '@/components/tool/Markdown/Markdown'
+import MdTable from '@/components/tool/Markdown/MdTable'
 Vue.use(Router);
 
 export default new Router({
@@ -37,9 +38,14 @@ export default new Router({
       component: ToLogin
     },
     {
-      path: '/tool/Admin',
-      name: 'Admin',
-      component: Admin
+      path: '/tool/Markdown/Detail',
+      name: 'Markdown',
+      component: Markdown
+    },
+    {
+      path: '/tool/MdTable',
+      name: 'MdTable',
+      component: MdTable
     }
   ]
 })

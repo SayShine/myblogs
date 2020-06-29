@@ -9,12 +9,11 @@
 
 <script>
   import {Link} from 'element-ui'
-
   export default {
     name: "Taobao",
     components: {
       [Link.name]: Link,
-    },
+    }
   }
 </script>
 

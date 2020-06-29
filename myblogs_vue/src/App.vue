@@ -1,5 +1,5 @@
 <template>
-  <Main v-if="loginStatus"></Main>
+  <Main v-if="isoutContent"></Main>
   <router-view v-else></router-view>
 </template>
 
@@ -16,11 +16,15 @@
       }
     },
     computed:{
-      loginStatus:function() {
+      isoutContent:function() {
+        //登录页面
         let toLogin = "/login/toLogin";
-        let toRegister = "/login/toRegister";
+        //Markdown文本编辑页面
+        let MarkdownDetail = "/tool/Markdown/Detail";
         //当前路由
         let localPath = this.$route.path;
+
+        let isout = localPath!=toLogin&&localPath!=MarkdownDetail
         // if(localPath!=toLogin&&localPath!=toRegister){//访问非登陆页面
         //     if(store.state.token == ''){//如果不存在token
         //       this.$router.push({path:'/login/toLogin'})
@@ -30,7 +34,7 @@
         // }else{
         //   return false;
         // }
-        return localPath!=toLogin&&localPath!=toRegister
+        return isout
       }
     }
   }
