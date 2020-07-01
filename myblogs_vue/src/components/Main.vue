@@ -42,9 +42,9 @@
 
       <el-link type="info" href="http://www.beian.miit.gov.cn">
 <!--        xk的-->
-        备案号：鄂ICP备19027451号
+<!--        备案号：鄂ICP备19027451号-->
 <!--        tsc的-->
-<!--        备案号：鄂ICP备20008807号-->
+        备案号：鄂ICP备20008807号
       </el-link>
     </el-footer>
 
