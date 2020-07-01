@@ -90,6 +90,14 @@
                 </includes>
                 <filtering>false</filtering>
             </resource>
+
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>mapper/*.xml</include>
+                </includes>
+            </resource>
+
         </resources>
         <plugins>
             <plugin>

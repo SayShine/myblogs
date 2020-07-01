@@ -54,7 +54,7 @@ public class UserAdminServiceImpl implements UserAdminService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Autowired
+    @Resource
     private UserAdminAuthDao userAdminAuthDao;
 
     @Autowired
