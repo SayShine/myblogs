@@ -38,7 +38,7 @@ public class AdminController {
 
     @PostMapping("/toLogin")
     @ApiOperation("会员登录")
-    public Result<String> toTransalte(@RequestParam(value = "username") String username,
+    public Result<String> toLogin(@RequestParam(value = "username") String username,
                                       @RequestParam(value = "password") String password) {
         if(StringUtils.isEmpty(username)||StringUtils.isEmpty(password)){
             return Result.error(LoginStatusEnum.LOGIN_PARAM_ERROR.getMsg());
@@ -94,6 +94,6 @@ public class AdminController {
     @RequestMapping(value = "/helloWorld", method = RequestMethod.GET)
     @ApiOperation("纯属测试")
     public Result<String> sayHello() {
-        return Result.ok("20200622");
+        return Result.ok("20200701");
     }
 }
