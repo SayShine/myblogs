@@ -40,11 +40,17 @@
     </el-container>
     <el-footer style="text-align: center">
 
-      <el-link type="info" href="http://www.beian.miit.gov.cn">
+      <el-link v-if="isXk" type="info" href="http://www.beian.miit.gov.cn">
 <!--        xk的-->
-<!--        备案号：鄂ICP备19027451号-->
+        备案号：鄂ICP备19027451号
 <!--        tsc的-->
-        备案号：鄂ICP备20008807号 
+<!--        备案号：鄂ICP备20008807号-->
+      </el-link>
+      <el-link v-else type="info" href="http://www.beian.miit.gov.cn">
+        <!--        xk的-->
+        <!--        备案号：鄂ICP备19027451号-->
+        <!--        tsc的-->
+        备案号：鄂ICP备20008807号
       </el-link>
     </el-footer>
 
@@ -156,10 +162,18 @@
       },
       loginIn(){
         //跳转登录页面
+        console.log(window.location.href);
         this.$router.push({path:'/login/toLogin'})
       },
       MarkdownDetail(){
         this.$router.push({path:'/tool/Markdown/Detail'})
+      },
+      isXk(){
+        let host = window.location.href;
+        if(host.startsWith("http://www.wangmin520.com/")){
+          return true;
+        }
+        return false;
       }
     }
   };
