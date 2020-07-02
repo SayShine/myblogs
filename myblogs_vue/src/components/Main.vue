@@ -133,7 +133,7 @@
         isindex: true,
         title: "",
         visitor: "这位怪蜀黍",
-        bg: require('@/assets/common/cutedoll/feizong/images/22.png'),
+        bg: require('../../static/images/22.png'),
         msgs: "",
       }
     },
