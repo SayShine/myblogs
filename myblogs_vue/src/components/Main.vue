@@ -133,7 +133,7 @@
         isindex: true,
         title: "",
         visitor: "这位怪蜀黍",
-        bg: require('../../static/images/22.png'),
+        bg: ('/static/images/22.png'),
         msgs: "",
       }
     },
