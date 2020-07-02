@@ -40,7 +40,7 @@
     </el-container>
     <el-footer style="text-align: center">
 
-      <el-link v-if="isXk" type="info" href="http://www.beian.miit.gov.cn">
+      <el-link v-if="isXk()" type="info" href="http://www.beian.miit.gov.cn">
 <!--        xk的-->
         备案号：鄂ICP备19027451号
 <!--        tsc的-->
