@@ -77,12 +77,11 @@
             <version>8.0.18</version>
         </dependency>
 
-        <!-- lombok插件 -->
+        <!--集成druid连接池-->
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.12</version>
-            <scope>provided</scope>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>1.1.10</version>
         </dependency>
 
 

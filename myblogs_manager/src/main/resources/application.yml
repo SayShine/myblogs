@@ -14,6 +14,7 @@ mybatis:
     - classpath:mapper/*.xml
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  type-handlers-package: com.xk.myblogs.service.typehandler
 
 ##########################  跨域配置参数  ##########################
 CROS_MAPPING: /**

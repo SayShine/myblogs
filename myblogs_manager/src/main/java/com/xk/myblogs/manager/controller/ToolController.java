@@ -74,11 +74,11 @@ public class ToolController {
     }
 
     @PostMapping("/savaMdList")
-    @ApiOperation("保存用户博客内容")
-    public Result savaMdList(@RequestBody String jsonObject) {
-        UserBlogs userBlogs = JSONObject.parseObject(jsonObject, UserBlogs.class);
-        int count = toolService.savaMdList(userBlogs);
-        return count>0?Result.ok(count):Result.error("修改失败");
+    @ApiOperation("保存或新增用户博客内容")
+    public Result savaMdList(@RequestBody String jsonString) {
+        //根据json字符串进行博客内容新增或更改
+        int count = toolService.savaMdList(jsonString);
+        return count>0?Result.ok(count):Result.error("修改(修改)失败");
     }
 
     @GetMapping("/deleteMdList")

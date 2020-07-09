@@ -1,5 +1,6 @@
 package com.xk.myblogs.client.entity;
 
+import com.xk.myblogs.client.enums.SexEnum;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.util.Date;
@@ -24,6 +25,10 @@ public class UserAdmin implements Serializable {
     @ApiModelProperty(value = "用户密码")
     private String password;
 
+    @ApiModelProperty(value = "性别:0->女 1->男 ")
+    private SexEnum sex;
+
+    @ApiModelProperty(value = "手机号")
     private Integer telephone;
 
     @ApiModelProperty(value = "用户邮箱")
@@ -49,9 +54,6 @@ public class UserAdmin implements Serializable {
 
     @ApiModelProperty(value = "备注")
     private String description;
-
-    @ApiModelProperty(value = "性别：0->女；1->男")
-    private Integer gender;
 
     private static final long serialVersionUID = 1L;
 
@@ -85,6 +87,14 @@ public class UserAdmin implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public SexEnum getSex() {
+        return sex;
+    }
+
+    public void setSex(SexEnum sex) {
+        this.sex = sex;
     }
 
     public Integer getTelephone() {
@@ -159,14 +169,6 @@ public class UserAdmin implements Serializable {
         this.description = description;
     }
 
-    public Integer getGender() {
-        return gender;
-    }
-
-    public void setGender(Integer gender) {
-        this.gender = gender;
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -177,6 +179,7 @@ public class UserAdmin implements Serializable {
         sb.append(", username=").append(username);
         sb.append(", realname=").append(realname);
         sb.append(", password=").append(password);
+        sb.append(", sex=").append(sex);
         sb.append(", telephone=").append(telephone);
         sb.append(", email=").append(email);
         sb.append(", creator=").append(creator);
@@ -186,7 +189,6 @@ public class UserAdmin implements Serializable {
         sb.append(", loginTime=").append(loginTime);
         sb.append(", status=").append(status);
         sb.append(", description=").append(description);
-        sb.append(", gender=").append(gender);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

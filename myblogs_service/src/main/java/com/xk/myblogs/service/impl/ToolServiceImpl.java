@@ -1,11 +1,13 @@
 package com.xk.myblogs.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.xk.myblogs.client.entity.UserAdmin;
 import com.xk.myblogs.client.entity.UserAdminExample;
 import com.xk.myblogs.client.entity.UserBlogs;
 import com.xk.myblogs.client.entity.UserBlogsExample;
 import com.xk.myblogs.service.RedisService;
 import com.xk.myblogs.service.ToolService;
+import com.xk.myblogs.service.UserAdminService;
 import com.xk.myblogs.service.dao.UserBlogsDao;
 import com.xk.myblogs.service.mapper.UserAdminMapper;
 import com.xk.myblogs.service.mapper.UserBlogsMapper;
@@ -38,6 +40,8 @@ public class ToolServiceImpl implements ToolService {
     private UserBlogsMapper userBlogsMapper;
     @Resource
     private UserBlogsDao userBlogsDao;
+    @Autowired
+    private UserAdminService userAdminService;
 
 
     @Override
@@ -84,9 +88,23 @@ public class ToolServiceImpl implements ToolService {
     }
 
     @Override
-    public int savaMdList(UserBlogs userBlogs) {
+    public int savaMdList(String jsonString) {
+        UserBlogs userBlogs = JSONObject.parseObject(jsonString, UserBlogs.class);
+        JSONObject jsonObject = JSONObject.parseObject(jsonString);
+
         userBlogs.setUpdateTime(new Date());
-        return userBlogsMapper.updateByPrimaryKey(userBlogs);
+        Object username = jsonObject.get("username");
+        if(username == null){
+            //保存操作
+            return userBlogsMapper.updateByPrimaryKeySelective(userBlogs);
+        }
+
+        //新增博客内容
+        UserAdmin userAdmin = userAdminService.getUserAdminByUsername(username.toString());
+        userBlogs.setUserId(userAdmin.getId());
+        //插入操作
+        return userBlogsMapper.insertSelective(userBlogs);
+
     }
 
     @Override

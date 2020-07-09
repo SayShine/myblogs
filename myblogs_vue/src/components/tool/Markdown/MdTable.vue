@@ -7,12 +7,23 @@
     <div class="container">
       <!--操作栏-->
       <div class="handle-box">
+
+        <el-button
+          icon="el-icon-plus"
+          class="handle-box mr10"
+          @click="addNewTable">
+          新增</el-button>
+
         <el-button
           type="primary"
           icon="el-icon-delete"
           class="handle-box mr10"
-          @click="delAllSelection"
-        >批量删除</el-button>
+          @click="delAllSelection">
+          批量删除</el-button>
+
+
+
+
 
       </div>
       <el-table
@@ -97,7 +108,7 @@
       </el-form>
       <span slot="footer" class="dialog-footer">
                 <el-button @click="editVisible = false">取 消</el-button>
-                <el-button type="primary" @click="saveEdit">确 定</el-button>
+                <el-button type="primary" @click="saveEdit">保存</el-button>
             </span>
     </el-dialog>
 
@@ -150,6 +161,7 @@
         idx: -1,
         editVisible: false,
         isShow:false,
+        isUpdate:true, //默认是更新
       }
     },
     created() {
@@ -176,30 +188,56 @@
       },
       // 编辑操作
       handleEdit(index, row) {
+        //设置为更新状态
+        this.isUpdate = true;
+
         this.idx = index;
         this.form = row;
         this.editVisible = true;
       },
-      // 保存编辑
+      // 保存编辑  更新/新增
       saveEdit() {
+        //更新数据
         this.editVisible = false;
         let param = this.form;
+        if(this.isUpdate === false){
+          param.username = window.localStorage.getItem('username');
+        }
+        console.log(param);
         ToolApi.saveMdList(param).then(res =>{
-          if(res.data.code == 0){
-            Notification({
-              type: 'success',
-              message: `修改第 ${this.idx + 1} 行成功`,
-              duration: 2500
-            });
-            this.$set(this.MdList, this.idx, this.form);
+          if(this.isUpdate === true){
+            if(res.data.code == 0){
+              Notification({
+                type: 'success',
+                message: `修改第 ${this.idx + 1} 行成功`,
+                duration: 2500
+              });
+              this.$set(this.MdList, this.idx, this.form);
+            }else{
+              Notification({
+                type: 'error',
+                message: `修改第 ${this.idx + 1} 行失败`,
+                duration: 2500
+              });
+            }
           }else{
-            Notification({
-              type: 'error',
-              message: `修改第 ${this.idx + 1} 行失败`,
-              duration: 2500
-            });
+            if(res.data.code == 0){
+              Notification({
+                type: 'success',
+                message: `新增数据成功`,
+                duration: 2500
+              });
+              this.getMdList();
+            }else{
+              Notification({
+                type: 'error',
+                message: `新增数据失败`,
+                duration: 2500
+              });
+            }
           }
         });
+
       },
       handleDelete(index, row) {
         // 二次确认删除
@@ -224,7 +262,6 @@
         });
       },
       delAllSelection(){
-
         // 二次确认删除
         MessageBox.confirm('确定要删除吗？', '提示', {
           type: 'warning'
@@ -257,12 +294,17 @@
           })
         })
           .catch(() => {});
+      },
+      addNewTable(){
+        //设置为新增数据状态
+        this.isUpdate = false;
 
-
-
-
+        this.form = {};
+        this.editVisible = true;
 
       }
+
+
 
 
     }

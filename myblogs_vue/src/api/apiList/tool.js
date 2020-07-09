@@ -27,15 +27,20 @@ const Tool = {
       data :JSON.stringify(params)
     })
   },
+  //新增博客列表
+  insertMdList(params){
+    return axios.request({
+      url:'/tool/savaMdList',
+      method:'post',
+      headers:{
+        'Content-Type': 'application/json'
+      },
+      data :JSON.stringify(params)
+    })
+  },
   //批量删除
   deleteMdList(params){
     return axios.get('/tool/deleteMdList',{params:params})
-    // return axios.request({
-    //   url:'/tool/deleteMdList',
-    //   method:'post',
-    //   headers:{'Content-Type':'application/x-www-form-urlencoded'},
-    //   data :{params:params}
-    // })
   }
 }
 

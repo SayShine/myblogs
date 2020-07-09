@@ -32,6 +32,13 @@
             <version>2.0.2</version>
         </dependency>
 
+        <!-- lombok插件 -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.12</version>
+        </dependency>
+
     </dependencies>
 
     <properties>
