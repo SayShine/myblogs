@@ -21,10 +21,6 @@
           @click="delAllSelection">
           批量删除</el-button>
 
-
-
-
-
       </div>
       <el-table
         ref="multipleTable"
@@ -92,14 +88,14 @@
 
     <!-- 编辑弹出框 -->
     <el-dialog title="编辑" :visible.sync="editVisible" width="30%">
-      <el-form ref="form" :model="form" label-width="70px">
-        <el-form-item label="博客主题">
+      <el-form :rules="formRules" ref="form" :model="form" label-width="70px">
+        <el-form-item label="博客主题" >
           <el-input v-model="form.title"></el-input>
         </el-form-item>
-        <el-form-item label="浏览量">
+        <el-form-item label="浏览量" prop="readnum">
           <el-input v-model="form.readnum"></el-input>
         </el-form-item>
-        <el-form-item label="点赞数">
+        <el-form-item label="点赞数" prop="thumbnum">
           <el-input v-model="form.thumbnum"></el-input>
         </el-form-item>
         <el-form-item label="备注">
@@ -108,7 +104,7 @@
       </el-form>
       <span slot="footer" class="dialog-footer">
                 <el-button @click="editVisible = false">取 消</el-button>
-                <el-button type="primary" @click="saveEdit">保存</el-button>
+                <el-button type="primary" @click="saveEdit('form')">保存</el-button>
             </span>
     </el-dialog>
 
@@ -132,6 +128,7 @@
   } from 'element-ui'
   import ToolApi from '../../../api/apiList/tool'
   import qs from 'qs'
+  import validate from "../../../assets/utils/js/validate";
 
   export default {
     name: "aa",
@@ -155,7 +152,20 @@
         MdList: [],
         //多选
         multipleSelection: [],
-        form: {},
+        form: {
+          readnum:'',
+          thumbnum:''
+        },
+        formRules: {
+          readnum: [
+            //trigger: 'blur' 表示失去焦点时候进行表单验证
+            {required: true, trigger: 'blur', validator: validate.isInteger}
+          ],
+          thumbnum: [
+            //trigger: 'blur' 表示失去焦点时候进行表单验证
+            {required: true, trigger: 'blur', validator: validate.isInteger}
+          ],
+        },
         //删除列表
         delList: [],
         idx: -1,
@@ -196,54 +206,52 @@
         this.editVisible = true;
       },
       // 保存编辑  更新/新增
-      saveEdit() {
-        //更新数据
-        this.editVisible = false;
+      saveEdit(formName) {
         let param = this.form;
-        if(this.isUpdate === true){
-          //更新
-          ToolApi.updateMdList(param).then(res =>{
-            if(res.data.code == 0){
-              Notification({
-                type: 'success',
-                message: `修改第 ${this.idx + 1} 行成功`,
-                duration: 2500
+        //表单校验
+        this.$refs[formName].validate((valid)=>{
+          if (valid) {
+            this.editVisible = false;
+            if(this.isUpdate === true){
+              //更新
+              ToolApi.updateMdList(param).then(res =>{
+                if(res.data.code == 0){
+                  Notification({
+                    type: 'success',
+                    message: `修改第 ${this.idx + 1} 行成功`,
+                    duration: 2500
+                  });
+                  this.$set(this.MdList, this.idx, this.form);
+                }else{
+                  Notification({
+                    type: 'error',
+                    message: `修改第 ${this.idx + 1} 行失败`,
+                    duration: 2500
+                  });
+                }
               });
-              this.$set(this.MdList, this.idx, this.form);
             }else{
-              Notification({
-                type: 'error',
-                message: `修改第 ${this.idx + 1} 行失败`,
-                duration: 2500
+              //新增
+              param.username = window.localStorage.getItem('username');
+              ToolApi.insertMdList(param).then(res =>{
+                if(res.data.code == 0){
+                  Notification({
+                    type: 'success',
+                    message: `新增数据成功`,
+                    duration: 2500
+                  });
+                  this.getMdList();
+                }else{
+                  Notification({
+                    type: 'error',
+                    message: `新增数据失败`,
+                    duration: 2500
+                  });
+                }
               });
             }
-          });
-        }else{
-          //新增
-          param.username = window.localStorage.getItem('username');
-          ToolApi.insertMdList(param).then(res =>{
-            if(res.data.code == 0){
-              Notification({
-                type: 'success',
-                message: `新增数据成功`,
-                duration: 2500
-              });
-              this.getMdList();
-            }else{
-              Notification({
-                type: 'error',
-                message: `新增数据失败`,
-                duration: 2500
-              });
-            }
-          });
-
-        }
-
-
-
-
-
+          }
+        })
       },
       handleDelete(index, row) {
         // 二次确认删除
@@ -301,9 +309,11 @@
       },
       addNewTable(){
         //设置为新增数据状态
-        this.isUpdate = false;
+        if(this.isUpdate === true){
+          this.form = {};
+          this.isUpdate = false;
+        }
 
-        this.form = {};
         this.editVisible = true;
 
       }

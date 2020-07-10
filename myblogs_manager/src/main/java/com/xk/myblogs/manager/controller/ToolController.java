@@ -82,7 +82,7 @@ public class ToolController {
     }
 
     @PutMapping("/MdList")
-    @ApiOperation("根据用户名更新用户博客内容")
+    @ApiOperation("根据用户名新增用户博客内容")
     public Result insertMdList(@RequestBody String jsonString) {
         //根据json字符串进行博客内容新增或更改
         int count = toolService.savaMdList(jsonString);
