@@ -66,19 +66,27 @@ public class ToolController {
         return result?Result.ok("验证码校验成功"):Result.error("验证码校验失败");
     }
 
-    @GetMapping("/getMdListByUsername")
+    @GetMapping("/MdList/{username}")
     @ApiOperation("根据用户名获取博客列表")
-    public Result<List<UserBlogs>> getMdListByUsername(@RequestParam String username){
+    public Result<List<UserBlogs>> getMdListByUsername(@PathVariable String username){
         List<UserBlogs> userBlogsList = toolService.getMdListByUsername(username);
         return Result.ok(userBlogsList);
     }
 
-    @PostMapping("/savaMdList")
-    @ApiOperation("保存或新增用户博客内容")
-    public Result savaMdList(@RequestBody String jsonString) {
+    @PostMapping("/MdList")
+    @ApiOperation("更新用户博客内容")
+    public Result updateMdList(@RequestBody String jsonString) {
         //根据json字符串进行博客内容新增或更改
         int count = toolService.savaMdList(jsonString);
-        return count>0?Result.ok(count):Result.error("修改(修改)失败");
+        return count>0?Result.ok(count):Result.error("更新失败");
+    }
+
+    @PutMapping("/MdList")
+    @ApiOperation("根据用户名更新用户博客内容")
+    public Result insertMdList(@RequestBody String jsonString) {
+        //根据json字符串进行博客内容新增或更改
+        int count = toolService.savaMdList(jsonString);
+        return count>0?Result.ok(count):Result.error("更新失败");
     }
 
     @GetMapping("/deleteMdList")

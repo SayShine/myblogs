@@ -200,12 +200,9 @@
         //更新数据
         this.editVisible = false;
         let param = this.form;
-        if(this.isUpdate === false){
-          param.username = window.localStorage.getItem('username');
-        }
-        console.log(param);
-        ToolApi.saveMdList(param).then(res =>{
-          if(this.isUpdate === true){
+        if(this.isUpdate === true){
+          //更新
+          ToolApi.updateMdList(param).then(res =>{
             if(res.data.code == 0){
               Notification({
                 type: 'success',
@@ -220,7 +217,11 @@
                 duration: 2500
               });
             }
-          }else{
+          });
+        }else{
+          //新增
+          param.username = window.localStorage.getItem('username');
+          ToolApi.insertMdList(param).then(res =>{
             if(res.data.code == 0){
               Notification({
                 type: 'success',
@@ -235,8 +236,13 @@
                 duration: 2500
               });
             }
-          }
-        });
+          });
+
+        }
+
+
+
+
 
       },
       handleDelete(index, row) {
@@ -254,10 +260,8 @@
           .catch(() => {});
       },
       getMdList(){
-        let param = {
-          "username": window.localStorage.getItem('username')
-        }
-        ToolApi.getMdList(param).then(res => {
+        let username = window.localStorage.getItem('username');
+        ToolApi.getMdListByUserName(username).then(res => {
           this.MdList = res.data.body;
         });
       },

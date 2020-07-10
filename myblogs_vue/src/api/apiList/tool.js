@@ -12,32 +12,26 @@ const Tool = {
   toEncoding(params) {
     return axios.get(`/tool/toEncode`, {params: params})
   },
+
+
   //根据用户名获取博客列表
-  getMdList(params){
-    return axios.get('/tool/getMdListByUsername',{params:params})
+  getMdListByUserName(username){
+    return axios.get('/tool/MdList/'+username+'/');
   },
-  //保存博客列表
-  saveMdList(params){
-    return axios.request({
-      url:'/tool/savaMdList',
-      method:'post',
-      headers:{
-        'Content-Type': 'application/json'
-      },
-      data :JSON.stringify(params)
-    })
+
+  //saveMdlist
+  updateMdList(params){
+    return axios.post('/tool/MdList/',JSON.stringify(params),
+      {headers:{'Content-Type': 'application/json'}
+      })
   },
-  //新增博客列表
+
   insertMdList(params){
-    return axios.request({
-      url:'/tool/savaMdList',
-      method:'post',
-      headers:{
-        'Content-Type': 'application/json'
-      },
-      data :JSON.stringify(params)
-    })
+    return axios.put('/tool/MdList/',JSON.stringify(params),
+      {headers:{'Content-Type': 'application/json'}
+      })
   },
+
   //批量删除
   deleteMdList(params){
     return axios.get('/tool/deleteMdList',{params:params})
