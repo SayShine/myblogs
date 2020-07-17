@@ -63,7 +63,6 @@ instance.interceptors.request.use(
     // post请求进行序列化
     if(config.method=='post'){
       //json字符串不需要序列化
-      console.log(typeof config.data);
       if(typeof config.data !== "string"){
         config.data = qs.stringify(config.data);
       }

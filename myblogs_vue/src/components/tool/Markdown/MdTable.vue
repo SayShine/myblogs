@@ -278,16 +278,19 @@
         MessageBox.confirm('确定要删除吗？', '提示', {
           type: 'warning'
         }).then(() => {
-          const length =this.multipleSelection.length;
-          let ids = "";
-          for (let i = 0; i < length; i++) {
-            this.delList = this.delList.concat();
-            ids += this.multipleSelection[i].id+",";
-          }
-          let param={
-            "idsString" : ids
-          }
-          ToolApi.deleteMdList(param).then(res =>{
+          // const length =this.multipleSelection.length;
+          // let ids = [];
+          // for (let i = 0; i < length; i++) {
+          //   ids.push([i].id)
+          // }
+          // let param={
+          //   "idsString" : ids
+          // }
+          var ids = [];
+          this.multipleSelection.forEach(function (item) {
+            ids.push(item.id)
+          })
+          ToolApi.deleteMdList(ids).then(res =>{
             if(res.data.code == 0){
               Notification({
                 type: 'success',
@@ -317,10 +320,6 @@
         this.editVisible = true;
 
       }
-
-
-
-
     }
   }
 </script>

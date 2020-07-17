@@ -2,8 +2,6 @@ package com.xk.myblogs.manager.controller;
 
 
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.xk.myblogs.client.entity.UserBlogs;
 import com.xk.myblogs.manager.vo.Result;
 import com.xk.myblogs.common.utils.Md5Util;
@@ -12,13 +10,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.spring.web.json.Json;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -73,26 +66,28 @@ public class ToolController {
         return Result.ok(userBlogsList);
     }
 
-    @PostMapping("/MdList")
-    @ApiOperation("更新用户博客内容")
-    public Result updateMdList(@RequestBody String jsonString) {
-        //根据json字符串进行博客内容新增或更改
-        int count = toolService.savaMdList(jsonString);
-        return count>0?Result.ok(count):Result.error("更新失败");
-    }
-
     @PutMapping("/MdList")
-    @ApiOperation("根据用户名新增用户博客内容")
-    public Result insertMdList(@RequestBody String jsonString) {
+    @ApiOperation("更新用户博客内容")
+    public Result updateMdList(@RequestBody UserBlogs userBlogs) {
+        System.out.println(userBlogs);
         //根据json字符串进行博客内容新增或更改
-        int count = toolService.savaMdList(jsonString);
+        int count = toolService.updateMdList(userBlogs);
         return count>0?Result.ok(count):Result.error("更新失败");
     }
 
-    @GetMapping("/deleteMdList")
+    @PostMapping("/MdList/{username}")
+    @ApiOperation("根据用户名新增用户博客内容")
+    public Result insertMdList(@PathVariable String username, @RequestBody UserBlogs userBlogs) {
+        //根据json字符串进行博客内容新增或更改
+        int count = toolService.insertMdList(username, userBlogs);
+        return count>0?Result.ok(count):Result.error("新增失败");
+    }
+
+    @PostMapping("/deleteMdList")
     @ApiOperation("批量删除博客内容")
-    public Result deleteMdList(@RequestParam(value = "idsString") String idsString){
-        int count = toolService.deleteMdList(idsString);
+    public Result deleteMdList(@RequestBody Long[] ids){
+        System.out.println(ids);
+        Integer count = toolService.deleteMdList(ids);
         return count>0?Result.ok(count):Result.error("删除失败");
     }
 

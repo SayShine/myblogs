@@ -88,36 +88,35 @@ public class ToolServiceImpl implements ToolService {
     }
 
     @Override
-    public int savaMdList(String jsonString) {
-        UserBlogs userBlogs = JSONObject.parseObject(jsonString, UserBlogs.class);
-        JSONObject jsonObject = JSONObject.parseObject(jsonString);
-
+    public int updateMdList(UserBlogs userBlogs){
         userBlogs.setUpdateTime(new Date());
-        Object username = jsonObject.get("username");
-        if(username == null){
-            //保存操作
-            return userBlogsMapper.updateByPrimaryKeySelective(userBlogs);
+        if(userBlogs.getId() == null){
+            return 0;
         }
-
-        //新增博客内容
-        UserAdmin userAdmin = userAdminService.getUserAdminByUsername(username.toString());
-        userBlogs.setUserId(userAdmin.getId());
-        //插入操作
-        return userBlogsMapper.insertSelective(userBlogs);
-
+        return userBlogsMapper.updateByPrimaryKeySelective(userBlogs);
     }
 
     @Override
-    public int deleteMdList(String idsString) {
-        String[] ids = idsString.split(",");
+    public int insertMdList(String username, UserBlogs userBlogs) {
+        userBlogs.setUpdateTime(new Date());
+        //新增博客内容
+        UserAdmin userAdmin = userAdminService.getUserAdminByUsername(username);
+        if(userAdmin == null){
+            return 0;
+
+        }
+        userBlogs.setUserId(userAdmin.getId());
+        //插入操作
+        return userBlogsMapper.insertSelective(userBlogs);
+    }
+
+    @Override
+    public Integer deleteMdList(Long[] ids) {
         if(ids.length==0){
             return 0;
         }
         List<Long> list = new ArrayList<>();
-        for (int i = 0; i < ids.length; i++) {
-            String id = ids[i];
-            list.add(Long.parseLong(id));
-        }
+        list = Arrays.asList(ids);
 
         UserBlogs userBlogs = new UserBlogs();
         userBlogs.setStatus(0);

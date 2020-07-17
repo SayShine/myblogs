@@ -21,20 +21,23 @@ const Tool = {
 
   //saveMdlist
   updateMdList(params){
-    return axios.post('/tool/MdList/',JSON.stringify(params),
+    return axios.put('/tool/MdList/',JSON.stringify(params),
       {headers:{'Content-Type': 'application/json'}
       })
   },
 
   insertMdList(params){
-    return axios.put('/tool/MdList/',JSON.stringify(params),
+    return axios.post('/tool/MdList/'+params.username+'/',JSON.stringify(params),
       {headers:{'Content-Type': 'application/json'}
       })
   },
 
   //批量删除
   deleteMdList(params){
-    return axios.get('/tool/deleteMdList',{params:params})
+    // return axios.get(`/tool/deleteMdList/`, {params: params})
+    return axios.post('/tool/deleteMdList/',JSON.stringify(params),
+      {headers:{'Content-Type': 'application/json'}
+      })
   }
 }
 

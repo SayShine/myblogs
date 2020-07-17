@@ -16,6 +16,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -61,7 +63,9 @@ public class UserAdminServiceImpl implements UserAdminService {
     private RedisService redisService;
 
     @Override
-    public UserAdmin getUserAdminByUsername(String username) {
+//    @Cacheable(value = "redisCache", key="'redis_user_'+#username")
+    @Cacheable(value = "redisCache", key="'redis_user_'+#username")
+    public UserAdmin getUserAdminByUsername(String username){
         if(StringUtils.isEmpty(username)){
             return null;
         }
@@ -142,14 +146,27 @@ public class UserAdminServiceImpl implements UserAdminService {
     @Override
     public String refreshToken(String username) {
         if(StringUtils.isEmpty(redisService.get(REDIS_KEY_PREFIX_AUTH_TOKEN+username))){
-            LOGGER.info("-----------key is null----------");
-
             return null;
         }
-        LOGGER.info("-----------key is not null----------");
         LOGGER.info("username:{}",redisService.get(REDIS_KEY_PREFIX_AUTH_TOKEN+username));
         return jwtUtil.generateToken(username);
 
 //        return jwtUtil.refreshHeadToken(token);
+    }
+
+    @Override
+    @Cacheable(value = "fruit", key = "#param", unless = "!#result")
+    public boolean isApple(String param) {
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        if (param.equals("apple")) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }

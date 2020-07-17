@@ -2,6 +2,23 @@
 spring:
   profiles:
     active: prod  #默认为开发环境dev  生产环境需要更换为prod
+  ##########################  配置spring缓存 ##########################
+  cache:
+    type: REDIS
+    cache-names: redisCache
+    redis:
+      use-key-prefix: false #禁用前缀
+      cache-null-values: true #允许保存空值
+      key-prefix:  #自定义前缀
+      time-to-live: 60000 #一分钟
+  ########################  配置MongoDB数据库 uri配置账号密码  ############################
+  # 需要用户名和密码认证
+  #uri:  mongodb://username:password@ip:port/admin
+  #不需要用户名和密码认证
+  #uri:  mongodb://ip:port/admin
+  data:
+    mongodb:
+      uri: mongodb://myblogs:111@39.107.247.2:27017/myblogs
 server:
   port: 8080
   servlet:
@@ -27,7 +44,7 @@ jwt:
   tokenHeader: Authorization #JWT存储的请求头
   tokenHead: Bearer
   secret: oursecret #JWT加解密使用的密钥
-  expiration: 150 #JWT的超期限时间(60*60)
+  expiration: 15000 #JWT的超期限时间(60*60)
 
 ##########################  自定义redis key ##########################
 redis:
@@ -39,3 +56,6 @@ redis:
       authCode: 120 #验证码超期时间
       authToken: 3000 #token刷新时间 三倍过期时长
 
+logging:
+  level:
+    org.springframework.data.mongodb.core: debug

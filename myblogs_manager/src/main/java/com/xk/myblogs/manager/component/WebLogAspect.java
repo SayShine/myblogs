@@ -47,6 +47,7 @@ public class WebLogAspect {
         // 就可以获取到封装了该方法信息的JoinPoint对象. ”
         //不是Joinpoint   而是 JoinPoint ！！
         // 如果写成Joinpoint 会报错 “error at ::0 formal unbound in pointcut ”
+        System.out.println("111");
 
     }
 

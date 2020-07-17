@@ -46,4 +46,11 @@ public interface UserAdminService {
      * @return
      */
     String refreshToken(String username);
+
+    /**
+     * Spring缓存测试
+     * @param param
+     * @return
+     */
+    boolean isApple(String param);
 }

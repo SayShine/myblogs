@@ -91,7 +91,7 @@ public class AdminController {
     }
 
     @GetMapping
-    @RequestMapping(value = "/helloWorld", method = RequestMethod.GET)
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
     @ApiOperation("纯属测试")
     public Result<String> sayHello() {
         return Result.ok("20200701晚上");

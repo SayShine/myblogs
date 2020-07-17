@@ -30,15 +30,23 @@ public interface ToolService {
 
     /**
      * 保存博客相关内容
-     * @param jsonString json字符串
+     * @param userBlogs 博客内容
      * @return
      */
-    int savaMdList(String jsonString);
+    int updateMdList(UserBlogs userBlogs);
 
     /**
      * 批量删除博客内容
-     * @param idsString
+     * @param ids
      * @return
      */
-    int deleteMdList(String idsString);
+    Integer deleteMdList(Long[] ids);
+
+    /**
+     * 根据用户名新增博客内容
+     * @param username
+     * @param userBlogs
+     * @return
+     */
+    int insertMdList(String username, UserBlogs userBlogs);
 }

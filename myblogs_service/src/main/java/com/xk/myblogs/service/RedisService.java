@@ -1,5 +1,9 @@
 package com.xk.myblogs.service;
 
+import org.springframework.data.redis.core.ZSetOperations;
+
+import java.util.HashMap;
+
 /**
  * redis操作Service
  * @Author: tian
@@ -31,4 +35,18 @@ public interface RedisService {
      */
     Long increment(String key, long delta);
 
+    /**
+     * redis向对应hash添加键值对
+     * @param hashMapName hashMap表名
+     * @param key 键
+     * @param value 值
+     */
+    void put(String hashMapName,String key, String value);
+
+    /**
+     * redis中添加hashMap
+     * @param hashMapName
+     * @param hashMap
+     */
+    void putall(String hashMapName, HashMap hashMap);
 }
