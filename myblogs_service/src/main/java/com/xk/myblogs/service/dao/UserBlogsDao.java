@@ -1,6 +1,6 @@
 package com.xk.myblogs.service.dao;
 
-import com.xk.myblogs.client.entity.UserBlogs;
+import com.xk.myblogs.client.entity.myblog.UserBlogs;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

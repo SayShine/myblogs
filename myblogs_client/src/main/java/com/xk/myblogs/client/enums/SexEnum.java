@@ -24,7 +24,7 @@ public enum  SexEnum {
     }
 
     /**
-     * 根据id放回性别
+     * 根据id返回性别
      * @param id
      * @return
      */

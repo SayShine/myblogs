@@ -7,6 +7,7 @@ import Taobao from "../components/tool/Taobao"
 import ToLogin from '@/components/login/toLogin'
 import Markdown from '@/components/tool/Markdown/Markdown'
 import MdTable from '@/components/tool/Markdown/MdTable'
+import StudyTable from "@/components/tool/StudyTable";
 Vue.use(Router);
 
 export default new Router({
@@ -46,6 +47,11 @@ export default new Router({
       path: '/tool/MdTable',
       name: 'MdTable',
       component: MdTable
+    },
+    {
+      path: '/tool/StudyTable',
+      name: 'StudyTable',
+      component: StudyTable
     }
   ]
 })

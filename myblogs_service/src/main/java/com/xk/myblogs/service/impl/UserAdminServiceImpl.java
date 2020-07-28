@@ -1,22 +1,21 @@
 package com.xk.myblogs.service.impl;
 
 import com.xk.myblogs.client.dto.LoginResultDto;
-import com.xk.myblogs.client.entity.Permission;
-import com.xk.myblogs.client.entity.UserAdmin;
-import com.xk.myblogs.client.entity.UserAdminExample;
+import com.xk.myblogs.client.entity.myblog.Permission;
+import com.xk.myblogs.client.entity.myblog.UserAdmin;
+import com.xk.myblogs.client.entity.myblog.UserAdminExample;
 import com.xk.myblogs.common.enums.DataStatusEnum;
 import com.xk.myblogs.common.enums.LoginStatusEnum;
 import com.xk.myblogs.common.utils.JwtUtil;
 import com.xk.myblogs.service.RedisService;
 import com.xk.myblogs.service.UserAdminService;
 import com.xk.myblogs.service.dao.UserAdminAuthDao;
-import com.xk.myblogs.service.mapper.UserAdminMapper;
+import com.xk.myblogs.service.mapper.myblog.UserAdminMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

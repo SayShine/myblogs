@@ -27,6 +27,7 @@
             <template slot="title"><i class="el-icon-s-tools"></i>小工具</template>
             <el-menu-item-group>
               <el-menu-item index="MdTable">我的博客</el-menu-item>
+              <el-menu-item index="StudyTable">学习博客</el-menu-item>
               <el-menu-item index="ZuanTranslator">祖安语言翻译器</el-menu-item>
               <el-menu-item index="Md5Encode">MD5在线加密</el-menu-item>
               <el-menu-item index="Taobao">网址</el-menu-item>

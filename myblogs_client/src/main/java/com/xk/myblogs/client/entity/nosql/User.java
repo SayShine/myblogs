@@ -34,5 +34,4 @@ public class User implements Serializable {
 
     @ApiModelProperty("用户列表")
     private List<Role> roles;
-
 }

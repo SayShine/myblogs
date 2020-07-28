@@ -131,7 +131,7 @@
   import validate from "../../../assets/utils/js/validate";
 
   export default {
-    name: "aa",
+    name: "MdTable",
     components: {
       [Table.name]:Table,
       [TableColumn.name]:TableColumn,

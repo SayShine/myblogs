@@ -29,16 +29,14 @@ public class NoSqlController {
 
     @PostMapping("/user")
     @ApiOperation("新增用户信息")
-    public Result savaUser(@RequestBody String jsonString){
+    public Result savaUser(@RequestBody User user){
         boolean flag = true;
         try {
-            User user = JSONObject.parseObject(jsonString, User.class);
             nosqlService.savaMdList(user);
         } catch (Exception e) {
             e.printStackTrace();
             flag = false;
         }
-
         //根据json字符串进行博客内容新增或更改
         return flag?Result.ok("新增信息成功"):Result.error("输入有误，新增信息失败");
     }

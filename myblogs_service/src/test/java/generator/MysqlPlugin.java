@@ -15,7 +15,18 @@ public class MysqlPlugin {
     public static void main(String[] args) throws Exception{
         List<String> warnings = new ArrayList<String>();
         boolean overwrite = true;
-        File configFile = new File("E:\\IdeaProjects\\myblogs\\myblogs_service\\src\\test\\java\\generator\\mybatis-generator.xml");
+
+        //默认为空  自行设置
+        File configFile = new File("");
+
+        //生成myblog库下的表
+//        File configFile = new File("E:\\IdeaProjects\\myblogs\\myblogs_service\\src\\test\\java\\generator\\mybatis-generator-myblog.xml");
+
+        //生成tscxk库下的表
+//        File configFile = new File("E:\\IdeaProjects\\myblogs\\myblogs_service\\src\\test\\java\\generator\\mybatis-generator-tscxk.xml");
+
+
+
         ConfigurationParser cp = new ConfigurationParser(warnings);
         Configuration config = cp.parseConfiguration(configFile);
         DefaultShellCallback callback = new DefaultShellCallback(overwrite);

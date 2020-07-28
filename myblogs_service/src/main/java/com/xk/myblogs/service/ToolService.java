@@ -1,6 +1,7 @@
 package com.xk.myblogs.service;
 
-import com.xk.myblogs.client.entity.UserBlogs;
+import com.xk.myblogs.client.entity.myblog.UserBlogs;
+import com.xk.myblogs.client.entity.tscxk.StudyUrl;
 
 import java.util.List;
 
@@ -33,7 +34,7 @@ public interface ToolService {
      * @param userBlogs 博客内容
      * @return
      */
-    int updateMdList(UserBlogs userBlogs);
+    Integer updateMdList(UserBlogs userBlogs);
 
     /**
      * 批量删除博客内容
@@ -48,5 +49,38 @@ public interface ToolService {
      * @param userBlogs
      * @return
      */
-    int insertMdList(String username, UserBlogs userBlogs);
+    Integer insertMdList(String username, UserBlogs userBlogs);
+
+    /**
+     * 异步模拟生成报表的方法
+     */
+    void generateRepost();
+
+    /**
+     * 获取学习网址
+     * @return
+     */
+    List<StudyUrl> getStudyList();
+
+    /**
+     * 插入学习内容
+     * @param studyUrl
+     * @return
+     */
+    Integer insertStudyList(StudyUrl studyUrl);
+
+    /**
+     * 更新单个（包括删除）
+     * @param studyUrl
+     * @return
+     */
+    Integer updateStudyList(StudyUrl studyUrl);
+
+    /**
+     * 批量更新（包括删除）
+     * @param ids
+     * @return
+     */
+    Integer updateAllStudyList(Long[] ids);
+
 }

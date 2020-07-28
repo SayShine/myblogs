@@ -1,18 +1,18 @@
 package com.xk.myblogs.service.impl;
 
-import com.alibaba.fastjson.JSONObject;
-import com.xk.myblogs.client.entity.UserAdmin;
-import com.xk.myblogs.client.entity.UserAdminExample;
-import com.xk.myblogs.client.entity.UserBlogs;
-import com.xk.myblogs.client.entity.UserBlogsExample;
+import com.xk.myblogs.client.entity.myblog.*;
+import com.xk.myblogs.client.entity.tscxk.StudyUrl;
+import com.xk.myblogs.client.entity.tscxk.StudyUrlExample;
 import com.xk.myblogs.service.RedisService;
 import com.xk.myblogs.service.ToolService;
 import com.xk.myblogs.service.UserAdminService;
 import com.xk.myblogs.service.dao.UserBlogsDao;
-import com.xk.myblogs.service.mapper.UserAdminMapper;
-import com.xk.myblogs.service.mapper.UserBlogsMapper;
+import com.xk.myblogs.service.mapper.myblog.UserAdminMapper;
+import com.xk.myblogs.service.mapper.myblog.UserBlogsMapper;
+import com.xk.myblogs.service.mapper.tscxk.StudyUrlMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
@@ -36,12 +36,17 @@ public class ToolServiceImpl implements ToolService {
 
     @Resource
     private UserAdminMapper userAdminMapper;
+
+    @Autowired
+    private UserAdminService userAdminService;
+
     @Resource
     private UserBlogsMapper userBlogsMapper;
     @Resource
     private UserBlogsDao userBlogsDao;
-    @Autowired
-    private UserAdminService userAdminService;
+
+    @Resource
+    private StudyUrlMapper studyUrlMapper;
 
 
     @Override
@@ -88,7 +93,7 @@ public class ToolServiceImpl implements ToolService {
     }
 
     @Override
-    public int updateMdList(UserBlogs userBlogs){
+    public Integer updateMdList(UserBlogs userBlogs){
         userBlogs.setUpdateTime(new Date());
         if(userBlogs.getId() == null){
             return 0;
@@ -97,7 +102,7 @@ public class ToolServiceImpl implements ToolService {
     }
 
     @Override
-    public int insertMdList(String username, UserBlogs userBlogs) {
+    public Integer insertMdList(String username, UserBlogs userBlogs) {
         userBlogs.setUpdateTime(new Date());
         //新增博客内容
         UserAdmin userAdmin = userAdminService.getUserAdminByUsername(username);
@@ -124,5 +129,34 @@ public class ToolServiceImpl implements ToolService {
         example.createCriteria().andStatusEqualTo(1).andIdIn(list);
         return userBlogsMapper.updateByExampleSelective(userBlogs,example);
 
+    }
+
+    @Override
+    @Async //声明异步调用
+    public void generateRepost() {
+        //打印异步线程名称
+        System.out.println("报表线程名称" + "[" + Thread.currentThread().getName() + "]");
+    }
+
+    @Override
+    public List<StudyUrl> getStudyList() {
+        StudyUrlExample example = new StudyUrlExample();
+        return studyUrlMapper.selectByExample(example);
+
+    }
+
+    @Override
+    public Integer insertStudyList(StudyUrl studyUrl) {
+        return null;
+    }
+
+    @Override
+    public Integer updateStudyList(StudyUrl studyUrl) {
+        return null;
+    }
+
+    @Override
+    public Integer updateAllStudyList(Long[] ids) {
+        return null;
     }
 }

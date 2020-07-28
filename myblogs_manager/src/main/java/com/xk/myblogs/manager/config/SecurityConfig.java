@@ -1,7 +1,7 @@
 package com.xk.myblogs.manager.config;
 
-import com.xk.myblogs.client.entity.Permission;
-import com.xk.myblogs.client.entity.UserAdmin;
+import com.xk.myblogs.client.entity.myblog.Permission;
+import com.xk.myblogs.client.entity.myblog.UserAdmin;
 import com.xk.myblogs.manager.sercurity.*;
 import com.xk.myblogs.service.UserAdminService;
 import com.xk.myblogs.service.dto.UserAdminDetail;
@@ -95,8 +95,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.OPTIONS)//跨域请求会先进行一次options请求
                 .permitAll()
                 .anyRequest()//除上面外的所有请求全部需要鉴权认证
-                .authenticated()
-//                .permitAll()
+//                .authenticated()
+                .permitAll()
 
                 //配置跨域
                 .and()

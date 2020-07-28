@@ -1,7 +1,8 @@
 package com.xk.myblogs.manager.controller;
 
 import com.xk.myblogs.client.dto.LoginResultDto;
-import com.xk.myblogs.client.entity.UserAdmin;
+import com.xk.myblogs.client.entity.myblog.UserAdmin;
+import com.xk.myblogs.common.annotion.TestAnnotion;
 import com.xk.myblogs.common.enums.LoginStatusEnum;
 import com.xk.myblogs.manager.vo.Result;
 import com.xk.myblogs.service.UserAdminService;

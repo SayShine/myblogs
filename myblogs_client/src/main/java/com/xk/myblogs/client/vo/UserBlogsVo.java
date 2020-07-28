@@ -1,7 +1,5 @@
 package com.xk.myblogs.client.vo;
 
-import com.xk.myblogs.client.entity.UserBlogs;
-
 /**
  * 临时的
  * @author: tian

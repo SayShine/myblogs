@@ -1,8 +1,8 @@
 package com.xk.myblogs.service;
 
 import com.xk.myblogs.client.dto.LoginResultDto;
-import com.xk.myblogs.client.entity.Permission;
-import com.xk.myblogs.client.entity.UserAdmin;
+import com.xk.myblogs.client.entity.myblog.Permission;
+import com.xk.myblogs.client.entity.myblog.UserAdmin;
 
 import java.util.List;
 

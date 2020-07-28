@@ -2,14 +2,17 @@ package com.xk.myblogs.manager.controller;
 
 
 
-import com.xk.myblogs.client.entity.UserBlogs;
+import com.xk.myblogs.client.entity.myblog.UserBlogs;
+import com.xk.myblogs.client.entity.nosql.User;
+import com.xk.myblogs.client.entity.tscxk.StudyUrl;
+import com.xk.myblogs.common.annotion.TestAnnotion;
 import com.xk.myblogs.manager.vo.Result;
 import com.xk.myblogs.common.utils.Md5Util;
+import com.xk.myblogs.service.ActiveMqService;
 import com.xk.myblogs.service.ToolService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +27,9 @@ import java.util.List;
 public class ToolController {
     @Autowired
     private ToolService toolService;
+
+    @Autowired
+    private ActiveMqService activeMqService;
 
     @GetMapping("/toTranslate")
     @ApiOperation("祖安语言翻译器")
@@ -59,6 +65,7 @@ public class ToolController {
         return result?Result.ok("验证码校验成功"):Result.error("验证码校验失败");
     }
 
+    //----------------我的博客start
     @GetMapping("/MdList/{username}")
     @ApiOperation("根据用户名获取博客列表")
     public Result<List<UserBlogs>> getMdListByUsername(@PathVariable String username){
@@ -86,9 +93,63 @@ public class ToolController {
     @PostMapping("/deleteMdList")
     @ApiOperation("批量删除博客内容")
     public Result deleteMdList(@RequestBody Long[] ids){
-        System.out.println(ids);
         Integer count = toolService.deleteMdList(ids);
         return count>0?Result.ok(count):Result.error("删除失败");
     }
+    //----------------我的博客end
+
+    @GetMapping("/asyncTest")
+    @ApiOperation("异步请求")
+    public Result asyncTest(){
+        System.out.println("当前请求线程名称" + "[" + Thread.currentThread().getName() + "]");
+        toolService.generateRepost();
+        return Result.ok("调用成功");
+    }
+
+    @GetMapping("/sendMsg/{msg}")
+    @ApiOperation("activemq发送消息")
+    public Result sendMqMsg(@PathVariable String msg){
+        activeMqService.sendMsg(msg);
+        return Result.ok("发送成功");
+    }
+
+    @PostMapping("/sendMsg")
+    @ApiOperation("activemq发送对象消息")
+    public Result sendEntityMqMsg(@RequestBody User user){
+        activeMqService.sendUser(user);
+        return Result.ok("发送成功");
+
+    }
+
+    //学习博客start--------------------------------------------------
+    @GetMapping("/studyList")
+    @ApiOperation("获取学习网站列表")
+    public Result<List<StudyUrl>> getStudyList(){
+        List<StudyUrl> studyUrlList = toolService.getStudyList();
+        return Result.ok(studyUrlList);
+    }
+
+    @PostMapping("/studyList")
+    @ApiOperation("单个修改状态(目前仅用于删除)")
+    public Result updateStudyList(@RequestBody StudyUrl studyUrl){
+        Integer count = toolService.updateStudyList(studyUrl);
+        return count>0?Result.ok(count):Result.error("删除失败");
+    }
+
+    @PutMapping("/studyList")
+    public Result insertStudyList(@RequestBody StudyUrl studyUrl) {
+        //根据json字符串进行博客内容新增或更改
+        Integer count = toolService.insertStudyList(studyUrl);
+        return count>0?Result.ok(count):Result.error("新增失败");
+    }
+
+    @PostMapping("/allStudyList")
+    @ApiOperation("批量修改状态(目前仅用于删除)")
+    public Result updateAllStudyList(@RequestBody Long[] ids){
+        Integer count = toolService.updateAllStudyList(ids);
+        return count>0?Result.ok(count):Result.error("删除失败");
+    }
+
+    //学习博客end----------------------------------------------------
 
 }

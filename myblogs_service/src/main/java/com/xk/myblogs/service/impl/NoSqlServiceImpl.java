@@ -32,6 +32,7 @@ public class NoSqlServiceImpl implements NosqlService {
 
     @Override
     public User getUserById(Long id) {
+        
         return mongoTemplate.findById(id, User.class);
         //如果只需要获取第一个，也可以采用如下查询方法
 //        Criteria criteriaId = Criteria.where("id").is(id);

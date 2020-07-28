@@ -1,7 +1,7 @@
 package com.xk.myblogs.service.dto;
 
-import com.xk.myblogs.client.entity.Permission;
-import com.xk.myblogs.client.entity.UserAdmin;
+import com.xk.myblogs.client.entity.myblog.Permission;
+import com.xk.myblogs.client.entity.myblog.UserAdmin;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

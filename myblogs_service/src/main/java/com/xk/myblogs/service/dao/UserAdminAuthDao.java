@@ -1,8 +1,7 @@
 package com.xk.myblogs.service.dao;
 
-import com.xk.myblogs.client.entity.Permission;
+import com.xk.myblogs.client.entity.myblog.Permission;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
