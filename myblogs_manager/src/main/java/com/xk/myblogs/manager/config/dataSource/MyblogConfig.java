@@ -29,20 +29,20 @@ import java.util.List;
  * @author: tian
  * @date: 2020/7/24 11:43
  */
-@Configuration
-@MapperScan(basePackages = "com.xk.myblogs.service.mapper.myblog", sqlSessionFactoryRef = "myBlogSqlSessionFactory")
+//@Configuration
+//@MapperScan(basePackages = "com.xk.myblogs.service.mapper.myblog", sqlSessionFactoryRef = "myBlogSqlSessionFactory")
 public class MyblogConfig {
     private static final Logger LOGGER = LoggerFactory.getLogger(MyblogConfig.class);
 
-    @Bean(name = "myblogDataSource")
-    @Primary
-    @ConfigurationProperties(prefix = "spring.datasource.myblog", ignoreInvalidFields = true)
+//    @Bean(name = "myblogDataSource")
+//    @Primary
+//    @ConfigurationProperties(prefix = "spring.datasource.myblog", ignoreInvalidFields = true)
     public DataSource getDataSource(){
         return new DruidDataSource();
     }
 
-    @Bean(name = "myBlogSqlSessionFactory")
-    @Primary
+//    @Bean(name = "myBlogSqlSessionFactory")
+//    @Primary
     public SqlSessionFactory myBlogSqlSessionFactory(@Qualifier("myblogDataSource") DataSource datasource) throws Exception {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         bean.setDataSource(datasource);
@@ -53,6 +53,12 @@ public class MyblogConfig {
         );
         bean.setTypeHandlersPackage("com.xk.myblogs.service.typehandler");
         return bean.getObject();
+    }
+
+    //    @Bean(name = "myblogSqlSessionTemplate")
+    //    @Primary
+    public SqlSessionTemplate myblogSqlSessionTemplate(@Qualifier("myBlogSqlSessionFactory") SqlSessionFactory sessionfactory){
+        return new SqlSessionTemplate(sessionfactory);
     }
 
     //获取所有匹配上路径的参数
@@ -85,10 +91,6 @@ public class MyblogConfig {
 
     }
 
-    @Bean(name = "myblogSqlSessionTemplate")
-    @Primary
-    public SqlSessionTemplate myblogSqlSessionTemplate(@Qualifier("myBlogSqlSessionFactory") SqlSessionFactory sessionfactory){
-        return new SqlSessionTemplate(sessionfactory);
-    }
+
 
 }
