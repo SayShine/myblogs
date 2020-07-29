@@ -13,6 +13,8 @@ import com.xk.myblogs.service.ToolService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -90,7 +92,7 @@ public class ToolController {
         return count>0?Result.ok(count):Result.error("新增失败");
     }
 
-    @PostMapping("/deleteMdList")
+    @PutMapping("/deleteMdList")
     @ApiOperation("批量删除博客内容")
     public Result deleteMdList(@RequestBody Long[] ids){
         Integer count = toolService.deleteMdList(ids);
@@ -129,25 +131,28 @@ public class ToolController {
         return Result.ok(studyUrlList);
     }
 
-    @PostMapping("/studyList")
+    @PreAuthorize("hasAuthority('root')")
+    @PutMapping("/studyList")
     @ApiOperation("单个修改状态(目前仅用于删除)")
     public Result updateStudyList(@RequestBody StudyUrl studyUrl){
         Integer count = toolService.updateStudyList(studyUrl);
         return count>0?Result.ok(count):Result.error("删除失败");
     }
 
-    @PutMapping("/studyList")
+    @PreAuthorize("hasAuthority('root')")
+    @PostMapping("/studyList")
+    @ApiOperation("新增博客")
     public Result insertStudyList(@RequestBody StudyUrl studyUrl) {
         //根据json字符串进行博客内容新增或更改
         Integer count = toolService.insertStudyList(studyUrl);
         return count>0?Result.ok(count):Result.error("新增失败");
     }
 
-    @PostMapping("/allStudyList")
+    @PutMapping("/allStudyList")
     @ApiOperation("批量修改状态(目前仅用于删除)")
     public Result updateAllStudyList(@RequestBody Long[] ids){
         Integer count = toolService.updateAllStudyList(ids);
-        return count>0?Result.ok(count):Result.error("删除失败");
+        return count>0?Result.ok(count):Result.error("修改失败");
     }
 
     //学习博客end----------------------------------------------------

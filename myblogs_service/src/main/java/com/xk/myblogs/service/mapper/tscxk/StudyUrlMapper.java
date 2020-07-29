@@ -3,8 +3,10 @@ package com.xk.myblogs.service.mapper.tscxk;
 import com.xk.myblogs.client.entity.tscxk.StudyUrl;
 import com.xk.myblogs.client.entity.tscxk.StudyUrlExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import com.xk.myblogs.common.annotion.DataSource;
+import org.apache.ibatis.annotations.Param;
+@DataSource("tscxk")
 public interface StudyUrlMapper {
     /**
      * 按条件计数

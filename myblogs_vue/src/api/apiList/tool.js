@@ -36,7 +36,7 @@ const Tool = {
   //批量删除
   deleteMdList(params){
     // return axios.get(`/tool/deleteMdList/`, {params: params})
-    return axios.post('/tool/deleteMdList/',JSON.stringify(params),
+    return axios.put('/tool/deleteMdList/',JSON.stringify(params),
       {headers:{'Content-Type': 'application/json'}
       })
   },
@@ -46,12 +46,12 @@ const Tool = {
   //学习博客start-------------------------------------------------
   //获取个人学习网站
   getStudyList(){
-    return axios.get('tool/studyList');
+    return axios.get('/tool/studyList');
   },
 
   //插入操作
   insertStudyList(params){
-    return axios.post('tool/studyList', JSON.stringify(params),
+    return axios.post('/tool/studyList', JSON.stringify(params),
       {headers:{'Content-Type': 'application/json'}}
       )
 
@@ -67,7 +67,7 @@ const Tool = {
   //批量修改状态 （目前用于删除）
   deleteStudyList(params){
     // return axios.get(`/tool/deleteMdList/`, {params: params})
-    return axios.post('/tool/allStudyList/',JSON.stringify(params),
+    return axios.put('/tool/allStudyList/',JSON.stringify(params),
       {headers:{'Content-Type': 'application/json'}
       })
   },

@@ -258,12 +258,28 @@
         MessageBox.confirm('确定要删除吗？', '提示', {
           type: 'warning'
         }).then(() => {
-            Notification({
-              type: 'success',
-              message: '删除成功',
-              duration: 2500
-            });
-            this.MdList.splice(index, 1);
+          // ToolApi.deleteMdList(row).then(res =>{
+          //   if(res.data.code == 0){
+          //     Notification({
+          //       type: 'success',
+          //       message: '删除成功',
+          //       duration: 2500
+          //     });
+          //     this.StudyList.splice(index, 1);
+          //   }else{
+          //     Notification({
+          //       type: 'error',
+          //       message: `删除失败`,
+          //       duration: 2500
+          //     });
+          //   }
+          // })
+          Notification({
+            type: 'warning',
+            message: `无法删除,请使用批量删除`,
+            duration: 2500
+          });
+
           })
           .catch(() => {});
       },

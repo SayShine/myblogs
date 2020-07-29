@@ -1,8 +1,9 @@
-package com.xk.myblogs.manager.config.dataSource.dynamic;
+package com.xk.myblogs.service.config.dynamicDataSource;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,7 +14,6 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
-import tk.mybatis.spring.annotation.MapperScan;
 
 import javax.sql.DataSource;
 import java.io.IOException;
@@ -25,6 +25,7 @@ import java.util.*;
  * @date: 2020/7/28 17:05
  */
 @Configuration
+//@MapperScan(basePackages = "com.xk.myblogs.service.mapper", sqlSessionFactoryRef = "dynamicSqlSessionFactory")
 public class DynamicDatasourceConfig {
     private static final Logger LOGGER = LoggerFactory.getLogger(DynamicDatasourceConfig.class);
 
@@ -55,10 +56,12 @@ public class DynamicDatasourceConfig {
         return dynamicDataSource;
     }
 
+    @Bean(name = "dynamicSqlSessionFactory")
     public SqlSessionFactory sqlSessionFactory(@Qualifier("dynamicDataSource")DataSource dynamicDataSource) throws Exception {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         bean.setDataSource(dynamicDataSource);
         bean.setMapperLocations(resoleveMapperLocations());
+        bean.setTypeHandlersPackage("com.xk.myblogs.service.typehandler");
         return bean.getObject();
     }
 
@@ -83,7 +86,7 @@ public class DynamicDatasourceConfig {
         }
 
         for (int i = 0; i < resources.size(); i++) {
-            LOGGER.info("tscxk数据库获取到xml文件:{}",resources.get(i));
+            LOGGER.info("搜索到xml文件:{}",resources.get(i));
         }
 
         return resources.toArray(new Resource[resources.size()]);

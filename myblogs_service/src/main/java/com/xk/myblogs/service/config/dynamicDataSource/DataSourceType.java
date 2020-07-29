@@ -1,4 +1,4 @@
-package com.xk.myblogs.manager.config.dataSource.dynamic;
+package com.xk.myblogs.service.config.dynamicDataSource;
 
 /**
  * @author: tian

@@ -26,6 +26,7 @@ public class UserAdminDetail implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         //返回当前用户的权限
+        System.out.println(1111);
         return permissionList==null?null:
                 permissionList.stream()
                         .filter(permission -> permission.getType()!=null)

@@ -35,11 +35,11 @@
                          width="228">
         </el-table-column>
         <el-table-column property="url" label="网址"
-                         width="228">
+                         width="550">
         </el-table-column>
 
         <el-table-column property="comment" label="备注"
-                         width="228">
+                         width="500">
         </el-table-column>
 
 
@@ -199,7 +199,7 @@
             this.editVisible = false;
             if(this.isUpdate === true){
               //更新
-              ToolApi.updateMdList(param).then(res =>{
+              ToolApi.updateStudyList(param).then(res =>{
                 if(res.data.code == 0){
                   Notification({
                     type: 'success',
@@ -217,8 +217,7 @@
               });
             }else{
               //新增
-              param.username = window.localStorage.getItem('username');
-              ToolApi.insertMdList(param).then(res =>{
+              ToolApi.insertStudyList(param).then(res =>{
                 if(res.data.code == 0){
                   Notification({
                     type: 'success',
@@ -243,19 +242,16 @@
         MessageBox.confirm('确定要删除吗？', '提示', {
           type: 'warning'
         }).then(() => {
-          console.log(this.row);
           Notification({
-            type: 'success',
-            message: '删除成功',
+            type: 'warning',
+            message: `无法删除`,
             duration: 2500
           });
-          this.StudyList.splice(index, 1);
         })
           .catch(() => {});
       },
       getStudyList(){
-        let username = window.localStorage.getItem('username');
-        ToolApi.getMdListByUserName(username).then(res => {
+        ToolApi.getStudyList().then(res => {
           this.StudyList = res.data.body;
         });
       },

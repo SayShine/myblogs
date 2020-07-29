@@ -98,7 +98,7 @@ public class ToolServiceImpl implements ToolService {
         if(userBlogs.getId() == null){
             return 0;
         }
-        return userBlogsMapper.updateByPrimaryKeySelective(userBlogs);
+        return userBlogsMapper.updateByPrimaryKey(userBlogs);
     }
 
     @Override
@@ -147,12 +147,15 @@ public class ToolServiceImpl implements ToolService {
 
     @Override
     public Integer insertStudyList(StudyUrl studyUrl) {
-        return null;
+        return studyUrlMapper.insertSelective(studyUrl);
     }
 
     @Override
     public Integer updateStudyList(StudyUrl studyUrl) {
-        return null;
+        if(studyUrl.getId() == null){
+            return 0;
+        }
+        return studyUrlMapper.updateByPrimaryKey(studyUrl);
     }
 
     @Override
