@@ -6,18 +6,29 @@ import com.xk.myblogs.client.entity.tscxk.StudyUrlExample;
 import com.xk.myblogs.service.RedisService;
 import com.xk.myblogs.service.ToolService;
 import com.xk.myblogs.service.UserAdminService;
+import com.xk.myblogs.service.dao.ProductDao;
 import com.xk.myblogs.service.dao.UserBlogsDao;
+import com.xk.myblogs.service.dto.UserAdminDetail;
+import com.xk.myblogs.service.mapper.myblog.ProductMapper;
+import com.xk.myblogs.service.mapper.myblog.PurchaseRecordMapper;
 import com.xk.myblogs.service.mapper.myblog.UserAdminMapper;
 import com.xk.myblogs.service.mapper.myblog.UserBlogsMapper;
 import com.xk.myblogs.service.mapper.tscxk.StudyUrlMapper;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.*;
 
 /**
@@ -25,7 +36,7 @@ import java.util.*;
  * @date: 2020/6/8 19:29
  */
 @Service
-public class ToolServiceImpl implements ToolService {
+public class ToolServiceImpl implements ToolService, ApplicationContextAware {
     @Autowired
     private RedisService redisService;
     //验证码字段和时间限制
@@ -33,6 +44,9 @@ public class ToolServiceImpl implements ToolService {
     private String REDIS_KEY_PREFIX_AUTH_CODE;
     @Value("${redis.key.expire.authCode}")
     private Long AUTH_CODE_EXPIRE_SECONDS;
+
+    @Autowired
+    private ApplicationContext applicationContext;
 
     @Resource
     private UserAdminMapper userAdminMapper;
@@ -48,6 +62,18 @@ public class ToolServiceImpl implements ToolService {
     @Resource
     private StudyUrlMapper studyUrlMapper;
 
+    @Resource
+    private ProductMapper productMapper;
+    @Resource
+    private PurchaseRecordMapper purchaseRecordMapper;
+    @Resource
+    private ProductDao productDao;
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        //方便从ioc容器中获取对象
+        this.applicationContext = applicationContext;
+    }
 
     @Override
     public String generateAuthCode(String telephone) {
@@ -162,4 +188,50 @@ public class ToolServiceImpl implements ToolService {
     public Integer updateAllStudyList(Long[] ids) {
         return null;
     }
+
+    @Override
+    public Product getProductById(Long id) {
+        return productMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    //开启事务控制 并设置为可重复读
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
+    @Async
+    public Boolean purchaseProduct(Long productid, int quantity, Long userId) {
+        //获取产品id -> 检验是否能够扣除库存 -> 获取用户信息 -> 扣除库存
+        System.out.println(Thread.currentThread().getName());
+        //获取产品
+        Product product = productMapper.selectByPrimaryKey(productid);
+        if(product.getStock() < quantity){
+            //库存不足
+            return false;
+        }
+
+        //扣除库存
+        productDao.decreaseProduct(productid, quantity);
+
+        //获得购买记录表
+        PurchaseRecord purchaseRecord = initPurchaseRecord(userId, product, quantity);
+        //插入购买记录
+        purchaseRecordMapper.insertSelective(purchaseRecord);
+
+        return true;
+    }
+
+    @Override
+    public PurchaseRecord initPurchaseRecord(Long userId, Product product, int quantity) {
+        PurchaseRecord purchaseRecord = new PurchaseRecord();
+        purchaseRecord.setNote("购买日志，时间： " + System.currentTimeMillis());
+        purchaseRecord.setPrice(product.getPrice());
+        purchaseRecord.setProductId(product.getId());
+        purchaseRecord.setQuantity(quantity);
+        purchaseRecord.setAfterpurchase(product.getStock() - quantity);
+        BigDecimal sum = new BigDecimal(quantity).multiply(product.getPrice());
+        purchaseRecord.setSum(sum);
+        purchaseRecord.setUserId(userId);
+        return purchaseRecord;
+    }
+
+
 }

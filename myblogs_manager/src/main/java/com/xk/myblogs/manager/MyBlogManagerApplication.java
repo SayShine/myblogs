@@ -8,6 +8,7 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import tk.mybatis.spring.annotation.MapperScan;
 
 @SpringBootApplication
@@ -18,6 +19,8 @@ import tk.mybatis.spring.annotation.MapperScan;
 //mongodb dao接口扫描
 @EnableMongoRepositories("com.xk.myblogs.service.nosqldao")
 @EnableScheduling
+//开启事务控制
+@EnableTransactionManagement
 public class MyBlogManagerApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {

@@ -3,11 +3,12 @@
 <mapper namespace="com.xk.myblogs.service.dao.UserAdminAuthDao">
     <select id="getPermissionList" resultMap="com.xk.myblogs.service.mapper.myblog.PermissionMapper.BaseResultMap">
         select a.type
-        from tpg_user_role_relation urrel
+        from tpg_user user
+                 left join tpg_user_role_relation urrel on user.id = urrel.user_id
                  left join tpg_role r on urrel.role_id = r.id
                  left join tpg_role_authority_relation rarel on r.id = rarel.role_id
                  left join tpg_authority a on rarel.authority_id = a.id
-        where urrel.id = #{id}
+        where user.id = #{id}
           and r.status = 1
           and a.status = 1
     </select>

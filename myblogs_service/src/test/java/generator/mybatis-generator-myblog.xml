@@ -49,24 +49,37 @@
         </javaClientGenerator>
 
         <!-- 需要生成的表的名称 -->
-        <table tableName="tpg_user" domainObjectName="UserAdmin">
+<!--        <table tableName="tpg_user" domainObjectName="UserAdmin">-->
+<!--            <generatedKey column="ID" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="tpg_role" domainObjectName="Role">-->
+<!--            <generatedKey column="ID" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="tpg_authority" domainObjectName="Permission">-->
+<!--            <generatedKey column="ID" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="tpg_user_role_relation" domainObjectName="UserRole">-->
+<!--            <generatedKey column="ID" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="tpg_role_authority_relation" domainObjectName="RolePermission">-->
+<!--            <generatedKey column="ID" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="tpg_user_blogs" domainObjectName="UserBlogs">-->
+<!--            <generatedKey column="ID" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+
+        <!--订单业务表-->
+        <table tableName="t_purchase_record" domainObjectName="PurchaseRecord">
             <generatedKey column="ID" sqlStatement="MySql" identity="true"/>
         </table>
-        <table tableName="tpg_role" domainObjectName="Role">
+        <table tableName="T_Product" domainObjectName="Product">
             <generatedKey column="ID" sqlStatement="MySql" identity="true"/>
         </table>
-        <table tableName="tpg_authority" domainObjectName="Permission">
-            <generatedKey column="ID" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="tpg_user_role_relation" domainObjectName="UserRole">
-            <generatedKey column="ID" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="tpg_role_authority_relation" domainObjectName="RolePermission">
-            <generatedKey column="ID" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="tpg_user_blogs" domainObjectName="UserBlogs">
-            <generatedKey column="ID" sqlStatement="MySql" identity="true"/>
-        </table>
+
+        <!--tscxk库中的表-->
+<!--        <table tableName="study_url" domainObjectName="StudyUrl">-->
+<!--            <generatedKey column="ID" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
     </context>
 
 </generatorConfiguration>

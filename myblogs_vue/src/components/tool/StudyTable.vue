@@ -252,7 +252,9 @@
       },
       getStudyList(){
         ToolApi.getStudyList().then(res => {
-          this.StudyList = res.data.body;
+          if(res.data.body !== null){
+            this.StudyList = res.data.body;
+          }
         });
       },
       delAllSelection(){

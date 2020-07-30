@@ -2,6 +2,7 @@ package com.xk.myblogs.manager.controller;
 
 
 
+import com.xk.myblogs.client.entity.myblog.Product;
 import com.xk.myblogs.client.entity.myblog.UserBlogs;
 import com.xk.myblogs.client.entity.nosql.User;
 import com.xk.myblogs.client.entity.tscxk.StudyUrl;
@@ -10,11 +11,16 @@ import com.xk.myblogs.manager.vo.Result;
 import com.xk.myblogs.common.utils.Md5Util;
 import com.xk.myblogs.service.ActiveMqService;
 import com.xk.myblogs.service.ToolService;
+import com.xk.myblogs.service.dto.UserAdminDetail;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -157,4 +163,40 @@ public class ToolController {
 
     //学习博客end----------------------------------------------------
 
+    //并发抢购start----------------------------------------------------
+    @GetMapping("/product/{id}")
+    @ApiOperation("根据id获取商品信息")
+    public Result<Product> getProductById(@PathVariable Long id){
+        Product product = toolService.getProductById(id);
+        return product==null ? Result.error("查询不到结果") : Result.ok(product);
+    }
+
+    @PutMapping("/product/puchase/{productid}/{quantity}")
+    @ApiOperation("购买对应商品的对应数量")
+    @PreAuthorize("hasAuthority('root')")
+    public Result<String> purchaseProduct(@PathVariable Long productid,
+                                  @PathVariable int quantity){
+        System.out.println(Thread.currentThread().getName());
+        //当前登录用户id
+        UserAdminDetail userAdminDetail = (UserAdminDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Long userId = userAdminDetail.getUserId();
+        Boolean purchaseSuccess = toolService.purchaseProduct(productid, quantity, userId);
+//        return purchaseSuccess ? Result.ok("购买成功") : Result.error("购买失败");
+        return Result.ok("购买成功");
+    }
+
+
+
+    //并发抢购end------------------------------------------------------
+
+
+    @GetMapping
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    @ApiOperation("纯属测试")
+    public Result<String> sayHello() {
+
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        System.out.println("111");
+        return Result.ok("20200701晚上");
+    }
 }

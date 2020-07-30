@@ -6,6 +6,7 @@ import com.xk.myblogs.common.annotion.TestAnnotion;
 import com.xk.myblogs.common.enums.LoginStatusEnum;
 import com.xk.myblogs.manager.vo.Result;
 import com.xk.myblogs.service.UserAdminService;
+import com.xk.myblogs.service.dto.UserAdminDetail;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -13,6 +14,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -96,6 +99,8 @@ public class AdminController {
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     @ApiOperation("纯属测试")
     public Result<String> sayHello() {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        System.out.println("111");
         return Result.ok("20200701晚上");
     }
 }

@@ -286,7 +286,9 @@
       getMdList(){
         let username = window.localStorage.getItem('username');
         ToolApi.getMdListByUserName(username).then(res => {
-          this.MdList = res.data.body;
+          if(res.data.body !== null){
+            this.MdList = res.data.body;
+          }
         });
       },
       delAllSelection(){

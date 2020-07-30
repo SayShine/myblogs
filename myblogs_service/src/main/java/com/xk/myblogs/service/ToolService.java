@@ -1,5 +1,7 @@
 package com.xk.myblogs.service;
 
+import com.xk.myblogs.client.entity.myblog.Product;
+import com.xk.myblogs.client.entity.myblog.PurchaseRecord;
 import com.xk.myblogs.client.entity.myblog.UserBlogs;
 import com.xk.myblogs.client.entity.tscxk.StudyUrl;
 
@@ -83,4 +85,27 @@ public interface ToolService {
      */
     Integer updateAllStudyList(Long[] ids);
 
+    /**
+     * 根据商品id获取商品
+     * @param id
+     * @return
+     */
+    Product getProductById(Long id);
+
+    /**
+     * 购买对应商品的对应数量
+     * @param productid 商品id
+     * @param quantity 商品数量
+     * @return
+     */
+    Boolean purchaseProduct(Long productid, int quantity, Long userId);
+
+    /**
+     * 生成订单信息
+     * @param userId
+     * @param product
+     * @param quantity
+     * @return
+     */
+    PurchaseRecord initPurchaseRecord(Long userId, Product product, int quantity);
 }
