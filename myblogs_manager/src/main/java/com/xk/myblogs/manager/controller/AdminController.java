@@ -99,7 +99,6 @@ public class AdminController {
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     @ApiOperation("纯属测试")
     public Result<String> sayHello() {
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         System.out.println("111");
         return Result.ok("20200701晚上");
     }
