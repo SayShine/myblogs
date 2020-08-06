@@ -9,9 +9,9 @@ import com.xk.myblogs.client.entity.tscxk.StudyUrl;
 import com.xk.myblogs.manager.vo.Result;
 import com.xk.myblogs.common.utils.Md5Util;
 import com.xk.myblogs.service.ActiveMqService;
+import com.xk.myblogs.service.OrderService;
 import com.xk.myblogs.service.ToolService;
 import com.xk.myblogs.service.dto.UserAdminDetail;
-import com.xk.myblogs.service.impl.OrderServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -26,7 +26,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * @author xiongkai
@@ -45,7 +44,7 @@ public class ToolController {
     private ActiveMqService activeMqService;
 
     @Autowired
-    private OrderServiceImpl orderService;
+    private OrderService orderService;
 
     @GetMapping("/toTranslate")
     @ApiOperation("祖安语言翻译器")

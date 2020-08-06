@@ -1,5 +1,6 @@
 package com.xk.myblogs.service.impl;
 
+import com.xk.myblogs.service.OrderService;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -15,13 +16,14 @@ import java.util.concurrent.TimeUnit;
  * @date: 2020/8/4 22:28
  */
 @Service
-public class OrderServiceImpl implements ApplicationContextAware {
+public class OrderServiceImpl implements OrderService, ApplicationContextAware {
     private ApplicationContext applicationContext;
 
     /**
      * 获取今日订单数
      * @return
      */
+    @Override
     public CompletableFuture<String> todayOrderCount(){
         String name = "hah";
         return CompletableFuture.supplyAsync(() -> this.getTodayOrderCount(name));
@@ -30,6 +32,7 @@ public class OrderServiceImpl implements ApplicationContextAware {
     /**
      * 获取今日营业额
      */
+    @Override
     public CompletableFuture<String> todayTurnover(){
         return CompletableFuture.supplyAsync(this::getTodayTurnover);
     }
@@ -38,6 +41,7 @@ public class OrderServiceImpl implements ApplicationContextAware {
      * 获取总营业额
      * @return
      */
+    @Override
     public CompletableFuture<String> totalTurnover(){
         return CompletableFuture.supplyAsync(this::getTotalTurnover, getExecutor());
     }
