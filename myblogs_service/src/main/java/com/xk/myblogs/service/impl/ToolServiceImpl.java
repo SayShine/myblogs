@@ -8,19 +8,19 @@ import com.xk.myblogs.service.ToolService;
 import com.xk.myblogs.service.UserAdminService;
 import com.xk.myblogs.service.dao.ProductDao;
 import com.xk.myblogs.service.dao.UserBlogsDao;
-import com.xk.myblogs.service.dto.UserAdminDetail;
 import com.xk.myblogs.service.mapper.myblog.ProductMapper;
 import com.xk.myblogs.service.mapper.myblog.PurchaseRecordMapper;
 import com.xk.myblogs.service.mapper.myblog.UserAdminMapper;
 import com.xk.myblogs.service.mapper.myblog.UserBlogsMapper;
 import com.xk.myblogs.service.mapper.tscxk.StudyUrlMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,6 +30,10 @@ import org.springframework.util.StringUtils;
 import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author: tian
@@ -37,6 +41,7 @@ import java.util.*;
  */
 @Service
 public class ToolServiceImpl implements ToolService, ApplicationContextAware {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ToolServiceImpl.class);
     @Autowired
     private RedisService redisService;
     //验证码字段和时间限制
@@ -73,6 +78,10 @@ public class ToolServiceImpl implements ToolService, ApplicationContextAware {
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         //方便从ioc容器中获取对象
         this.applicationContext = applicationContext;
+    }
+
+    private Executor getExecutor(){
+        return (Executor) applicationContext.getBean("myThreadPool");
     }
 
     @Override
@@ -172,6 +181,22 @@ public class ToolServiceImpl implements ToolService, ApplicationContextAware {
     }
 
     @Override
+    public List<StudyUrl> getStudyListByKeyWords(String keywords) {
+        StudyUrlExample example = new StudyUrlExample();
+        StudyUrlExample.Criteria criteria1 = example.createCriteria();
+        criteria1.andCommentLike("%"+keywords+"%");
+
+
+        StudyUrlExample.Criteria criteria2 = example.createCriteria();
+        criteria2.andUrlLike("%"+keywords+"%");
+
+        example.or(criteria2);
+
+        return studyUrlMapper.selectByExample(example);
+    }
+
+
+    @Override
     public Integer insertStudyList(StudyUrl studyUrl) {
         return studyUrlMapper.insertSelective(studyUrl);
     }
@@ -194,13 +219,34 @@ public class ToolServiceImpl implements ToolService, ApplicationContextAware {
         return productMapper.selectByPrimaryKey(id);
     }
 
+    /**
+     * 异步购买
+     * @param productid
+     * @param quantity
+     * @param userid
+     * @return
+     */
     @Override
-    //开启事务控制 并设置为可重复读
-    @Transactional(isolation = Isolation.REPEATABLE_READ)
-    @Async
-    public Boolean purchaseProduct(Long productid, int quantity, Long userId) {
+    public CompletableFuture<Boolean> purchaseProductSupply(Long productid, int quantity, Long userid) {
+        //由于异步 需要考虑注解失效问题
+        ToolService toolService = applicationContext.getBean(ToolService.class);
+
+        //指定我的线程池异步回调
+        return CompletableFuture.supplyAsync(() -> toolService.purchaseProduct(productid, quantity, userid), getExecutor());
+
+    }
+
+    /**
+     * 同步购买
+     * @param productid
+     * @param quantity
+     * @param userid
+     * @return
+     */
+    @Override
+    @Transactional(isolation = Isolation.READ_COMMITTED)
+    public Boolean purchaseProduct(Long productid, int quantity, Long userid){
         //获取产品id -> 检验是否能够扣除库存 -> 获取用户信息 -> 扣除库存
-        System.out.println(Thread.currentThread().getName());
         //获取产品
         Product product = productMapper.selectByPrimaryKey(productid);
         if(product.getStock() < quantity){
@@ -212,11 +258,17 @@ public class ToolServiceImpl implements ToolService, ApplicationContextAware {
         productDao.decreaseProduct(productid, quantity);
 
         //获得购买记录表
-        PurchaseRecord purchaseRecord = initPurchaseRecord(userId, product, quantity);
+        PurchaseRecord purchaseRecord = initPurchaseRecord(userid, product, quantity);
         //插入购买记录
         purchaseRecordMapper.insertSelective(purchaseRecord);
 
         return true;
+    }
+
+    //太复杂了  后续完善吧
+    @Override
+    public Boolean purchaseProductByRedis(Long productid, int quantity, Long userId) {
+        return null;
     }
 
     @Override
@@ -232,6 +284,7 @@ public class ToolServiceImpl implements ToolService, ApplicationContextAware {
         purchaseRecord.setUserId(userId);
         return purchaseRecord;
     }
+
 
 
 }

@@ -7,6 +7,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import tk.mybatis.spring.annotation.MapperScan;
@@ -21,6 +22,7 @@ import tk.mybatis.spring.annotation.MapperScan;
 @EnableScheduling
 //开启事务控制
 @EnableTransactionManagement
+@EnableAsync
 public class MyBlogManagerApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {

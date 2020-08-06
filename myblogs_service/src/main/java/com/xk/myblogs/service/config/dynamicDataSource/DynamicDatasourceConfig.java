@@ -11,6 +11,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
@@ -61,6 +63,13 @@ public class DynamicDatasourceConfig {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         bean.setDataSource(dynamicDataSource);
         bean.setMapperLocations(resoleveMapperLocations());
+
+        //读取mybatis配置文件
+//        Resource resource = new PathMatchingResourcePatternResolver().getResource("mybatis-config.xml");
+        Resource resource = new ClassPathResource("mybatis-config.xml");
+        System.out.println(resource.getFilename());
+        bean.setConfigLocation(resource);
+
         bean.setTypeHandlersPackage("com.xk.myblogs.service.typehandler");
         return bean.getObject();
     }

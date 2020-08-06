@@ -6,8 +6,14 @@
 
     <div class="container">
       <!--操作栏-->
-      <div class="handle-box">
+      <el-input
+        v-model="input"
+        placeholder="搜索"
+        @keyup.enter.native="searchByKey(input)"
+        style="width: 280px; margin-bottom: 10px;"
+      />
 
+      <div class="handle-box">
         <el-button
           icon="el-icon-plus"
           class="handle-box mr10"
@@ -46,6 +52,7 @@
 
         <el-table-column label="操作" width="180" align="center">
           <template slot-scope="scope">
+
             <el-button
               type="text"
               icon="el-icon-edit"
@@ -157,6 +164,7 @@
         editVisible: false,
         isShow:false,
         isUpdate:true, //默认是更新
+        input: '',
       }
     },
     created() {
@@ -252,10 +260,17 @@
       },
       getStudyList(){
         ToolApi.getStudyList().then(res => {
-          if(res.data.body !== null){
+          if(res.data.code === "0"){
             this.StudyList = res.data.body;
           }
         });
+      },
+      searchByKey(param){
+        ToolApi.searchStudyList(param).then(res => {
+          if(res.data.code === "0"){
+            this.StudyList = res.data.body;
+          }
+        })
       },
       delAllSelection(){
         // 二次确认删除

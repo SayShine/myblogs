@@ -5,7 +5,9 @@ import com.xk.myblogs.client.entity.myblog.PurchaseRecord;
 import com.xk.myblogs.client.entity.myblog.UserBlogs;
 import com.xk.myblogs.client.entity.tscxk.StudyUrl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * @author: tian
@@ -65,6 +67,13 @@ public interface ToolService {
     List<StudyUrl> getStudyList();
 
     /**
+     * 根据关键字获取学习列表
+     * @param keywords
+     * @return
+     */
+    List<StudyUrl> getStudyListByKeyWords(String keywords);
+
+    /**
      * 插入学习内容
      * @param studyUrl
      * @return
@@ -93,12 +102,30 @@ public interface ToolService {
     Product getProductById(Long id);
 
     /**
+     * 产品购买 异步回调 调用接口
+     * @param productid
+     * @param quantity
+     * @param userid
+     * @return
+     */
+    Boolean purchaseProduct(Long productid, int quantity, Long userid);
+
+    /**
+     * 产品购买 异步回调具体实现
+     * @param productid
+     * @param quantity
+     * @param userid
+     * @return
+     */
+    CompletableFuture<Boolean> purchaseProductSupply(Long productid, int quantity, Long userid);
+
+    /**
      * 购买对应商品的对应数量
      * @param productid 商品id
      * @param quantity 商品数量
      * @return
      */
-    Boolean purchaseProduct(Long productid, int quantity, Long userId);
+    Boolean purchaseProductByRedis(Long productid, int quantity, Long userId);
 
     /**
      * 生成订单信息
@@ -108,4 +135,7 @@ public interface ToolService {
      * @return
      */
     PurchaseRecord initPurchaseRecord(Long userId, Product product, int quantity);
+
+
+
 }

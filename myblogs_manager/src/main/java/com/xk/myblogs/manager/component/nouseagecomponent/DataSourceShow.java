@@ -8,6 +8,9 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
+import java.util.concurrent.Executor;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 /**
  * 监测数据库连接池类型
@@ -21,6 +24,7 @@ public class DataSourceShow implements ApplicationContextAware {
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         DataSource dataSource = applicationContext.getBean(DataSource.class);
+        Executor executor = (Executor) applicationContext.getBean("myThreadPool");
         LOGGER.info("当前数据库连接池类型：{}",dataSource.getClass().getName());
     }
 }

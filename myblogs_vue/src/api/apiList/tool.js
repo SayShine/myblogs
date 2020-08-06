@@ -49,6 +49,10 @@ const Tool = {
     return axios.get('/tool/studyList');
   },
 
+  searchStudyList(param){
+    return axios.get('/tool/studyList/'+param);
+  },
+
   //插入操作
   insertStudyList(params){
     return axios.post('/tool/studyList', JSON.stringify(params),
@@ -72,8 +76,15 @@ const Tool = {
       })
   },
 
-
   //学习博客end---------------------------------------------------
+
+  //抢购start---------------------------------------------------
+  purchaseProduct(productid, quantity){
+    return axios.post('/tool/product/puchase/'+productid+'/'+quantity, null,
+      {headers:{'Content-Type': 'application/json'}}
+    )
+  }
+  //抢购end-----------------------------------------------------
 
 
 

@@ -6,24 +6,27 @@ import com.xk.myblogs.client.entity.myblog.Product;
 import com.xk.myblogs.client.entity.myblog.UserBlogs;
 import com.xk.myblogs.client.entity.nosql.User;
 import com.xk.myblogs.client.entity.tscxk.StudyUrl;
-import com.xk.myblogs.common.annotion.TestAnnotion;
 import com.xk.myblogs.manager.vo.Result;
 import com.xk.myblogs.common.utils.Md5Util;
 import com.xk.myblogs.service.ActiveMqService;
 import com.xk.myblogs.service.ToolService;
 import com.xk.myblogs.service.dto.UserAdminDetail;
+import com.xk.myblogs.service.impl.OrderServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.EnableAsync;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * @author xiongkai
@@ -33,11 +36,16 @@ import java.util.List;
 @RequestMapping("tool")
 @Api(tags = "ToolController", description = "祖安工具")
 public class ToolController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ToolController.class);
+
     @Autowired
     private ToolService toolService;
 
     @Autowired
     private ActiveMqService activeMqService;
+
+    @Autowired
+    private OrderServiceImpl orderService;
 
     @GetMapping("/toTranslate")
     @ApiOperation("祖安语言翻译器")
@@ -137,6 +145,13 @@ public class ToolController {
         return Result.ok(studyUrlList);
     }
 
+    @GetMapping("/studyList/{keywords}")
+    @ApiOperation("根据关键字获取学习网站列表")
+    public Result<List<StudyUrl>> getStudyListByKeyWords(@PathVariable String keywords){
+        List<StudyUrl> studyUrlList = toolService.getStudyListByKeyWords(keywords);
+        return Result.ok(studyUrlList);
+    }
+
     @PreAuthorize("hasAuthority('root')")
     @PutMapping("/studyList")
     @ApiOperation("单个修改状态(目前仅用于删除)")
@@ -171,18 +186,54 @@ public class ToolController {
         return product==null ? Result.error("查询不到结果") : Result.ok(product);
     }
 
-    @PutMapping("/product/puchase/{productid}/{quantity}")
-    @ApiOperation("购买对应商品的对应数量")
-    @PreAuthorize("hasAuthority('root')")
+    @PostMapping("/product/puchase/{productid}/{quantity}")
+    @ApiOperation("购买对应商品的对应数量   可选择使用CompletableFuture异步回调提升速度")
+//    @PreAuthorize("hasAuthority('root')")
     public Result<String> purchaseProduct(@PathVariable Long productid,
-                                  @PathVariable int quantity){
-        System.out.println(Thread.currentThread().getName());
+                                  @PathVariable int quantity) {
         //当前登录用户id
         UserAdminDetail userAdminDetail = (UserAdminDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Long userId = userAdminDetail.getUserId();
-        Boolean purchaseSuccess = toolService.purchaseProduct(productid, quantity, userId);
-//        return purchaseSuccess ? Result.ok("购买成功") : Result.error("购买失败");
-        return Result.ok("购买成功");
+        Long userid = userAdminDetail.getUserId();
+        Map<String, Object> map = new HashMap<>();
+        map.put("isSuccess", false);
+
+        //同步处理请求  100个请求 耗时7-8s
+//        Boolean isSuccess = toolService.purchaseProduct(productid, quantity, userid);
+//        map.put("isSuccess", isSuccess);
+
+        //异步并发请求 因为只有一个事务 实际上和同步处理请求耗时一样  下面的才能充分体现异步回调的好处
+        CompletableFuture<Boolean> purchase = toolService.purchaseProductSupply(productid, quantity, userid);
+        try {
+            purchase.whenComplete((v, t) -> {
+                map.put("isSuccess", false);
+            }).exceptionally(exception -> {
+                System.out.println("捕获异常： " + exception);
+                return false;
+            }).get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        //异步回调例子
+//        CompletableFuture<Boolean> purchase = toolService.purchaseProductSupply(productid, quantity, userid);
+//        CompletableFuture<Boolean> purchase2 = toolService.purchaseProductSupply(productid, quantity, userid);
+//        CompletableFuture<Boolean> purchase3 = toolService.purchaseProductSupply(productid, quantity, userid);
+//        CompletableFuture<Boolean> purchase4 = toolService.purchaseProductSupply(productid, quantity, userid);
+//        purchase.whenComplete((v, t) -> {
+//            map.put("isSuccess", false);
+//        }).exceptionally(exception -> {
+//            System.out.println("捕获异常： " + exception);
+//            return false;
+//        });
+//
+//        CompletableFuture.allOf(purchase, purchase2, purchase3, purchase4)
+//                .thenRun(() -> System.out.println("完成！！！"))
+//                .join();
+
+
+        return (boolean)map.get("isSuccess") ? Result.ok("购买成功") : Result.error("购买失败");
     }
 
 
@@ -190,12 +241,78 @@ public class ToolController {
     //并发抢购end------------------------------------------------------
 
 
+    @GetMapping("/report/order")
+    @ApiOperation("测试异步回调")
+    public Result Report(){
+
+        long start = System.currentTimeMillis();
+//        Map<String, Object> map = orderReport();
+        Map<String, Object> map = new HashMap<>();
+        CompletableFuture<String> todayOrderCountFuture = orderService.todayOrderCount();
+        CompletableFuture<String> todayTurnoverFuture = orderService.todayTurnover();
+        CompletableFuture<String> totalTurnoverFuture = orderService.totalTurnover();
+
+        System.out.println("任务开始");
+
+        todayOrderCountFuture.whenComplete((v, t) -> {
+            map.put("todayOrderCountFuture", v);
+            System.out.println(t);
+        });
+
+        todayTurnoverFuture.whenComplete((v, t) -> {
+            map.put("todayTurnoverFuture", v);
+        });
+
+        System.out.println("任务进行中");
+
+        totalTurnoverFuture.whenComplete((v, t) -> {
+            map.put("totalTurnoverFuture", v);
+        });
+
+        CompletableFuture.allOf(todayOrderCountFuture, todayTurnoverFuture, totalTurnoverFuture)
+                .thenRun(() -> System.out.println("完成！！！"))
+                .join();
+
+
+        System.out.println("耗时： " + (System.currentTimeMillis() - start));
+        return Result.ok(map);
+    }
+
+    public Map<String, Object> orderReport(){
+        Map<String, Object> map = new HashMap<>();
+        CompletableFuture<String> todayOrderCountFuture = orderService.todayOrderCount();
+        CompletableFuture<String> todayTurnoverFuture = orderService.todayTurnover();
+        CompletableFuture<String> totalTurnoverFuture = orderService.totalTurnover();
+
+        System.out.println("任务开始");
+
+        todayOrderCountFuture.whenComplete((v, t) -> {
+            map.put("todayOrderCountFuture", v);
+        });
+
+        todayTurnoverFuture.whenComplete((v, t) -> {
+            map.put("todayTurnoverFuture", v);
+        });
+
+        System.out.println("任务进行中");
+
+        totalTurnoverFuture.whenComplete((v, t) -> {
+            map.put("totalTurnoverFuture", v);
+        });
+
+        CompletableFuture.allOf(todayOrderCountFuture, todayTurnoverFuture, totalTurnoverFuture)
+                .thenRun(() -> System.out.println("完成！！！"))
+                .join();
+
+        return map;
+    }
+
+
+
     @GetMapping
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     @ApiOperation("纯属测试")
     public Result<String> sayHello() {
-
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         System.out.println("111");
         return Result.ok("20200701晚上");
     }
