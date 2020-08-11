@@ -29,6 +29,12 @@ new Vue({
   el: '#app',
   router, //路由
   store,
-  components: {App},
-  template: '<App/>'
+  render: h => h(App)
+  //  render: h => h(App)等价于下面
+  // components: {App},
+  //  声明有哪些组件
+  // template: '<App/>'
+  //   表示用<app><app/>替换index.html中的<div id="app"></div>
+
+
 })

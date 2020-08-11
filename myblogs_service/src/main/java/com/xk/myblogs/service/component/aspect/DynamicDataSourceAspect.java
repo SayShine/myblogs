@@ -50,11 +50,8 @@ public class DynamicDataSourceAspect {
         MethodSignature methodSignature = (MethodSignature)point.getSignature();
         Method method = methodSignature.getMethod();
         if(method.isAnnotationPresent(DataSource.class)){
-            DataSource dataSource = (DataSource)currentClass.getAnnotation(DataSource.class);
-            //值不为空才覆盖
-            if(!StringUtils.isEmpty(value)){
-                value = dataSource.value();
-            }
+            DataSource dataSource = (DataSource)method.getAnnotation(DataSource.class);
+            value = dataSource.value();
         }
 
         if(!StringUtils.isEmpty(value)){
