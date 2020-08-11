@@ -17,6 +17,16 @@ export default new Router({
       path: '/',
       name: 'MainNotice',
       component: MainNotice
+      // path: '',
+      // redirect: '/login/toLogin',
+      // children: [
+      //   {
+      //     path: '/login/toLogin',
+      //     name: 'toLogin',
+      //     component: MainNotice,
+      //     // component: (resolve) => require(['@/components/MainNotice'], resolve),
+      //   }
+      // ]
     },
     {
       path: '/tool/zuanTranslator',

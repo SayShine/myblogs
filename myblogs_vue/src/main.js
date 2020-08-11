@@ -4,8 +4,11 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
+import './permission' //登录控制
+
 // 解决两次访问相同路由地址报错
 import VueRouter from "vue-router";
+
 
 const originalPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push(location) {
@@ -23,6 +26,7 @@ import store from "./store/index";
 //路由
 Vue.use(store);
 Vue.prototype.$store = store;
+
 
 /* eslint-disable no-new */
 new Vue({
