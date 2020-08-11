@@ -10,58 +10,62 @@ import MdTable from '@/components/tool/Markdown/MdTable'
 import StudyTable from "@/components/tool/StudyTable";
 Vue.use(Router);
 
+export const constantRoutes = [
+  {
+    path: '/',
+    name: 'MainNotice',
+    component: MainNotice
+    // path: '',
+    // redirect: '/login/toLogin',
+    // children: [
+    //   {
+    //     path: '/login/toLogin',
+    //     name: 'toLogin',
+    //     component: MainNotice,
+    //     // component: (resolve) => require(['@/components/MainNotice'], resolve),
+    //   }
+    // ]
+  },
+  {
+    path: '/tool/zuanTranslator',
+    name: 'ZuanTranslator',
+    component: ZuanTranslator
+  },
+  {
+    path: '/tool/Md5Encode',
+    name: 'md5',
+    component: Md5Encode
+  },
+  {
+    path: '/tool/Taobao',
+    name: 'taobao',
+    component: Taobao
+  },
+  {
+    path: '/login/toLogin',
+    name: 'toLogin',
+    component: ToLogin
+  },
+  {
+    path: '/tool/Markdown/Detail',
+    name: 'Markdown',
+    component: Markdown
+  },
+  {
+    path: '/tool/MdTable',
+    name: 'MdTable',
+    component: MdTable
+  },
+  {
+    path: '/tool/StudyTable',
+    name: 'StudyTable',
+    component: StudyTable
+  }
+]
+
 export default new Router({
-  mode: 'history',
-  routes: [
-    {
-      path: '/',
-      name: 'MainNotice',
-      component: MainNotice
-      // path: '',
-      // redirect: '/login/toLogin',
-      // children: [
-      //   {
-      //     path: '/login/toLogin',
-      //     name: 'toLogin',
-      //     component: MainNotice,
-      //     // component: (resolve) => require(['@/components/MainNotice'], resolve),
-      //   }
-      // ]
-    },
-    {
-      path: '/tool/zuanTranslator',
-      name: 'ZuanTranslator',
-      component: ZuanTranslator
-    },
-    {
-      path: '/tool/Md5Encode',
-      name: 'md5',
-      component: Md5Encode
-    },
-    {
-      path: '/tool/Taobao',
-      name: 'taobao',
-      component: Taobao
-    },
-    {
-      path: '/login/toLogin',
-      name: 'toLogin',
-      component: ToLogin
-    },
-    {
-      path: '/tool/Markdown/Detail',
-      name: 'Markdown',
-      component: Markdown
-    },
-    {
-      path: '/tool/MdTable',
-      name: 'MdTable',
-      component: MdTable
-    },
-    {
-      path: '/tool/StudyTable',
-      name: 'StudyTable',
-      component: StudyTable
-    }
-  ]
+  mode: 'history', // 去掉url中的#
+  //路由切换时的滚动  是否记录位置 需要用鼠标滑动
+  scrollBehavior: (savePosition) => ({ y: savePosition.y }),
+  routes: constantRoutes
 })
