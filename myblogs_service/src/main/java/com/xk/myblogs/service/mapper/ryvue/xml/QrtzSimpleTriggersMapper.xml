@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xk.myblogs.service.mapper.ryvue.QrtzSimpleTriggersMapper">
+  <resultMap id="BaseResultMap" type="com.xk.myblogs.client.entity.ryvue.QrtzSimpleTriggers">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    <id column="sched_name" jdbcType="VARCHAR" property="schedName" />
+    <id column="trigger_name" jdbcType="VARCHAR" property="triggerName" />
+    <id column="trigger_group" jdbcType="VARCHAR" property="triggerGroup" />
+    <result column="repeat_count" jdbcType="BIGINT" property="repeatCount" />
+    <result column="repeat_interval" jdbcType="BIGINT" property="repeatInterval" />
+    <result column="times_triggered" jdbcType="BIGINT" property="timesTriggered" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    sched_name, trigger_name, trigger_group, repeat_count, repeat_interval, times_triggered
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.xk.myblogs.client.entity.ryvue.QrtzSimpleTriggersKey" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from qrtz_simple_triggers
+    where sched_name = #{schedName,jdbcType=VARCHAR}
+      and trigger_name = #{triggerName,jdbcType=VARCHAR}
+      and trigger_group = #{triggerGroup,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.xk.myblogs.client.entity.ryvue.QrtzSimpleTriggersKey">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    delete from qrtz_simple_triggers
+    where sched_name = #{schedName,jdbcType=VARCHAR}
+      and trigger_name = #{triggerName,jdbcType=VARCHAR}
+      and trigger_group = #{triggerGroup,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xk.myblogs.client.entity.ryvue.QrtzSimpleTriggers">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    insert into qrtz_simple_triggers (sched_name, trigger_name, trigger_group, 
+      repeat_count, repeat_interval, times_triggered
+      )
+    values (#{schedName,jdbcType=VARCHAR}, #{triggerName,jdbcType=VARCHAR}, #{triggerGroup,jdbcType=VARCHAR}, 
+      #{repeatCount,jdbcType=BIGINT}, #{repeatInterval,jdbcType=BIGINT}, #{timesTriggered,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xk.myblogs.client.entity.ryvue.QrtzSimpleTriggers">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    insert into qrtz_simple_triggers
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="schedName != null">
+        sched_name,
+      </if>
+      <if test="triggerName != null">
+        trigger_name,
+      </if>
+      <if test="triggerGroup != null">
+        trigger_group,
+      </if>
+      <if test="repeatCount != null">
+        repeat_count,
+      </if>
+      <if test="repeatInterval != null">
+        repeat_interval,
+      </if>
+      <if test="timesTriggered != null">
+        times_triggered,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="schedName != null">
+        #{schedName,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerName != null">
+        #{triggerName,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerGroup != null">
+        #{triggerGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="repeatCount != null">
+        #{repeatCount,jdbcType=BIGINT},
+      </if>
+      <if test="repeatInterval != null">
+        #{repeatInterval,jdbcType=BIGINT},
+      </if>
+      <if test="timesTriggered != null">
+        #{timesTriggered,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xk.myblogs.client.entity.ryvue.QrtzSimpleTriggers">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    update qrtz_simple_triggers
+    <set>
+      <if test="repeatCount != null">
+        repeat_count = #{repeatCount,jdbcType=BIGINT},
+      </if>
+      <if test="repeatInterval != null">
+        repeat_interval = #{repeatInterval,jdbcType=BIGINT},
+      </if>
+      <if test="timesTriggered != null">
+        times_triggered = #{timesTriggered,jdbcType=BIGINT},
+      </if>
+    </set>
+    where sched_name = #{schedName,jdbcType=VARCHAR}
+      and trigger_name = #{triggerName,jdbcType=VARCHAR}
+      and trigger_group = #{triggerGroup,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xk.myblogs.client.entity.ryvue.QrtzSimpleTriggers">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    update qrtz_simple_triggers
+    set repeat_count = #{repeatCount,jdbcType=BIGINT},
+      repeat_interval = #{repeatInterval,jdbcType=BIGINT},
+      times_triggered = #{timesTriggered,jdbcType=BIGINT}
+    where sched_name = #{schedName,jdbcType=VARCHAR}
+      and trigger_name = #{triggerName,jdbcType=VARCHAR}
+      and trigger_group = #{triggerGroup,jdbcType=VARCHAR}
+  </update>
+</mapper>

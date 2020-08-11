@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xk.myblogs.service.mapper.ryvue.SysJobLogMapper">
+  <resultMap id="BaseResultMap" type="com.xk.myblogs.client.entity.ryvue.SysJobLog">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    <id column="job_log_id" jdbcType="BIGINT" property="jobLogId" />
+    <result column="job_name" jdbcType="VARCHAR" property="jobName" />
+    <result column="job_group" jdbcType="VARCHAR" property="jobGroup" />
+    <result column="invoke_target" jdbcType="VARCHAR" property="invokeTarget" />
+    <result column="job_message" jdbcType="VARCHAR" property="jobMessage" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="exception_info" jdbcType="VARCHAR" property="exceptionInfo" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    job_log_id, job_name, job_group, invoke_target, job_message, status, exception_info, 
+    create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from sys_job_log
+    where job_log_id = #{jobLogId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    delete from sys_job_log
+    where job_log_id = #{jobLogId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.xk.myblogs.client.entity.ryvue.SysJobLog">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    insert into sys_job_log (job_log_id, job_name, job_group, 
+      invoke_target, job_message, status, 
+      exception_info, create_time)
+    values (#{jobLogId,jdbcType=BIGINT}, #{jobName,jdbcType=VARCHAR}, #{jobGroup,jdbcType=VARCHAR}, 
+      #{invokeTarget,jdbcType=VARCHAR}, #{jobMessage,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{exceptionInfo,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xk.myblogs.client.entity.ryvue.SysJobLog">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    insert into sys_job_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="jobLogId != null">
+        job_log_id,
+      </if>
+      <if test="jobName != null">
+        job_name,
+      </if>
+      <if test="jobGroup != null">
+        job_group,
+      </if>
+      <if test="invokeTarget != null">
+        invoke_target,
+      </if>
+      <if test="jobMessage != null">
+        job_message,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="exceptionInfo != null">
+        exception_info,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="jobLogId != null">
+        #{jobLogId,jdbcType=BIGINT},
+      </if>
+      <if test="jobName != null">
+        #{jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="jobGroup != null">
+        #{jobGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="invokeTarget != null">
+        #{invokeTarget,jdbcType=VARCHAR},
+      </if>
+      <if test="jobMessage != null">
+        #{jobMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="exceptionInfo != null">
+        #{exceptionInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xk.myblogs.client.entity.ryvue.SysJobLog">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    update sys_job_log
+    <set>
+      <if test="jobName != null">
+        job_name = #{jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="jobGroup != null">
+        job_group = #{jobGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="invokeTarget != null">
+        invoke_target = #{invokeTarget,jdbcType=VARCHAR},
+      </if>
+      <if test="jobMessage != null">
+        job_message = #{jobMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="exceptionInfo != null">
+        exception_info = #{exceptionInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where job_log_id = #{jobLogId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xk.myblogs.client.entity.ryvue.SysJobLog">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    update sys_job_log
+    set job_name = #{jobName,jdbcType=VARCHAR},
+      job_group = #{jobGroup,jdbcType=VARCHAR},
+      invoke_target = #{invokeTarget,jdbcType=VARCHAR},
+      job_message = #{jobMessage,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      exception_info = #{exceptionInfo,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where job_log_id = #{jobLogId,jdbcType=BIGINT}
+  </update>
+</mapper>

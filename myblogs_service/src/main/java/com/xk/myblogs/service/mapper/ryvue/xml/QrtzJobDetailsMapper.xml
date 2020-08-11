@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xk.myblogs.service.mapper.ryvue.QrtzJobDetailsMapper">
+  <resultMap id="BaseResultMap" type="com.xk.myblogs.client.entity.ryvue.QrtzJobDetails">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    <id column="sched_name" jdbcType="VARCHAR" property="schedName" />
+    <id column="job_name" jdbcType="VARCHAR" property="jobName" />
+    <id column="job_group" jdbcType="VARCHAR" property="jobGroup" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="job_class_name" jdbcType="VARCHAR" property="jobClassName" />
+    <result column="is_durable" jdbcType="VARCHAR" property="isDurable" />
+    <result column="is_nonconcurrent" jdbcType="VARCHAR" property="isNonconcurrent" />
+    <result column="is_update_data" jdbcType="VARCHAR" property="isUpdateData" />
+    <result column="requests_recovery" jdbcType="VARCHAR" property="requestsRecovery" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.xk.myblogs.client.entity.ryvue.QrtzJobDetails">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    <result column="job_data" jdbcType="LONGVARBINARY" property="jobData" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    sched_name, job_name, job_group, description, job_class_name, is_durable, is_nonconcurrent, 
+    is_update_data, requests_recovery
+  </sql>
+  <sql id="Blob_Column_List">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    job_data
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.xk.myblogs.client.entity.ryvue.QrtzJobDetailsKey" resultMap="ResultMapWithBLOBs">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from qrtz_job_details
+    where sched_name = #{schedName,jdbcType=VARCHAR}
+      and job_name = #{jobName,jdbcType=VARCHAR}
+      and job_group = #{jobGroup,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.xk.myblogs.client.entity.ryvue.QrtzJobDetailsKey">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    delete from qrtz_job_details
+    where sched_name = #{schedName,jdbcType=VARCHAR}
+      and job_name = #{jobName,jdbcType=VARCHAR}
+      and job_group = #{jobGroup,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xk.myblogs.client.entity.ryvue.QrtzJobDetails">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    insert into qrtz_job_details (sched_name, job_name, job_group, 
+      description, job_class_name, is_durable, 
+      is_nonconcurrent, is_update_data, requests_recovery, 
+      job_data)
+    values (#{schedName,jdbcType=VARCHAR}, #{jobName,jdbcType=VARCHAR}, #{jobGroup,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{jobClassName,jdbcType=VARCHAR}, #{isDurable,jdbcType=VARCHAR}, 
+      #{isNonconcurrent,jdbcType=VARCHAR}, #{isUpdateData,jdbcType=VARCHAR}, #{requestsRecovery,jdbcType=VARCHAR}, 
+      #{jobData,jdbcType=LONGVARBINARY})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xk.myblogs.client.entity.ryvue.QrtzJobDetails">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    insert into qrtz_job_details
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="schedName != null">
+        sched_name,
+      </if>
+      <if test="jobName != null">
+        job_name,
+      </if>
+      <if test="jobGroup != null">
+        job_group,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="jobClassName != null">
+        job_class_name,
+      </if>
+      <if test="isDurable != null">
+        is_durable,
+      </if>
+      <if test="isNonconcurrent != null">
+        is_nonconcurrent,
+      </if>
+      <if test="isUpdateData != null">
+        is_update_data,
+      </if>
+      <if test="requestsRecovery != null">
+        requests_recovery,
+      </if>
+      <if test="jobData != null">
+        job_data,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="schedName != null">
+        #{schedName,jdbcType=VARCHAR},
+      </if>
+      <if test="jobName != null">
+        #{jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="jobGroup != null">
+        #{jobGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="jobClassName != null">
+        #{jobClassName,jdbcType=VARCHAR},
+      </if>
+      <if test="isDurable != null">
+        #{isDurable,jdbcType=VARCHAR},
+      </if>
+      <if test="isNonconcurrent != null">
+        #{isNonconcurrent,jdbcType=VARCHAR},
+      </if>
+      <if test="isUpdateData != null">
+        #{isUpdateData,jdbcType=VARCHAR},
+      </if>
+      <if test="requestsRecovery != null">
+        #{requestsRecovery,jdbcType=VARCHAR},
+      </if>
+      <if test="jobData != null">
+        #{jobData,jdbcType=LONGVARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xk.myblogs.client.entity.ryvue.QrtzJobDetails">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    update qrtz_job_details
+    <set>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="jobClassName != null">
+        job_class_name = #{jobClassName,jdbcType=VARCHAR},
+      </if>
+      <if test="isDurable != null">
+        is_durable = #{isDurable,jdbcType=VARCHAR},
+      </if>
+      <if test="isNonconcurrent != null">
+        is_nonconcurrent = #{isNonconcurrent,jdbcType=VARCHAR},
+      </if>
+      <if test="isUpdateData != null">
+        is_update_data = #{isUpdateData,jdbcType=VARCHAR},
+      </if>
+      <if test="requestsRecovery != null">
+        requests_recovery = #{requestsRecovery,jdbcType=VARCHAR},
+      </if>
+      <if test="jobData != null">
+        job_data = #{jobData,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    where sched_name = #{schedName,jdbcType=VARCHAR}
+      and job_name = #{jobName,jdbcType=VARCHAR}
+      and job_group = #{jobGroup,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.xk.myblogs.client.entity.ryvue.QrtzJobDetails">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    update qrtz_job_details
+    set description = #{description,jdbcType=VARCHAR},
+      job_class_name = #{jobClassName,jdbcType=VARCHAR},
+      is_durable = #{isDurable,jdbcType=VARCHAR},
+      is_nonconcurrent = #{isNonconcurrent,jdbcType=VARCHAR},
+      is_update_data = #{isUpdateData,jdbcType=VARCHAR},
+      requests_recovery = #{requestsRecovery,jdbcType=VARCHAR},
+      job_data = #{jobData,jdbcType=LONGVARBINARY}
+    where sched_name = #{schedName,jdbcType=VARCHAR}
+      and job_name = #{jobName,jdbcType=VARCHAR}
+      and job_group = #{jobGroup,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xk.myblogs.client.entity.ryvue.QrtzJobDetails">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    update qrtz_job_details
+    set description = #{description,jdbcType=VARCHAR},
+      job_class_name = #{jobClassName,jdbcType=VARCHAR},
+      is_durable = #{isDurable,jdbcType=VARCHAR},
+      is_nonconcurrent = #{isNonconcurrent,jdbcType=VARCHAR},
+      is_update_data = #{isUpdateData,jdbcType=VARCHAR},
+      requests_recovery = #{requestsRecovery,jdbcType=VARCHAR}
+    where sched_name = #{schedName,jdbcType=VARCHAR}
+      and job_name = #{jobName,jdbcType=VARCHAR}
+      and job_group = #{jobGroup,jdbcType=VARCHAR}
+  </update>
+</mapper>

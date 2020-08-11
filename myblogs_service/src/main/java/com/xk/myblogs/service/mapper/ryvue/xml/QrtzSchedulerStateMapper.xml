@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xk.myblogs.service.mapper.ryvue.QrtzSchedulerStateMapper">
+  <resultMap id="BaseResultMap" type="com.xk.myblogs.client.entity.ryvue.QrtzSchedulerState">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    <id column="sched_name" jdbcType="VARCHAR" property="schedName" />
+    <id column="instance_name" jdbcType="VARCHAR" property="instanceName" />
+    <result column="last_checkin_time" jdbcType="BIGINT" property="lastCheckinTime" />
+    <result column="checkin_interval" jdbcType="BIGINT" property="checkinInterval" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    sched_name, instance_name, last_checkin_time, checkin_interval
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.xk.myblogs.client.entity.ryvue.QrtzSchedulerStateKey" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from qrtz_scheduler_state
+    where sched_name = #{schedName,jdbcType=VARCHAR}
+      and instance_name = #{instanceName,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.xk.myblogs.client.entity.ryvue.QrtzSchedulerStateKey">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    delete from qrtz_scheduler_state
+    where sched_name = #{schedName,jdbcType=VARCHAR}
+      and instance_name = #{instanceName,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xk.myblogs.client.entity.ryvue.QrtzSchedulerState">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    insert into qrtz_scheduler_state (sched_name, instance_name, last_checkin_time, 
+      checkin_interval)
+    values (#{schedName,jdbcType=VARCHAR}, #{instanceName,jdbcType=VARCHAR}, #{lastCheckinTime,jdbcType=BIGINT}, 
+      #{checkinInterval,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xk.myblogs.client.entity.ryvue.QrtzSchedulerState">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    insert into qrtz_scheduler_state
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="schedName != null">
+        sched_name,
+      </if>
+      <if test="instanceName != null">
+        instance_name,
+      </if>
+      <if test="lastCheckinTime != null">
+        last_checkin_time,
+      </if>
+      <if test="checkinInterval != null">
+        checkin_interval,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="schedName != null">
+        #{schedName,jdbcType=VARCHAR},
+      </if>
+      <if test="instanceName != null">
+        #{instanceName,jdbcType=VARCHAR},
+      </if>
+      <if test="lastCheckinTime != null">
+        #{lastCheckinTime,jdbcType=BIGINT},
+      </if>
+      <if test="checkinInterval != null">
+        #{checkinInterval,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xk.myblogs.client.entity.ryvue.QrtzSchedulerState">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    update qrtz_scheduler_state
+    <set>
+      <if test="lastCheckinTime != null">
+        last_checkin_time = #{lastCheckinTime,jdbcType=BIGINT},
+      </if>
+      <if test="checkinInterval != null">
+        checkin_interval = #{checkinInterval,jdbcType=BIGINT},
+      </if>
+    </set>
+    where sched_name = #{schedName,jdbcType=VARCHAR}
+      and instance_name = #{instanceName,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xk.myblogs.client.entity.ryvue.QrtzSchedulerState">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    update qrtz_scheduler_state
+    set last_checkin_time = #{lastCheckinTime,jdbcType=BIGINT},
+      checkin_interval = #{checkinInterval,jdbcType=BIGINT}
+    where sched_name = #{schedName,jdbcType=VARCHAR}
+      and instance_name = #{instanceName,jdbcType=VARCHAR}
+  </update>
+</mapper>

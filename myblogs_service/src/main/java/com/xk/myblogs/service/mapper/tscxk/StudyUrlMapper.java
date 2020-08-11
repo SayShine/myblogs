@@ -2,11 +2,10 @@ package com.xk.myblogs.service.mapper.tscxk;
 
 import com.xk.myblogs.client.entity.tscxk.StudyUrl;
 import com.xk.myblogs.client.entity.tscxk.StudyUrlExample;
-import java.util.List;
-
 import com.xk.myblogs.common.annotion.DataSource;
+import java.util.List;
 import org.apache.ibatis.annotations.Param;
-@DataSource("tscxk")
+
 public interface StudyUrlMapper {
     /**
      * 按条件计数
@@ -14,6 +13,7 @@ public interface StudyUrlMapper {
      * 
      * WARNING - @mbg.generated MyBatis Generator Create
      */
+    @DataSource("tscxk")
     long countByExample(StudyUrlExample example);
 
     /**
@@ -22,6 +22,7 @@ public interface StudyUrlMapper {
      * 
      * WARNING - @mbg.generated MyBatis Generator Create
      */
+    @DataSource("tscxk")
     int deleteByExample(StudyUrlExample example);
 
     /**
@@ -29,6 +30,7 @@ public interface StudyUrlMapper {
      * 
      * WARNING - @mbg.generated MyBatis Generator Create
      */
+    @DataSource("tscxk")
     int deleteByPrimaryKey(Long id);
 
     /**
@@ -37,6 +39,7 @@ public interface StudyUrlMapper {
      * 
      * WARNING - @mbg.generated MyBatis Generator Create
      */
+    @DataSource("tscxk")
     int insert(StudyUrl record);
 
     /**
@@ -45,6 +48,7 @@ public interface StudyUrlMapper {
      * 
      * WARNING - @mbg.generated MyBatis Generator Create
      */
+    @DataSource("tscxk")
     int insertSelective(StudyUrl record);
 
     /**
@@ -53,6 +57,7 @@ public interface StudyUrlMapper {
      * 
      * WARNING - @mbg.generated MyBatis Generator Create
      */
+    @DataSource("tscxk")
     List<StudyUrl> selectByExample(StudyUrlExample example);
 
     /**
@@ -60,6 +65,7 @@ public interface StudyUrlMapper {
      * 
      * WARNING - @mbg.generated MyBatis Generator Create
      */
+    @DataSource("tscxk")
     StudyUrl selectByPrimaryKey(Long id);
 
     /**
@@ -69,6 +75,7 @@ public interface StudyUrlMapper {
      * 
      * WARNING - @mbg.generated MyBatis Generator Create
      */
+    @DataSource("tscxk")
     int updateByExampleSelective(@Param("record") StudyUrl record, @Param("example") StudyUrlExample example);
 
     /**
@@ -78,6 +85,7 @@ public interface StudyUrlMapper {
      * 
      * WARNING - @mbg.generated MyBatis Generator Create
      */
+    @DataSource("tscxk")
     int updateByExample(@Param("record") StudyUrl record, @Param("example") StudyUrlExample example);
 
     /**
@@ -86,6 +94,7 @@ public interface StudyUrlMapper {
      * 
      * WARNING - @mbg.generated MyBatis Generator Create
      */
+    @DataSource("tscxk")
     int updateByPrimaryKeySelective(StudyUrl record);
 
     /**
@@ -94,5 +103,6 @@ public interface StudyUrlMapper {
      * 
      * WARNING - @mbg.generated MyBatis Generator Create
      */
+    @DataSource("tscxk")
     int updateByPrimaryKey(StudyUrl record);
 }

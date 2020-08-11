@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xk.myblogs.service.mapper.ryvue.QrtzCronTriggersMapper">
+  <resultMap id="BaseResultMap" type="com.xk.myblogs.client.entity.ryvue.QrtzCronTriggers">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    <id column="sched_name" jdbcType="VARCHAR" property="schedName" />
+    <id column="trigger_name" jdbcType="VARCHAR" property="triggerName" />
+    <id column="trigger_group" jdbcType="VARCHAR" property="triggerGroup" />
+    <result column="cron_expression" jdbcType="VARCHAR" property="cronExpression" />
+    <result column="time_zone_id" jdbcType="VARCHAR" property="timeZoneId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    sched_name, trigger_name, trigger_group, cron_expression, time_zone_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.xk.myblogs.client.entity.ryvue.QrtzCronTriggersKey" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from qrtz_cron_triggers
+    where sched_name = #{schedName,jdbcType=VARCHAR}
+      and trigger_name = #{triggerName,jdbcType=VARCHAR}
+      and trigger_group = #{triggerGroup,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.xk.myblogs.client.entity.ryvue.QrtzCronTriggersKey">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    delete from qrtz_cron_triggers
+    where sched_name = #{schedName,jdbcType=VARCHAR}
+      and trigger_name = #{triggerName,jdbcType=VARCHAR}
+      and trigger_group = #{triggerGroup,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xk.myblogs.client.entity.ryvue.QrtzCronTriggers">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    insert into qrtz_cron_triggers (sched_name, trigger_name, trigger_group, 
+      cron_expression, time_zone_id)
+    values (#{schedName,jdbcType=VARCHAR}, #{triggerName,jdbcType=VARCHAR}, #{triggerGroup,jdbcType=VARCHAR}, 
+      #{cronExpression,jdbcType=VARCHAR}, #{timeZoneId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xk.myblogs.client.entity.ryvue.QrtzCronTriggers">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    insert into qrtz_cron_triggers
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="schedName != null">
+        sched_name,
+      </if>
+      <if test="triggerName != null">
+        trigger_name,
+      </if>
+      <if test="triggerGroup != null">
+        trigger_group,
+      </if>
+      <if test="cronExpression != null">
+        cron_expression,
+      </if>
+      <if test="timeZoneId != null">
+        time_zone_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="schedName != null">
+        #{schedName,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerName != null">
+        #{triggerName,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerGroup != null">
+        #{triggerGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="cronExpression != null">
+        #{cronExpression,jdbcType=VARCHAR},
+      </if>
+      <if test="timeZoneId != null">
+        #{timeZoneId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xk.myblogs.client.entity.ryvue.QrtzCronTriggers">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    update qrtz_cron_triggers
+    <set>
+      <if test="cronExpression != null">
+        cron_expression = #{cronExpression,jdbcType=VARCHAR},
+      </if>
+      <if test="timeZoneId != null">
+        time_zone_id = #{timeZoneId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sched_name = #{schedName,jdbcType=VARCHAR}
+      and trigger_name = #{triggerName,jdbcType=VARCHAR}
+      and trigger_group = #{triggerGroup,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xk.myblogs.client.entity.ryvue.QrtzCronTriggers">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    update qrtz_cron_triggers
+    set cron_expression = #{cronExpression,jdbcType=VARCHAR},
+      time_zone_id = #{timeZoneId,jdbcType=VARCHAR}
+    where sched_name = #{schedName,jdbcType=VARCHAR}
+      and trigger_name = #{triggerName,jdbcType=VARCHAR}
+      and trigger_group = #{triggerGroup,jdbcType=VARCHAR}
+  </update>
+</mapper>

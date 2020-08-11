@@ -218,6 +218,7 @@ public class MyCommentGenerator implements CommentGenerator {
 
     @Override
     public void addGeneralMethodComment(Method method, IntrospectedTable introspectedTable) {
+
         String msg = this.createMapperAnnotation(method);
         if (!StringUtils.isBlank(msg)) {
             method.addJavaDocLine("/**");
@@ -239,52 +240,52 @@ public class MyCommentGenerator implements CommentGenerator {
         byte var5 = -1;
         switch (name.hashCode()) {
             case -1973096654:
-                if (name.equals("updateByExampleSelective")) {
+                if ("updateByExampleSelective".equals(name)) {
                     var5 = 8;
                 }
                 break;
             case -1333471280:
-                if (name.equals("selectByPrimaryKey")) {
+                if ("selectByPrimaryKey".equals(name)) {
                     var5 = 7;
                 }
                 break;
             case -1183792455:
-                if (name.equals("insert")) {
+                if ("insert".equals(name)) {
                     var5 = 3;
                 }
                 break;
             case -812178569:
-                if (name.equals("selectByExample")) {
+                if ("selectByExample".equals(name)) {
                     var5 = 5;
                 }
                 break;
             case -88340525:
-                if (name.equals("updateByPrimaryKeyWithBLOBs")) {
+                if ("updateByPrimaryKeyWithBLOBs".equals(name)) {
                     var5 = 13;
                 }
                 break;
             case 252811705:
-                if (name.equals("selectByExampleWithBLOBs")) {
+                if ("selectByExampleWithBLOBs".equals(name)) {
                     var5 = 6;
                 }
                 break;
             case 513681320:
-                if (name.equals("deleteByExample")) {
+                if ("deleteByExample".equals(name)) {
                     var5 = 1;
                 }
                 break;
             case 627582022:
-                if (name.equals("updateByExampleWithBLOBs")) {
+                if ("updateByExampleWithBLOBs".equals(name)) {
                     var5 = 10;
                 }
                 break;
             case 646369187:
-                if (name.equals("insertSelective")) {
+                if ("insertSelective".equals(name)) {
                     var5 = 4;
                 }
                 break;
             case 839227903:
-                if (name.equals("deleteByPrimaryKey")) {
+                if ("deleteByPrimaryKey".equals(name)) {
                     var5 = 2;
                 }
                 break;
@@ -307,8 +308,10 @@ public class MyCommentGenerator implements CommentGenerator {
                 if (name.equals("updateByPrimaryKeySelective")) {
                     var5 = 11;
                 }
+                break;
+            default:
+                break;
         }
-
         switch (var5) {
             case 0:
                 msg = "按条件计数\n\t * @param example 条件";
@@ -351,6 +354,10 @@ public class MyCommentGenerator implements CommentGenerator {
                 break;
             case 13:
                 msg = "按主键更新所有字段（更新包含BLOB字段）\n     * @param record 操作 实体 bean 对象";
+                break;
+            default:
+                break;
+
         }
 
         return msg;

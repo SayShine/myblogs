@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xk.myblogs.service.mapper.ryvue.SysLogininforMapper">
+  <resultMap id="BaseResultMap" type="com.xk.myblogs.client.entity.ryvue.SysLogininfor">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    <id column="info_id" jdbcType="BIGINT" property="infoId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="ipaddr" jdbcType="VARCHAR" property="ipaddr" />
+    <result column="login_location" jdbcType="VARCHAR" property="loginLocation" />
+    <result column="browser" jdbcType="VARCHAR" property="browser" />
+    <result column="os" jdbcType="VARCHAR" property="os" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="msg" jdbcType="VARCHAR" property="msg" />
+    <result column="login_time" jdbcType="TIMESTAMP" property="loginTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    info_id, user_name, ipaddr, login_location, browser, os, status, msg, login_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from sys_logininfor
+    where info_id = #{infoId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    delete from sys_logininfor
+    where info_id = #{infoId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.xk.myblogs.client.entity.ryvue.SysLogininfor">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    insert into sys_logininfor (info_id, user_name, ipaddr, 
+      login_location, browser, os, 
+      status, msg, login_time
+      )
+    values (#{infoId,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, #{ipaddr,jdbcType=VARCHAR}, 
+      #{loginLocation,jdbcType=VARCHAR}, #{browser,jdbcType=VARCHAR}, #{os,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR}, #{msg,jdbcType=VARCHAR}, #{loginTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xk.myblogs.client.entity.ryvue.SysLogininfor">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    insert into sys_logininfor
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="infoId != null">
+        info_id,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="ipaddr != null">
+        ipaddr,
+      </if>
+      <if test="loginLocation != null">
+        login_location,
+      </if>
+      <if test="browser != null">
+        browser,
+      </if>
+      <if test="os != null">
+        os,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="msg != null">
+        msg,
+      </if>
+      <if test="loginTime != null">
+        login_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="infoId != null">
+        #{infoId,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="ipaddr != null">
+        #{ipaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="loginLocation != null">
+        #{loginLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="browser != null">
+        #{browser,jdbcType=VARCHAR},
+      </if>
+      <if test="os != null">
+        #{os,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="msg != null">
+        #{msg,jdbcType=VARCHAR},
+      </if>
+      <if test="loginTime != null">
+        #{loginTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xk.myblogs.client.entity.ryvue.SysLogininfor">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    update sys_logininfor
+    <set>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="ipaddr != null">
+        ipaddr = #{ipaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="loginLocation != null">
+        login_location = #{loginLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="browser != null">
+        browser = #{browser,jdbcType=VARCHAR},
+      </if>
+      <if test="os != null">
+        os = #{os,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="msg != null">
+        msg = #{msg,jdbcType=VARCHAR},
+      </if>
+      <if test="loginTime != null">
+        login_time = #{loginTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where info_id = #{infoId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xk.myblogs.client.entity.ryvue.SysLogininfor">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    update sys_logininfor
+    set user_name = #{userName,jdbcType=VARCHAR},
+      ipaddr = #{ipaddr,jdbcType=VARCHAR},
+      login_location = #{loginLocation,jdbcType=VARCHAR},
+      browser = #{browser,jdbcType=VARCHAR},
+      os = #{os,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      msg = #{msg,jdbcType=VARCHAR},
+      login_time = #{loginTime,jdbcType=TIMESTAMP}
+    where info_id = #{infoId,jdbcType=BIGINT}
+  </update>
+</mapper>

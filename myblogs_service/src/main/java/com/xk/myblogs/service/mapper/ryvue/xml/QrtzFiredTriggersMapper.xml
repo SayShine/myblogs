@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xk.myblogs.service.mapper.ryvue.QrtzFiredTriggersMapper">
+  <resultMap id="BaseResultMap" type="com.xk.myblogs.client.entity.ryvue.QrtzFiredTriggers">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    <id column="sched_name" jdbcType="VARCHAR" property="schedName" />
+    <id column="entry_id" jdbcType="VARCHAR" property="entryId" />
+    <result column="trigger_name" jdbcType="VARCHAR" property="triggerName" />
+    <result column="trigger_group" jdbcType="VARCHAR" property="triggerGroup" />
+    <result column="instance_name" jdbcType="VARCHAR" property="instanceName" />
+    <result column="fired_time" jdbcType="BIGINT" property="firedTime" />
+    <result column="sched_time" jdbcType="BIGINT" property="schedTime" />
+    <result column="priority" jdbcType="INTEGER" property="priority" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="job_name" jdbcType="VARCHAR" property="jobName" />
+    <result column="job_group" jdbcType="VARCHAR" property="jobGroup" />
+    <result column="is_nonconcurrent" jdbcType="VARCHAR" property="isNonconcurrent" />
+    <result column="requests_recovery" jdbcType="VARCHAR" property="requestsRecovery" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    sched_name, entry_id, trigger_name, trigger_group, instance_name, fired_time, sched_time, 
+    priority, state, job_name, job_group, is_nonconcurrent, requests_recovery
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.xk.myblogs.client.entity.ryvue.QrtzFiredTriggersKey" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from qrtz_fired_triggers
+    where sched_name = #{schedName,jdbcType=VARCHAR}
+      and entry_id = #{entryId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.xk.myblogs.client.entity.ryvue.QrtzFiredTriggersKey">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    delete from qrtz_fired_triggers
+    where sched_name = #{schedName,jdbcType=VARCHAR}
+      and entry_id = #{entryId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xk.myblogs.client.entity.ryvue.QrtzFiredTriggers">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    insert into qrtz_fired_triggers (sched_name, entry_id, trigger_name, 
+      trigger_group, instance_name, fired_time, 
+      sched_time, priority, state, 
+      job_name, job_group, is_nonconcurrent, 
+      requests_recovery)
+    values (#{schedName,jdbcType=VARCHAR}, #{entryId,jdbcType=VARCHAR}, #{triggerName,jdbcType=VARCHAR}, 
+      #{triggerGroup,jdbcType=VARCHAR}, #{instanceName,jdbcType=VARCHAR}, #{firedTime,jdbcType=BIGINT}, 
+      #{schedTime,jdbcType=BIGINT}, #{priority,jdbcType=INTEGER}, #{state,jdbcType=VARCHAR}, 
+      #{jobName,jdbcType=VARCHAR}, #{jobGroup,jdbcType=VARCHAR}, #{isNonconcurrent,jdbcType=VARCHAR}, 
+      #{requestsRecovery,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xk.myblogs.client.entity.ryvue.QrtzFiredTriggers">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    insert into qrtz_fired_triggers
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="schedName != null">
+        sched_name,
+      </if>
+      <if test="entryId != null">
+        entry_id,
+      </if>
+      <if test="triggerName != null">
+        trigger_name,
+      </if>
+      <if test="triggerGroup != null">
+        trigger_group,
+      </if>
+      <if test="instanceName != null">
+        instance_name,
+      </if>
+      <if test="firedTime != null">
+        fired_time,
+      </if>
+      <if test="schedTime != null">
+        sched_time,
+      </if>
+      <if test="priority != null">
+        priority,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="jobName != null">
+        job_name,
+      </if>
+      <if test="jobGroup != null">
+        job_group,
+      </if>
+      <if test="isNonconcurrent != null">
+        is_nonconcurrent,
+      </if>
+      <if test="requestsRecovery != null">
+        requests_recovery,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="schedName != null">
+        #{schedName,jdbcType=VARCHAR},
+      </if>
+      <if test="entryId != null">
+        #{entryId,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerName != null">
+        #{triggerName,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerGroup != null">
+        #{triggerGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="instanceName != null">
+        #{instanceName,jdbcType=VARCHAR},
+      </if>
+      <if test="firedTime != null">
+        #{firedTime,jdbcType=BIGINT},
+      </if>
+      <if test="schedTime != null">
+        #{schedTime,jdbcType=BIGINT},
+      </if>
+      <if test="priority != null">
+        #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="jobName != null">
+        #{jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="jobGroup != null">
+        #{jobGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="isNonconcurrent != null">
+        #{isNonconcurrent,jdbcType=VARCHAR},
+      </if>
+      <if test="requestsRecovery != null">
+        #{requestsRecovery,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xk.myblogs.client.entity.ryvue.QrtzFiredTriggers">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    update qrtz_fired_triggers
+    <set>
+      <if test="triggerName != null">
+        trigger_name = #{triggerName,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerGroup != null">
+        trigger_group = #{triggerGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="instanceName != null">
+        instance_name = #{instanceName,jdbcType=VARCHAR},
+      </if>
+      <if test="firedTime != null">
+        fired_time = #{firedTime,jdbcType=BIGINT},
+      </if>
+      <if test="schedTime != null">
+        sched_time = #{schedTime,jdbcType=BIGINT},
+      </if>
+      <if test="priority != null">
+        priority = #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="jobName != null">
+        job_name = #{jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="jobGroup != null">
+        job_group = #{jobGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="isNonconcurrent != null">
+        is_nonconcurrent = #{isNonconcurrent,jdbcType=VARCHAR},
+      </if>
+      <if test="requestsRecovery != null">
+        requests_recovery = #{requestsRecovery,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sched_name = #{schedName,jdbcType=VARCHAR}
+      and entry_id = #{entryId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xk.myblogs.client.entity.ryvue.QrtzFiredTriggers">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    update qrtz_fired_triggers
+    set trigger_name = #{triggerName,jdbcType=VARCHAR},
+      trigger_group = #{triggerGroup,jdbcType=VARCHAR},
+      instance_name = #{instanceName,jdbcType=VARCHAR},
+      fired_time = #{firedTime,jdbcType=BIGINT},
+      sched_time = #{schedTime,jdbcType=BIGINT},
+      priority = #{priority,jdbcType=INTEGER},
+      state = #{state,jdbcType=VARCHAR},
+      job_name = #{jobName,jdbcType=VARCHAR},
+      job_group = #{jobGroup,jdbcType=VARCHAR},
+      is_nonconcurrent = #{isNonconcurrent,jdbcType=VARCHAR},
+      requests_recovery = #{requestsRecovery,jdbcType=VARCHAR}
+    where sched_name = #{schedName,jdbcType=VARCHAR}
+      and entry_id = #{entryId,jdbcType=VARCHAR}
+  </update>
+</mapper>

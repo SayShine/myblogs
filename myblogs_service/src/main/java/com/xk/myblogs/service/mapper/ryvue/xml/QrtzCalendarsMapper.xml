@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xk.myblogs.service.mapper.ryvue.QrtzCalendarsMapper">
+  <resultMap id="BaseResultMap" type="com.xk.myblogs.client.entity.ryvue.QrtzCalendars">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    <id column="sched_name" jdbcType="VARCHAR" property="schedName" />
+    <id column="calendar_name" jdbcType="VARCHAR" property="calendarName" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.xk.myblogs.client.entity.ryvue.QrtzCalendars">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    <result column="calendar" jdbcType="LONGVARBINARY" property="calendar" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    sched_name, calendar_name
+  </sql>
+  <sql id="Blob_Column_List">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    calendar
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.xk.myblogs.client.entity.ryvue.QrtzCalendarsKey" resultMap="ResultMapWithBLOBs">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from qrtz_calendars
+    where sched_name = #{schedName,jdbcType=VARCHAR}
+      and calendar_name = #{calendarName,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.xk.myblogs.client.entity.ryvue.QrtzCalendarsKey">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    delete from qrtz_calendars
+    where sched_name = #{schedName,jdbcType=VARCHAR}
+      and calendar_name = #{calendarName,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xk.myblogs.client.entity.ryvue.QrtzCalendars">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    insert into qrtz_calendars (sched_name, calendar_name, calendar
+      )
+    values (#{schedName,jdbcType=VARCHAR}, #{calendarName,jdbcType=VARCHAR}, #{calendar,jdbcType=LONGVARBINARY}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xk.myblogs.client.entity.ryvue.QrtzCalendars">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    insert into qrtz_calendars
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="schedName != null">
+        sched_name,
+      </if>
+      <if test="calendarName != null">
+        calendar_name,
+      </if>
+      <if test="calendar != null">
+        calendar,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="schedName != null">
+        #{schedName,jdbcType=VARCHAR},
+      </if>
+      <if test="calendarName != null">
+        #{calendarName,jdbcType=VARCHAR},
+      </if>
+      <if test="calendar != null">
+        #{calendar,jdbcType=LONGVARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xk.myblogs.client.entity.ryvue.QrtzCalendars">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    update qrtz_calendars
+    <set>
+      <if test="calendar != null">
+        calendar = #{calendar,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    where sched_name = #{schedName,jdbcType=VARCHAR}
+      and calendar_name = #{calendarName,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.xk.myblogs.client.entity.ryvue.QrtzCalendars">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    update qrtz_calendars
+    set calendar = #{calendar,jdbcType=LONGVARBINARY}
+    where sched_name = #{schedName,jdbcType=VARCHAR}
+      and calendar_name = #{calendarName,jdbcType=VARCHAR}
+  </update>
+</mapper>

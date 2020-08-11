@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xk.myblogs.service.mapper.ryvue.SysRoleDeptMapper">
+  <resultMap id="BaseResultMap" type="com.xk.myblogs.client.entity.ryvue.SysRoleDeptKey">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    <id column="role_id" jdbcType="BIGINT" property="roleId" />
+    <id column="dept_id" jdbcType="BIGINT" property="deptId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="com.xk.myblogs.client.entity.ryvue.SysRoleDeptKey">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    delete from sys_role_dept
+    where role_id = #{roleId,jdbcType=BIGINT}
+      and dept_id = #{deptId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.xk.myblogs.client.entity.ryvue.SysRoleDeptKey">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    insert into sys_role_dept (role_id, dept_id)
+    values (#{roleId,jdbcType=BIGINT}, #{deptId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xk.myblogs.client.entity.ryvue.SysRoleDeptKey">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    insert into sys_role_dept
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        role_id,
+      </if>
+      <if test="deptId != null">
+        dept_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="deptId != null">
+        #{deptId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+</mapper>

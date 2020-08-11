@@ -1,4 +1,4 @@
-package com.xk.myblogs.service.dao;
+package com.xk.myblogs.service.dao.myblog;
 
 import com.xk.myblogs.client.entity.myblog.Permission;
 import org.apache.ibatis.annotations.Param;

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xk.myblogs.service.mapper.ryvue.SysUserPostMapper">
+  <resultMap id="BaseResultMap" type="com.xk.myblogs.client.entity.ryvue.SysUserPostKey">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    <id column="user_id" jdbcType="BIGINT" property="userId" />
+    <id column="post_id" jdbcType="BIGINT" property="postId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="com.xk.myblogs.client.entity.ryvue.SysUserPostKey">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    delete from sys_user_post
+    where user_id = #{userId,jdbcType=BIGINT}
+      and post_id = #{postId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.xk.myblogs.client.entity.ryvue.SysUserPostKey">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    insert into sys_user_post (user_id, post_id)
+    values (#{userId,jdbcType=BIGINT}, #{postId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xk.myblogs.client.entity.ryvue.SysUserPostKey">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    insert into sys_user_post
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="postId != null">
+        post_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="postId != null">
+        #{postId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+</mapper>

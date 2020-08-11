@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xk.myblogs.service.mapper.ryvue.QrtzSimpropTriggersMapper">
+  <resultMap id="BaseResultMap" type="com.xk.myblogs.client.entity.ryvue.QrtzSimpropTriggers">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    <id column="sched_name" jdbcType="VARCHAR" property="schedName" />
+    <id column="trigger_name" jdbcType="VARCHAR" property="triggerName" />
+    <id column="trigger_group" jdbcType="VARCHAR" property="triggerGroup" />
+    <result column="str_prop_1" jdbcType="VARCHAR" property="strProp1" />
+    <result column="str_prop_2" jdbcType="VARCHAR" property="strProp2" />
+    <result column="str_prop_3" jdbcType="VARCHAR" property="strProp3" />
+    <result column="int_prop_1" jdbcType="INTEGER" property="intProp1" />
+    <result column="int_prop_2" jdbcType="INTEGER" property="intProp2" />
+    <result column="long_prop_1" jdbcType="BIGINT" property="longProp1" />
+    <result column="long_prop_2" jdbcType="BIGINT" property="longProp2" />
+    <result column="dec_prop_1" jdbcType="DECIMAL" property="decProp1" />
+    <result column="dec_prop_2" jdbcType="DECIMAL" property="decProp2" />
+    <result column="bool_prop_1" jdbcType="VARCHAR" property="boolProp1" />
+    <result column="bool_prop_2" jdbcType="VARCHAR" property="boolProp2" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    sched_name, trigger_name, trigger_group, str_prop_1, str_prop_2, str_prop_3, int_prop_1, 
+    int_prop_2, long_prop_1, long_prop_2, dec_prop_1, dec_prop_2, bool_prop_1, bool_prop_2
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.xk.myblogs.client.entity.ryvue.QrtzSimpropTriggersKey" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from qrtz_simprop_triggers
+    where sched_name = #{schedName,jdbcType=VARCHAR}
+      and trigger_name = #{triggerName,jdbcType=VARCHAR}
+      and trigger_group = #{triggerGroup,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.xk.myblogs.client.entity.ryvue.QrtzSimpropTriggersKey">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    delete from qrtz_simprop_triggers
+    where sched_name = #{schedName,jdbcType=VARCHAR}
+      and trigger_name = #{triggerName,jdbcType=VARCHAR}
+      and trigger_group = #{triggerGroup,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xk.myblogs.client.entity.ryvue.QrtzSimpropTriggers">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    insert into qrtz_simprop_triggers (sched_name, trigger_name, trigger_group, 
+      str_prop_1, str_prop_2, str_prop_3, 
+      int_prop_1, int_prop_2, long_prop_1, 
+      long_prop_2, dec_prop_1, dec_prop_2, 
+      bool_prop_1, bool_prop_2)
+    values (#{schedName,jdbcType=VARCHAR}, #{triggerName,jdbcType=VARCHAR}, #{triggerGroup,jdbcType=VARCHAR}, 
+      #{strProp1,jdbcType=VARCHAR}, #{strProp2,jdbcType=VARCHAR}, #{strProp3,jdbcType=VARCHAR}, 
+      #{intProp1,jdbcType=INTEGER}, #{intProp2,jdbcType=INTEGER}, #{longProp1,jdbcType=BIGINT}, 
+      #{longProp2,jdbcType=BIGINT}, #{decProp1,jdbcType=DECIMAL}, #{decProp2,jdbcType=DECIMAL}, 
+      #{boolProp1,jdbcType=VARCHAR}, #{boolProp2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xk.myblogs.client.entity.ryvue.QrtzSimpropTriggers">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    insert into qrtz_simprop_triggers
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="schedName != null">
+        sched_name,
+      </if>
+      <if test="triggerName != null">
+        trigger_name,
+      </if>
+      <if test="triggerGroup != null">
+        trigger_group,
+      </if>
+      <if test="strProp1 != null">
+        str_prop_1,
+      </if>
+      <if test="strProp2 != null">
+        str_prop_2,
+      </if>
+      <if test="strProp3 != null">
+        str_prop_3,
+      </if>
+      <if test="intProp1 != null">
+        int_prop_1,
+      </if>
+      <if test="intProp2 != null">
+        int_prop_2,
+      </if>
+      <if test="longProp1 != null">
+        long_prop_1,
+      </if>
+      <if test="longProp2 != null">
+        long_prop_2,
+      </if>
+      <if test="decProp1 != null">
+        dec_prop_1,
+      </if>
+      <if test="decProp2 != null">
+        dec_prop_2,
+      </if>
+      <if test="boolProp1 != null">
+        bool_prop_1,
+      </if>
+      <if test="boolProp2 != null">
+        bool_prop_2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="schedName != null">
+        #{schedName,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerName != null">
+        #{triggerName,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerGroup != null">
+        #{triggerGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="strProp1 != null">
+        #{strProp1,jdbcType=VARCHAR},
+      </if>
+      <if test="strProp2 != null">
+        #{strProp2,jdbcType=VARCHAR},
+      </if>
+      <if test="strProp3 != null">
+        #{strProp3,jdbcType=VARCHAR},
+      </if>
+      <if test="intProp1 != null">
+        #{intProp1,jdbcType=INTEGER},
+      </if>
+      <if test="intProp2 != null">
+        #{intProp2,jdbcType=INTEGER},
+      </if>
+      <if test="longProp1 != null">
+        #{longProp1,jdbcType=BIGINT},
+      </if>
+      <if test="longProp2 != null">
+        #{longProp2,jdbcType=BIGINT},
+      </if>
+      <if test="decProp1 != null">
+        #{decProp1,jdbcType=DECIMAL},
+      </if>
+      <if test="decProp2 != null">
+        #{decProp2,jdbcType=DECIMAL},
+      </if>
+      <if test="boolProp1 != null">
+        #{boolProp1,jdbcType=VARCHAR},
+      </if>
+      <if test="boolProp2 != null">
+        #{boolProp2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xk.myblogs.client.entity.ryvue.QrtzSimpropTriggers">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    update qrtz_simprop_triggers
+    <set>
+      <if test="strProp1 != null">
+        str_prop_1 = #{strProp1,jdbcType=VARCHAR},
+      </if>
+      <if test="strProp2 != null">
+        str_prop_2 = #{strProp2,jdbcType=VARCHAR},
+      </if>
+      <if test="strProp3 != null">
+        str_prop_3 = #{strProp3,jdbcType=VARCHAR},
+      </if>
+      <if test="intProp1 != null">
+        int_prop_1 = #{intProp1,jdbcType=INTEGER},
+      </if>
+      <if test="intProp2 != null">
+        int_prop_2 = #{intProp2,jdbcType=INTEGER},
+      </if>
+      <if test="longProp1 != null">
+        long_prop_1 = #{longProp1,jdbcType=BIGINT},
+      </if>
+      <if test="longProp2 != null">
+        long_prop_2 = #{longProp2,jdbcType=BIGINT},
+      </if>
+      <if test="decProp1 != null">
+        dec_prop_1 = #{decProp1,jdbcType=DECIMAL},
+      </if>
+      <if test="decProp2 != null">
+        dec_prop_2 = #{decProp2,jdbcType=DECIMAL},
+      </if>
+      <if test="boolProp1 != null">
+        bool_prop_1 = #{boolProp1,jdbcType=VARCHAR},
+      </if>
+      <if test="boolProp2 != null">
+        bool_prop_2 = #{boolProp2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sched_name = #{schedName,jdbcType=VARCHAR}
+      and trigger_name = #{triggerName,jdbcType=VARCHAR}
+      and trigger_group = #{triggerGroup,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xk.myblogs.client.entity.ryvue.QrtzSimpropTriggers">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    update qrtz_simprop_triggers
+    set str_prop_1 = #{strProp1,jdbcType=VARCHAR},
+      str_prop_2 = #{strProp2,jdbcType=VARCHAR},
+      str_prop_3 = #{strProp3,jdbcType=VARCHAR},
+      int_prop_1 = #{intProp1,jdbcType=INTEGER},
+      int_prop_2 = #{intProp2,jdbcType=INTEGER},
+      long_prop_1 = #{longProp1,jdbcType=BIGINT},
+      long_prop_2 = #{longProp2,jdbcType=BIGINT},
+      dec_prop_1 = #{decProp1,jdbcType=DECIMAL},
+      dec_prop_2 = #{decProp2,jdbcType=DECIMAL},
+      bool_prop_1 = #{boolProp1,jdbcType=VARCHAR},
+      bool_prop_2 = #{boolProp2,jdbcType=VARCHAR}
+    where sched_name = #{schedName,jdbcType=VARCHAR}
+      and trigger_name = #{triggerName,jdbcType=VARCHAR}
+      and trigger_group = #{triggerGroup,jdbcType=VARCHAR}
+  </update>
+</mapper>

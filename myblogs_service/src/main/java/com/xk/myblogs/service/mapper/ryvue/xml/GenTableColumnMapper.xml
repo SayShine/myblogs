@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xk.myblogs.service.mapper.ryvue.GenTableColumnMapper">
+  <resultMap id="BaseResultMap" type="com.xk.myblogs.client.entity.ryvue.GenTableColumn">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    <id column="column_id" jdbcType="BIGINT" property="columnId" />
+    <result column="table_id" jdbcType="VARCHAR" property="tableId" />
+    <result column="column_name" jdbcType="VARCHAR" property="columnName" />
+    <result column="column_comment" jdbcType="VARCHAR" property="columnComment" />
+    <result column="column_type" jdbcType="VARCHAR" property="columnType" />
+    <result column="java_type" jdbcType="VARCHAR" property="javaType" />
+    <result column="java_field" jdbcType="VARCHAR" property="javaField" />
+    <result column="is_pk" jdbcType="CHAR" property="isPk" />
+    <result column="is_increment" jdbcType="CHAR" property="isIncrement" />
+    <result column="is_required" jdbcType="CHAR" property="isRequired" />
+    <result column="is_insert" jdbcType="CHAR" property="isInsert" />
+    <result column="is_edit" jdbcType="CHAR" property="isEdit" />
+    <result column="is_list" jdbcType="CHAR" property="isList" />
+    <result column="is_query" jdbcType="CHAR" property="isQuery" />
+    <result column="query_type" jdbcType="VARCHAR" property="queryType" />
+    <result column="html_type" jdbcType="VARCHAR" property="htmlType" />
+    <result column="dict_type" jdbcType="VARCHAR" property="dictType" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    column_id, table_id, column_name, column_comment, column_type, java_type, java_field, 
+    is_pk, is_increment, is_required, is_insert, is_edit, is_list, is_query, query_type, 
+    html_type, dict_type, sort, create_by, create_time, update_by, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from gen_table_column
+    where column_id = #{columnId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    delete from gen_table_column
+    where column_id = #{columnId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.xk.myblogs.client.entity.ryvue.GenTableColumn">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    insert into gen_table_column (column_id, table_id, column_name, 
+      column_comment, column_type, java_type, 
+      java_field, is_pk, is_increment, 
+      is_required, is_insert, is_edit, 
+      is_list, is_query, query_type, 
+      html_type, dict_type, sort, 
+      create_by, create_time, update_by, 
+      update_time)
+    values (#{columnId,jdbcType=BIGINT}, #{tableId,jdbcType=VARCHAR}, #{columnName,jdbcType=VARCHAR}, 
+      #{columnComment,jdbcType=VARCHAR}, #{columnType,jdbcType=VARCHAR}, #{javaType,jdbcType=VARCHAR}, 
+      #{javaField,jdbcType=VARCHAR}, #{isPk,jdbcType=CHAR}, #{isIncrement,jdbcType=CHAR}, 
+      #{isRequired,jdbcType=CHAR}, #{isInsert,jdbcType=CHAR}, #{isEdit,jdbcType=CHAR}, 
+      #{isList,jdbcType=CHAR}, #{isQuery,jdbcType=CHAR}, #{queryType,jdbcType=VARCHAR}, 
+      #{htmlType,jdbcType=VARCHAR}, #{dictType,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, 
+      #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xk.myblogs.client.entity.ryvue.GenTableColumn">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    insert into gen_table_column
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="columnId != null">
+        column_id,
+      </if>
+      <if test="tableId != null">
+        table_id,
+      </if>
+      <if test="columnName != null">
+        column_name,
+      </if>
+      <if test="columnComment != null">
+        column_comment,
+      </if>
+      <if test="columnType != null">
+        column_type,
+      </if>
+      <if test="javaType != null">
+        java_type,
+      </if>
+      <if test="javaField != null">
+        java_field,
+      </if>
+      <if test="isPk != null">
+        is_pk,
+      </if>
+      <if test="isIncrement != null">
+        is_increment,
+      </if>
+      <if test="isRequired != null">
+        is_required,
+      </if>
+      <if test="isInsert != null">
+        is_insert,
+      </if>
+      <if test="isEdit != null">
+        is_edit,
+      </if>
+      <if test="isList != null">
+        is_list,
+      </if>
+      <if test="isQuery != null">
+        is_query,
+      </if>
+      <if test="queryType != null">
+        query_type,
+      </if>
+      <if test="htmlType != null">
+        html_type,
+      </if>
+      <if test="dictType != null">
+        dict_type,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="columnId != null">
+        #{columnId,jdbcType=BIGINT},
+      </if>
+      <if test="tableId != null">
+        #{tableId,jdbcType=VARCHAR},
+      </if>
+      <if test="columnName != null">
+        #{columnName,jdbcType=VARCHAR},
+      </if>
+      <if test="columnComment != null">
+        #{columnComment,jdbcType=VARCHAR},
+      </if>
+      <if test="columnType != null">
+        #{columnType,jdbcType=VARCHAR},
+      </if>
+      <if test="javaType != null">
+        #{javaType,jdbcType=VARCHAR},
+      </if>
+      <if test="javaField != null">
+        #{javaField,jdbcType=VARCHAR},
+      </if>
+      <if test="isPk != null">
+        #{isPk,jdbcType=CHAR},
+      </if>
+      <if test="isIncrement != null">
+        #{isIncrement,jdbcType=CHAR},
+      </if>
+      <if test="isRequired != null">
+        #{isRequired,jdbcType=CHAR},
+      </if>
+      <if test="isInsert != null">
+        #{isInsert,jdbcType=CHAR},
+      </if>
+      <if test="isEdit != null">
+        #{isEdit,jdbcType=CHAR},
+      </if>
+      <if test="isList != null">
+        #{isList,jdbcType=CHAR},
+      </if>
+      <if test="isQuery != null">
+        #{isQuery,jdbcType=CHAR},
+      </if>
+      <if test="queryType != null">
+        #{queryType,jdbcType=VARCHAR},
+      </if>
+      <if test="htmlType != null">
+        #{htmlType,jdbcType=VARCHAR},
+      </if>
+      <if test="dictType != null">
+        #{dictType,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xk.myblogs.client.entity.ryvue.GenTableColumn">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    update gen_table_column
+    <set>
+      <if test="tableId != null">
+        table_id = #{tableId,jdbcType=VARCHAR},
+      </if>
+      <if test="columnName != null">
+        column_name = #{columnName,jdbcType=VARCHAR},
+      </if>
+      <if test="columnComment != null">
+        column_comment = #{columnComment,jdbcType=VARCHAR},
+      </if>
+      <if test="columnType != null">
+        column_type = #{columnType,jdbcType=VARCHAR},
+      </if>
+      <if test="javaType != null">
+        java_type = #{javaType,jdbcType=VARCHAR},
+      </if>
+      <if test="javaField != null">
+        java_field = #{javaField,jdbcType=VARCHAR},
+      </if>
+      <if test="isPk != null">
+        is_pk = #{isPk,jdbcType=CHAR},
+      </if>
+      <if test="isIncrement != null">
+        is_increment = #{isIncrement,jdbcType=CHAR},
+      </if>
+      <if test="isRequired != null">
+        is_required = #{isRequired,jdbcType=CHAR},
+      </if>
+      <if test="isInsert != null">
+        is_insert = #{isInsert,jdbcType=CHAR},
+      </if>
+      <if test="isEdit != null">
+        is_edit = #{isEdit,jdbcType=CHAR},
+      </if>
+      <if test="isList != null">
+        is_list = #{isList,jdbcType=CHAR},
+      </if>
+      <if test="isQuery != null">
+        is_query = #{isQuery,jdbcType=CHAR},
+      </if>
+      <if test="queryType != null">
+        query_type = #{queryType,jdbcType=VARCHAR},
+      </if>
+      <if test="htmlType != null">
+        html_type = #{htmlType,jdbcType=VARCHAR},
+      </if>
+      <if test="dictType != null">
+        dict_type = #{dictType,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where column_id = #{columnId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xk.myblogs.client.entity.ryvue.GenTableColumn">
+    <!--
+      WARNING - @mbg.generated MyBatis Generator Create
+    -->
+    update gen_table_column
+    set table_id = #{tableId,jdbcType=VARCHAR},
+      column_name = #{columnName,jdbcType=VARCHAR},
+      column_comment = #{columnComment,jdbcType=VARCHAR},
+      column_type = #{columnType,jdbcType=VARCHAR},
+      java_type = #{javaType,jdbcType=VARCHAR},
+      java_field = #{javaField,jdbcType=VARCHAR},
+      is_pk = #{isPk,jdbcType=CHAR},
+      is_increment = #{isIncrement,jdbcType=CHAR},
+      is_required = #{isRequired,jdbcType=CHAR},
+      is_insert = #{isInsert,jdbcType=CHAR},
+      is_edit = #{isEdit,jdbcType=CHAR},
+      is_list = #{isList,jdbcType=CHAR},
+      is_query = #{isQuery,jdbcType=CHAR},
+      query_type = #{queryType,jdbcType=VARCHAR},
+      html_type = #{htmlType,jdbcType=VARCHAR},
+      dict_type = #{dictType,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where column_id = #{columnId,jdbcType=BIGINT}
+  </update>
+</mapper>

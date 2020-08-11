@@ -65,6 +65,9 @@ public class DynamicDataSourceAspect {
                 case "tscxk":
                     DataSourceType.setDataBaseType(DataSourceType.DataBaseType.TSCXK);
                     break;
+                case "ryvue":
+                    DataSourceType.setDataBaseType(DataSourceType.DataBaseType.RYVUE);
+                    break;
                 default:
                     DataSourceType.setDataBaseType(DataSourceType.DataBaseType.MYBLOG);
             }

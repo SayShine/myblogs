@@ -9,7 +9,7 @@ import com.xk.myblogs.common.enums.LoginStatusEnum;
 import com.xk.myblogs.common.utils.JwtUtil;
 import com.xk.myblogs.service.RedisService;
 import com.xk.myblogs.service.UserAdminService;
-import com.xk.myblogs.service.dao.UserAdminAuthDao;
+import com.xk.myblogs.service.dao.myblog.UserAdminAuthDao;
 import com.xk.myblogs.service.mapper.myblog.UserAdminMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

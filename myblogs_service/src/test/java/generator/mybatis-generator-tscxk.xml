@@ -14,7 +14,7 @@
 <!--        &lt;!&ndash; 增加分页处理 &ndash;&gt;-->
 <!--        <plugin type="com.xk.myblogs.common.plugins.MysqlPaginationPlugin"/>-->
 
-        <commentGenerator type="com.xk.myblogs.common.plugins.MyCommentGenerator">
+        <commentGenerator type="com.xk.myblogs.service.component.plugin.MyCommentGenerator">
             <property name="suppressDate" value="true"/>
             <property name="addRemarkComments" value="true"/>
         </commentGenerator>
@@ -24,6 +24,8 @@
                 connectionURL="jdbc:mysql://rm-2zex7x2f6f8ljwfw0ao.mysql.rds.aliyuncs.com:3306/my_blog?useUnicode=true&amp;characterEncoding=utf-8&amp;autoReconnect=true&amp;serverTimezone=Asia/Shanghai&amp;tinyInt1isBit=false&amp;zeroDateTimeBehavior=convertToNull"
                 userId="tiansc"
                 password="lvmz521@tsc">
+            <!-- 去掉会生成全部库的全部实体表 -->
+            <property name="nullCatalogMeansCurrent" value="true"/>
         </jdbcConnection>
 
         <javaTypeResolver type="com.xk.myblogs.common.plugins.MyJavaTypeResolver"/>

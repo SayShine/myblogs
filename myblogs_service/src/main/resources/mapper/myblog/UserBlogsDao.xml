@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xk.myblogs.service.dao.UserBlogsDao">
+<mapper namespace="com.xk.myblogs.service.dao.myblog.UserBlogsDao">
     <delete id="deleteMdList" parameterType="java.lang.String">
         delete from tpg_user_blogs t where t.id in
         <foreach item="item" index="index" collection="array" open="(" separator="," close=")">

@@ -3,8 +3,9 @@ package com.xk.myblogs.service.mapper.myblog;
 import com.xk.myblogs.client.entity.myblog.Permission;
 import com.xk.myblogs.client.entity.myblog.PermissionExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import com.xk.myblogs.common.annotion.DataSource;
+import org.apache.ibatis.annotations.Param;
 public interface PermissionMapper {
     /**
      * 按条件计数

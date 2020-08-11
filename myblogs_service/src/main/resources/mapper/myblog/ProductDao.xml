@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xk.myblogs.service.dao.ProductDao">
+<mapper namespace="com.xk.myblogs.service.dao.myblog.ProductDao">
     <update id="decreaseProduct">
         update t_product t set t.stock = t.stock - #{quantity,jdbcType=INTEGER}
         where id = #{id,jdbcType=BIGINT}

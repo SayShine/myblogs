@@ -1,6 +1,7 @@
 package generator;
 
 
+import com.xk.myblogs.service.config.dynamicDataSource.DataSourceType;
 import org.mybatis.generator.api.MyBatisGenerator;
 import org.mybatis.generator.config.Configuration;
 import org.mybatis.generator.config.xml.ConfigurationParser;
@@ -20,12 +21,16 @@ public class MysqlPlugin {
 //        File configFile = new File("");
 
         //生成myblog库下的表
-        File configFile = new File("E:\\IdeaProjects\\myblogs\\myblogs_service\\src\\test\\java\\generator\\mybatis-generator-myblog.xml");
+//        File configFile = new File("E:\\IdeaProjects\\myblogs\\myblogs_service\\src\\test\\java\\generator\\mybatis-generator-myblog.xml");
+//        DataSourceType.setDataBaseType(DataSourceType.DataBaseType.MYBLOG);
 
         //生成tscxk库下的表
 //        File configFile = new File("E:\\IdeaProjects\\myblogs\\myblogs_service\\src\\test\\java\\generator\\mybatis-generator-tscxk.xml");
+//        DataSourceType.setDataBaseType(DataSourceType.DataBaseType.TSCXK);
 
-
+//        生成ryvue库下的表
+        File configFile = new File("E:\\IdeaProjects\\myblogs\\myblogs_service\\src\\test\\java\\generator\\mybatis-generator-ryvue.xml");
+        DataSourceType.setDataBaseType(DataSourceType.DataBaseType.RYVUE);
 
         ConfigurationParser cp = new ConfigurationParser(warnings);
         Configuration config = cp.parseConfiguration(configFile);

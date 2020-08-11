@@ -6,8 +6,8 @@ import com.xk.myblogs.client.entity.tscxk.StudyUrlExample;
 import com.xk.myblogs.service.RedisService;
 import com.xk.myblogs.service.ToolService;
 import com.xk.myblogs.service.UserAdminService;
-import com.xk.myblogs.service.dao.ProductDao;
-import com.xk.myblogs.service.dao.UserBlogsDao;
+import com.xk.myblogs.service.dao.myblog.ProductDao;
+import com.xk.myblogs.service.dao.myblog.UserBlogsDao;
 import com.xk.myblogs.service.mapper.myblog.ProductMapper;
 import com.xk.myblogs.service.mapper.myblog.PurchaseRecordMapper;
 import com.xk.myblogs.service.mapper.myblog.UserAdminMapper;
@@ -31,9 +31,7 @@ import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author: tian

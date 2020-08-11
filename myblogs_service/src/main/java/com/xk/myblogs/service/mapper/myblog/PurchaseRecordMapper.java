@@ -2,6 +2,7 @@ package com.xk.myblogs.service.mapper.myblog;
 
 import com.xk.myblogs.client.entity.myblog.PurchaseRecord;
 import com.xk.myblogs.client.entity.myblog.PurchaseRecordExample;
+import com.xk.myblogs.common.annotion.DataSource;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -12,6 +13,7 @@ public interface PurchaseRecordMapper {
      * 
      * WARNING - @mbg.generated MyBatis Generator Create
      */
+    @DataSource("myblog")
     long countByExample(PurchaseRecordExample example);
 
     /**
@@ -20,6 +22,7 @@ public interface PurchaseRecordMapper {
      * 
      * WARNING - @mbg.generated MyBatis Generator Create
      */
+    @DataSource("myblog")
     int deleteByExample(PurchaseRecordExample example);
 
     /**
@@ -27,6 +30,7 @@ public interface PurchaseRecordMapper {
      * 
      * WARNING - @mbg.generated MyBatis Generator Create
      */
+    @DataSource("myblog")
     int deleteByPrimaryKey(Long id);
 
     /**
@@ -35,6 +39,7 @@ public interface PurchaseRecordMapper {
      * 
      * WARNING - @mbg.generated MyBatis Generator Create
      */
+    @DataSource("myblog")
     int insert(PurchaseRecord record);
 
     /**
@@ -43,6 +48,7 @@ public interface PurchaseRecordMapper {
      * 
      * WARNING - @mbg.generated MyBatis Generator Create
      */
+    @DataSource("myblog")
     int insertSelective(PurchaseRecord record);
 
     /**
@@ -51,6 +57,7 @@ public interface PurchaseRecordMapper {
      * 
      * WARNING - @mbg.generated MyBatis Generator Create
      */
+    @DataSource("myblog")
     List<PurchaseRecord> selectByExample(PurchaseRecordExample example);
 
     /**
@@ -58,6 +65,7 @@ public interface PurchaseRecordMapper {
      * 
      * WARNING - @mbg.generated MyBatis Generator Create
      */
+    @DataSource("myblog")
     PurchaseRecord selectByPrimaryKey(Long id);
 
     /**
@@ -67,6 +75,7 @@ public interface PurchaseRecordMapper {
      * 
      * WARNING - @mbg.generated MyBatis Generator Create
      */
+    @DataSource("myblog")
     int updateByExampleSelective(@Param("record") PurchaseRecord record, @Param("example") PurchaseRecordExample example);
 
     /**
@@ -76,6 +85,7 @@ public interface PurchaseRecordMapper {
      * 
      * WARNING - @mbg.generated MyBatis Generator Create
      */
+    @DataSource("myblog")
     int updateByExample(@Param("record") PurchaseRecord record, @Param("example") PurchaseRecordExample example);
 
     /**
@@ -84,6 +94,7 @@ public interface PurchaseRecordMapper {
      * 
      * WARNING - @mbg.generated MyBatis Generator Create
      */
+    @DataSource("myblog")
     int updateByPrimaryKeySelective(PurchaseRecord record);
 
     /**
@@ -92,5 +103,6 @@ public interface PurchaseRecordMapper {
      * 
      * WARNING - @mbg.generated MyBatis Generator Create
      */
+    @DataSource("myblog")
     int updateByPrimaryKey(PurchaseRecord record);
 }

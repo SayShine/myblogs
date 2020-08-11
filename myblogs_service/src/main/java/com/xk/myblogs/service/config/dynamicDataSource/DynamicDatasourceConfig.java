@@ -31,6 +31,7 @@ import java.util.*;
 public class DynamicDatasourceConfig {
     private static final Logger LOGGER = LoggerFactory.getLogger(DynamicDatasourceConfig.class);
 
+    //主数据库
     @Primary
     @Bean(name = "myblogDataSource")
     @ConfigurationProperties(prefix = "spring.datasource.myblog", ignoreInvalidFields = true)
@@ -38,19 +39,29 @@ public class DynamicDatasourceConfig {
         return new DruidDataSource();
     }
 
+    //tscxk数据库
     @Bean(name = "tscxkDataSource")
     @ConfigurationProperties(prefix = "spring.datasource.tscxk", ignoreInvalidFields = true)
     public DataSource getTscxkDataSource(){
         return new DruidDataSource();
     }
 
+    //ruoyi数据库
+    @Bean(name = "ryvueDataSource")
+    @ConfigurationProperties(prefix = "spring.datasource.ryvue", ignoreInvalidFields = true)
+    public DataSource getRyVueDataSource(){
+        return new DruidDataSource();
+    }
+
     @Bean(name = "dynamicDataSource")
     public DynamicDataSource dataSource(@Qualifier("myblogDataSource")DataSource myblogDataSource,
-                                        @Qualifier("tscxkDataSource")DataSource tscxkDataSource){
+                                        @Qualifier("tscxkDataSource")DataSource tscxkDataSource,
+                                        @Qualifier("ryvueDataSource")DataSource ryvueDataSource){
         Map<Object,Object> targetDataSource = new HashMap<>();
 
         targetDataSource.put(DataSourceType.DataBaseType.MYBLOG, myblogDataSource);
         targetDataSource.put(DataSourceType.DataBaseType.TSCXK, tscxkDataSource);
+        targetDataSource.put(DataSourceType.DataBaseType.RYVUE, ryvueDataSource);
 
         DynamicDataSource dynamicDataSource = new DynamicDataSource();
         dynamicDataSource.setTargetDataSources(targetDataSource);
